@@ -7,8 +7,8 @@ import nl.harm27.obswebsocket.api.requests.RequestType;
 
 /**
  * Returns the latest version of the plugin and the API.
- * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#getversion">protocol.md#getversion</a>
  *
+ * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#getversion">OBS WebSocket Documentation</a>
  * @since v0.3
  */
 public class GetVersion {

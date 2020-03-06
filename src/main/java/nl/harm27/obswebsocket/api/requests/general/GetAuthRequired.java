@@ -8,8 +8,8 @@ import java.util.Optional;
 
 /**
  * Tells the client if authentication is required. If so, returns authentication parameters challenge and salt (see "Authentication" for more information).
- * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#getauthrequired">protocol.md#getauthrequired</a>
  *
+ * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#getauthrequired">OBS WebSocket Documentation</a>
  * @since v0.3
  */
 public class GetAuthRequired {

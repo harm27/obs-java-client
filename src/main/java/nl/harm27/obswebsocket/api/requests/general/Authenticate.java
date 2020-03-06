@@ -7,7 +7,7 @@ import nl.harm27.obswebsocket.api.requests.RequestType;
 /**
  * Attempt to authenticate the client to the server.
  *
- * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#authenticate">protocol.md#authenticate</a>
+ * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#authenticate">OBS WebSocket Documentation</a>
  * @since v0.3
  */
 public class Authenticate {
