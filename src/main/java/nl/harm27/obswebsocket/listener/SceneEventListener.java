@@ -20,6 +20,7 @@ public abstract class SceneEventListener implements EventListener {
         switch (baseEvent.getEventType()) {
             case SWITCH_SCENES:
                 switchScenes((SwitchScenes) baseEvent);
+                break;
             default:
                 throw new IllegalStateException("Unexpected EventType for SceneEventListener.");
         }
