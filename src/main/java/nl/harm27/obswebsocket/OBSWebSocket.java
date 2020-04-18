@@ -3,6 +3,8 @@ package nl.harm27.obswebsocket;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.authentication.AuthenticationHandler;
+import nl.harm27.obswebsocket.listener.EventListener;
+import nl.harm27.obswebsocket.listener.ListenerRegistry;
 import nl.harm27.obswebsocket.processor.MessageReceiver;
 import nl.harm27.obswebsocket.processor.MessageSender;
 import nl.harm27.obswebsocket.websocket.OBSWebSocketClient;
@@ -18,6 +20,7 @@ public class OBSWebSocket {
     private final OBSWebSocketClient obsWebSocketClient;
     private final AuthenticationHandler authenticationHandler;
     private final MessageReceiver messageReceiver;
+    private final ListenerRegistry listenerRegistry;
 
     private int lastMessageId = 0;
 
@@ -29,7 +32,8 @@ public class OBSWebSocket {
         authenticationHandler = new AuthenticationHandler(this, password);
         obsWebSocketClient = new OBSWebSocketClient(this, ip, port);
         messageSender = new MessageSender(this, obsWebSocketClient);
-        messageReceiver = new MessageReceiver();
+        listenerRegistry = new ListenerRegistry();
+        messageReceiver = new MessageReceiver(listenerRegistry);
         obsWebSocketClient.connect();
     }
 
@@ -41,6 +45,10 @@ public class OBSWebSocket {
     public void sendMessage(BaseRequest request, Consumer<BaseResponse> responseConsumer) {
         messageReceiver.addMessage(request.getMessageId(), request.getResponseType(), responseConsumer);
         messageSender.sendMessage(request);
+    }
+
+    public void registerListener(EventListener eventListener) {
+        listenerRegistry.registerListener(eventListener);
     }
 
     public void notifyShutdown() {
