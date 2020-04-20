@@ -2,6 +2,7 @@ package nl.harm27.obswebsocket.listener;
 
 import nl.harm27.obswebsocket.api.events.BaseEvent;
 import nl.harm27.obswebsocket.api.events.EventType;
+import nl.harm27.obswebsocket.api.events.scenes.SceneCollectionChanged;
 import nl.harm27.obswebsocket.api.events.scenes.ScenesChanged;
 import nl.harm27.obswebsocket.api.events.scenes.SwitchScenes;
 
@@ -17,8 +18,9 @@ public abstract class ScenesEventListener implements EventListener {
     @Override
     public final Map<EventType, Class<?>> getSupportedEvents() {
         Map<EventType, Class<?>> supportedEvents = new EnumMap<>(EventType.class);
-        supportedEvents.put(EventType.SWITCH_SCENES, SwitchScenes.class);
-        supportedEvents.put(EventType.SCENES_CHANGED, ScenesChanged.class);
+        supportedEvents.put(SWITCH_SCENES, SwitchScenes.class);
+        supportedEvents.put(SCENES_CHANGED, ScenesChanged.class);
+        supportedEvents.put(SCENE_COLLECTION_CHANGED, SceneCollectionChanged.class);
         return supportedEvents;
     }
 
@@ -30,6 +32,9 @@ public abstract class ScenesEventListener implements EventListener {
                 break;
             case SCENES_CHANGED:
                 scenesChanged((ScenesChanged) baseEvent);
+                break;
+            case SCENE_COLLECTION_CHANGED:
+                sceneCollectionChanged((SceneCollectionChanged) baseEvent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected EventType for SceneEventListener.");
@@ -51,5 +56,13 @@ public abstract class ScenesEventListener implements EventListener {
      * @param scenesChanged The received event.
      */
     public void scenesChanged(ScenesChanged scenesChanged) {
+    }
+
+    /**
+     * Implement this method to process SceneCollectionChanged events.
+     *
+     * @param sceneCollectionChanged The received event.
+     */
+    public void sceneCollectionChanged(SceneCollectionChanged sceneCollectionChanged) {
     }
 }
