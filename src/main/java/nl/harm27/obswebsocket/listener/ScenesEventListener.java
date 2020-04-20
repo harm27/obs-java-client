@@ -13,7 +13,7 @@ import java.util.Map;
 import static nl.harm27.obswebsocket.api.events.EventType.*;
 
 /**
- * The EventListener for the events that are part of the Scenes categorie.
+ * The EventListener for the events that are part of the Scenes category.
  */
 public abstract class ScenesEventListener implements EventListener {
     @Override
