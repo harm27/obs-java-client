@@ -3,6 +3,7 @@ package nl.harm27.obswebsocket.listener;
 import nl.harm27.obswebsocket.api.events.BaseEvent;
 import nl.harm27.obswebsocket.api.events.EventType;
 import nl.harm27.obswebsocket.api.events.scenes.SceneCollectionChanged;
+import nl.harm27.obswebsocket.api.events.scenes.SceneCollectionListChanged;
 import nl.harm27.obswebsocket.api.events.scenes.ScenesChanged;
 import nl.harm27.obswebsocket.api.events.scenes.SwitchScenes;
 
@@ -21,6 +22,7 @@ public abstract class ScenesEventListener implements EventListener {
         supportedEvents.put(SWITCH_SCENES, SwitchScenes.class);
         supportedEvents.put(SCENES_CHANGED, ScenesChanged.class);
         supportedEvents.put(SCENE_COLLECTION_CHANGED, SceneCollectionChanged.class);
+        supportedEvents.put(SCENE_COLLECTION_LIST_CHANGED, SceneCollectionListChanged.class);
         return supportedEvents;
     }
 
@@ -35,6 +37,9 @@ public abstract class ScenesEventListener implements EventListener {
                 break;
             case SCENE_COLLECTION_CHANGED:
                 sceneCollectionChanged((SceneCollectionChanged) baseEvent);
+                break;
+            case SCENE_COLLECTION_LIST_CHANGED:
+                sceneCollectionListChanged((SceneCollectionListChanged) baseEvent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected EventType for SceneEventListener.");
@@ -64,5 +69,13 @@ public abstract class ScenesEventListener implements EventListener {
      * @param sceneCollectionChanged The received event.
      */
     public void sceneCollectionChanged(SceneCollectionChanged sceneCollectionChanged) {
+    }
+
+    /**
+     * Implement this method to process SceneCollectionListChanged events.
+     *
+     * @param sceneCollectionListChanged The received event.
+     */
+    public void sceneCollectionListChanged(SceneCollectionListChanged sceneCollectionListChanged) {
     }
 }
