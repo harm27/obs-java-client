@@ -8,7 +8,12 @@ import nl.harm27.obswebsocket.api.events.scenes.SwitchScenes;
 import java.util.EnumMap;
 import java.util.Map;
 
-public abstract class SceneEventListener implements EventListener {
+import static nl.harm27.obswebsocket.api.events.EventType.*;
+
+/**
+ * The EventListener for the events that are part of the Scenes categorie.
+ */
+public abstract class ScenesEventListener implements EventListener {
     @Override
     public final Map<EventType, Class<?>> getSupportedEvents() {
         Map<EventType, Class<?>> supportedEvents = new EnumMap<>(EventType.class);
