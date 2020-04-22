@@ -18,11 +18,11 @@ jobs:
         persist-credentials: false
 
     - name: Generate Javadoc
-      run: mvn -B javadoc:javadoc --file pom.xml
+      run: mvn -B javadoc:javadoc --file pom.xml -DoutputDirectory=./javadoc
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
         BRANCH: gh-pages
-        FOLDER: target/apidocs
+        FOLDER: javadoc
