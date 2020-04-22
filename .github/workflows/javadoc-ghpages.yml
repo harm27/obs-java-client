@@ -19,9 +19,9 @@ jobs:
     - name: Generate Javadoc
       run: mvn -B javadoc:javadoc --file pom.xml
 
-  - name: Deploy 
+    - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          ACCESS_TOKEN: ${{ github.token }} 
-          BRANCH: gh-pages 
+          ACCESS_TOKEN: ${{ github.token }}
+          BRANCH: gh-pages
           FOLDER: target\apidocs
