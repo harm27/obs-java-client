@@ -22,6 +22,6 @@ jobs:
   - name: Deploy 
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          ACCESS_TOKEN: ${{ secrets.REPO_AUTH }} 
+          ACCESS_TOKEN: ${{ github.token }} 
           BRANCH: gh-pages 
           FOLDER: target\apidocs
