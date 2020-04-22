@@ -20,7 +20,7 @@ jobs:
       run: mvn -B javadoc:javadoc --file pom.xml
 
     - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+      uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ github.token }}
           BRANCH: gh-pages
