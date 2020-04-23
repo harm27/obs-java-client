@@ -21,4 +21,5 @@ If you want to use Maven, you can find the latest jars in https://github.com/har
 
 # Javadoc
 The javadoc from the last release can be found at https://harm27.github.io/obs-websocket-java/release/.
+
 The javadoc from the last master build can be found at https://harm27.github.io/obs-websocket-java/snapshot/.
