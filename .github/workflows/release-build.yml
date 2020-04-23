@@ -1,11 +1,11 @@
-name: Javadoc to Github Pages
+name: Release build
 
 on:
-  push:
-    branches: master
+  milestone:
+    types: [closed]
 
 jobs:
-  build:
+  javadoc:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,3 +24,4 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
         BRANCH: gh-pages
         FOLDER: target/site/apidocs
+        TARGET_FOLDER: release
