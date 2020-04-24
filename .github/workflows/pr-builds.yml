@@ -2,8 +2,8 @@ name: PR Build
 
 on:
   pull_request:
-    branches:
-      - master
+    types: [ready_for_review, opened, synchronize, reopened]
+    branches: [master]
 
 jobs:
   build:
