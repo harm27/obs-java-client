@@ -6,13 +6,12 @@ on:
 
 jobs:
   branch:
-    if: github.event.issue.label.name == 'enhancement'
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Debugging
-      env:
-        label: ${{github.event.issue.label.name }}
-      run: echo Debug ${{env.label}}
+      run: 
+        echo Debug ${{github.event.issue.label }}
+        echo Debug ${{github.event.label.name }}
