@@ -1,4 +1,4 @@
-name: Automated label actions
+name: Automated unlabel actions
 
 on: 
   issues:
