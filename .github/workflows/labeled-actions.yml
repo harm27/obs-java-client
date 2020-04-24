@@ -30,5 +30,6 @@ jobs:
         source_branch: 'issue/${{github.event.issue.number }}'
         pr_title: '${{github.event.issue.title }}'
         pr_body: 'Closes #${{github.event.issue.number }}'
+        pr_milestone: '${{github.event.issue.milestone.title}}'
         pr_draft: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
