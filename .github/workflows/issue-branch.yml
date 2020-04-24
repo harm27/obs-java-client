@@ -5,8 +5,8 @@ on:
     types: [labeled]
 
 jobs:
-  build:
-
+  branch:
+    if: github.event.issue.label.name == 'enhancement'
     runs-on: ubuntu-latest
 
     steps:
@@ -15,4 +15,4 @@ jobs:
     - name: Debugging
       env:
         label: ${{github.event.issue.label.name }}
-      run: echo Debug {{env.label}}
+      run: echo Debug ${{env.label}}
