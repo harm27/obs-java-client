@@ -1,4 +1,4 @@
-name: Master Build
+name: Auto-Create branch
 
 on: 
   issues:
