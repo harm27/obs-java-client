@@ -1,6 +1,7 @@
 name: Master Build
 
-issues:
+on: 
+  issues:
     types: [labeled]
 
 jobs:
@@ -11,5 +12,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: 
+    - name: Debugging
       run: echo Debug {{  github.event.label.name }}
