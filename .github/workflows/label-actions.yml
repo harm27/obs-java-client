@@ -1,0 +1,28 @@
+name: Automated actions based on labels
+
+on: 
+  issues:
+    types: [labeled]
+
+jobs:
+  branch:
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'in-development'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Debugging
+      run: 
+        echo Debug ${{github.event.issue.number }}
+
+  pr:
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'ready'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Debugging
+      run: 
+        echo Debug ${{github.event.issue.number }}
