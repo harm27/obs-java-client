@@ -12,9 +12,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Debugging
-      run:
-        echo Debug 'issue/${{github.event.issue.number }}'
+    - name: Create branch
+      uses: peterjgrainger/action-create-branch@v1.0.0
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        branch: 'issue/${{github.event.issue.number }}'
 
   pr:
     runs-on: ubuntu-latest
