@@ -11,7 +11,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
     - name: Create branch
       uses: peterjgrainger/action-create-branch@v1.0.0
       env: 
@@ -24,12 +23,6 @@ jobs:
     if: github.event.label.name == 'ready'
 
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Debugging
-      run: 
-        echo Debug ${{github.event.issue.number }}
-        
     - uses: actions/checkout@v2
     - name: Create Pull-Request
       uses: repo-sync/pull-request@v2
