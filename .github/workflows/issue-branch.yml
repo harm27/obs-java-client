@@ -14,4 +14,4 @@ jobs:
 
     - name: Debugging
       run: 
-        echo Debug ${{github.event.label.name }}
+        echo Debug ${{github.event.issue.id }}
