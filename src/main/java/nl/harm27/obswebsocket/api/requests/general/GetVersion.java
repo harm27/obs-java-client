@@ -12,6 +12,9 @@ import nl.harm27.obswebsocket.api.requests.RequestType;
  * @since v0.3
  */
 public class GetVersion {
+    private GetVersion() {
+    }
+
     public static class Request extends BaseRequest {
         public Request(String messageId) {
             super(RequestType.GET_VERSION, messageId);
