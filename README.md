@@ -12,6 +12,8 @@ It does already includes the following features:
 
 But it does not support all events and requests yet. 
 
+Check https://github.com/harm27/obs-websocket-java/milestones for which version what events are planned
+
 # Download options
 To be able to use this project you can either download the jars or use the maven dependency. 
 
