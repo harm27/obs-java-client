@@ -1,4 +1,4 @@
-name: Automated actions based on labels
+name: Automated label actions
 
 on: 
   issues:
@@ -13,8 +13,8 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Debugging
-      run: 
-        echo Debug ${{github.event.issue.number }}
+      run:
+        echo Debug 'issue/${{github.event.issue.number }}'
 
   pr:
     runs-on: ubuntu-latest
