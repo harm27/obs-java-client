@@ -14,10 +14,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-
     - name: Generate Javadoc
       run: mvn -B javadoc:javadoc --file pom.xml
-
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
