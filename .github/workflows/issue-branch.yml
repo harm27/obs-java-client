@@ -13,4 +13,4 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Debugging
-      run: echo Debug {{  github.event.label.name }}
+      run: echo Debug {{ github.event.label.name }}
