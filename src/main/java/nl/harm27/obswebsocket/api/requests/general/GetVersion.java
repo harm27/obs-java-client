@@ -27,14 +27,12 @@ public class GetVersion {
     }
 
     public static class Response extends BaseResponse {
+        @SerializedName("version")
         private double version;
-
         @SerializedName("obs-websocket-version")
         private String obsWebsocketVersion;
-
         @SerializedName("obs-studio-version")
         private String obsStudioVersion;
-
         @SerializedName("available-requests")
         private String availableRequests;
 
