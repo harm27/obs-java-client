@@ -22,4 +22,4 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
         BRANCH: gh-pages
         FOLDER: target/site/apidocs
-        TARGET_FOLDER: release
+        TARGET_FOLDER: release/{{github.event.title}}
