@@ -23,3 +23,18 @@ If you want to use Maven, you can find the latest jars in https://github.com/har
 
 # Javadoc
 The javadoc can be found at https://harm27.github.io/obs-websocket-java/
+
+# SonarCloud codequality
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=bugs)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=code_smells)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=ncloc)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=sqale_index)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=security_rating)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
