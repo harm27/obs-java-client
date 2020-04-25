@@ -8,7 +8,6 @@ jobs:
   branch:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'in-development'
-
     steps:
     - uses: actions/checkout@v2
     - name: Create branch
@@ -21,7 +20,6 @@ jobs:
   pr:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'ready'
-
     steps:
     - uses: actions/checkout@v2
     - name: Create Pull-Request
