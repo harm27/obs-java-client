@@ -8,6 +8,8 @@ import nl.harm27.obswebsocket.listener.EventListener;
 import nl.harm27.obswebsocket.listener.ListenerRegistry;
 import nl.harm27.obswebsocket.processor.MessageReceiver;
 import nl.harm27.obswebsocket.processor.MessageSender;
+import nl.harm27.obswebsocket.sender.GeneralRequestSender;
+import nl.harm27.obswebsocket.sender.RequestSenderManager;
 import nl.harm27.obswebsocket.websocket.OBSWebSocketClient;
 
 import java.net.http.WebSocket;
@@ -22,6 +24,7 @@ public class OBSWebSocket {
     private final AuthenticationHandler authenticationHandler;
     private final MessageReceiver messageReceiver;
     private final ListenerRegistry listenerRegistry;
+    private final RequestSenderManager requestSenderManager;
 
     private int lastMessageId = 0;
 
@@ -33,6 +36,7 @@ public class OBSWebSocket {
         authenticationHandler = new AuthenticationHandler(this, password);
         obsWebSocketClient = new OBSWebSocketClient(this, ip, port);
         messageSender = new MessageSender(this, obsWebSocketClient);
+        requestSenderManager = new RequestSenderManager(this);
         listenerRegistry = new ListenerRegistry();
         messageReceiver = new MessageReceiver(listenerRegistry);
         obsWebSocketClient.connect();
