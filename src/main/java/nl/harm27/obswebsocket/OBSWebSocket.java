@@ -3,6 +3,7 @@ package nl.harm27.obswebsocket;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.authentication.AuthenticationHandler;
+import nl.harm27.obswebsocket.authentication.AuthenticationResult;
 import nl.harm27.obswebsocket.listener.EventListener;
 import nl.harm27.obswebsocket.listener.ListenerRegistry;
 import nl.harm27.obswebsocket.processor.MessageReceiver;
@@ -63,5 +64,13 @@ public class OBSWebSocket {
         obsWebSocketClient.setWebSocket(webSocket);
         messageSender.processQueuedMessages();
         authenticationHandler.checkAuthenticationRequired();
+    }
+
+    public AuthenticationResult getAuthenticationResult() {
+        return authenticationHandler.getAuthenticationResult();
+    }
+
+    public GeneralRequestSender getGeneralRequestSender() {
+        return requestSenderManager.getGeneralRequestSender();
     }
 }

@@ -23,6 +23,10 @@ public class AuthenticationHandler {
         authenticationResult = AuthenticationResult.UN_AVAILABLE;
     }
 
+    public AuthenticationResult getAuthenticationResult() {
+        return authenticationResult;
+    }
+
     public void checkAuthenticationRequired() {
         authenticationResult = AuthenticationResult.AUTHENTICATION_REQUIRED_CHECKING;
         obsWebSocket.sendMessage(new GetAuthRequired.Request(obsWebSocket.getMessageId()), this::processGetAuthRequiredResponse);
