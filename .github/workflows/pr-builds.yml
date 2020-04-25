@@ -27,4 +27,4 @@ jobs:
         with:
           java-version: 11
       - name: SonarCloud Scan
-        run: mvn verify sonar:sonar -Dsonar.login={{secrets.SONAR_LOGIN}}
+        run: mvn verify sonar:sonar -Dsonar.login=${{secrets.SONAR_LOGIN}} -DskipTests=true -Dmaven.javadoc.skip=true
