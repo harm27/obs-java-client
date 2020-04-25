@@ -18,3 +18,9 @@ jobs:
           java-version: 11
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: SonarCloud Scan
+        run: mvn verify sonar:sonar -Dsonar.login={{secrets.SONAR_LOGIN}}
