@@ -22,7 +22,7 @@ public class GetVersion {
 
         @Override
         public Class<?> getResponseType() {
-            return GetAuthRequired.Response.class;
+            return Response.class;
         }
     }
 
