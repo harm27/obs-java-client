@@ -35,7 +35,7 @@ public class OBSWebSocket {
     public OBSWebSocket(String ip, int port, String password) {
         authenticationHandler = new AuthenticationHandler(this, password);
         obsWebSocketClient = new OBSWebSocketClient(this, ip, port);
-        messageSender = new MessageSender(this, obsWebSocketClient);
+        messageSender = new MessageSender(obsWebSocketClient);
         requestSenderManager = new RequestSenderManager(this);
         listenerRegistry = new ListenerRegistry();
         messageReceiver = new MessageReceiver(listenerRegistry);
