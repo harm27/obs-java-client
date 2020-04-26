@@ -1,5 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.general;
 
+import com.google.gson.annotations.SerializedName;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
@@ -28,10 +29,11 @@ public class GetAuthRequired {
     }
 
     public static class Response extends BaseResponse {
+        @SerializedName("authRequired")
         private boolean authRequired;
-
+        @SerializedName("challenge")
         private String challenge;
-
+        @SerializedName("salt")
         private String salt;
 
         /**

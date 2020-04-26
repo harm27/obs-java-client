@@ -2,7 +2,6 @@ package nl.harm27.obswebsocket.processor;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import nl.harm27.obswebsocket.OBSWebSocket;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.websocket.OBSWebSocketClient;
 
@@ -11,10 +10,10 @@ import java.util.List;
 
 public class MessageSender {
     private final OBSWebSocketClient obsWebSocketClient;
-    private List<BaseRequest> queuedMessages;
-    private Gson gson;
+    private final List<BaseRequest> queuedMessages;
+    private final Gson gson;
 
-    public MessageSender(OBSWebSocket obsWebSocket, OBSWebSocketClient obsWebSocketClient) {
+    public MessageSender(OBSWebSocketClient obsWebSocketClient) {
         queuedMessages = new ArrayList<>();
         this.obsWebSocketClient = obsWebSocketClient;
         gson = new GsonBuilder().create();

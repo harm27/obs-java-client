@@ -12,6 +12,9 @@ import nl.harm27.obswebsocket.api.requests.RequestType;
  * @since v0.3
  */
 public class GetVersion {
+    private GetVersion() {
+    }
+
     public static class Request extends BaseRequest {
         public Request(String messageId) {
             super(RequestType.GET_VERSION, messageId);
@@ -19,19 +22,17 @@ public class GetVersion {
 
         @Override
         public Class<?> getResponseType() {
-            return GetAuthRequired.Response.class;
+            return Response.class;
         }
     }
 
     public static class Response extends BaseResponse {
+        @SerializedName("version")
         private double version;
-
         @SerializedName("obs-websocket-version")
         private String obsWebsocketVersion;
-
         @SerializedName("obs-studio-version")
         private String obsStudioVersion;
-
         @SerializedName("available-requests")
         private String availableRequests;
 
