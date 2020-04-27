@@ -2,6 +2,7 @@ package nl.harm27.obswebsocket.sender;
 
 import nl.harm27.obswebsocket.OBSWebSocket;
 import nl.harm27.obswebsocket.api.requests.scenes.GetCurrentScene;
+import nl.harm27.obswebsocket.api.requests.scenes.GetSceneList;
 import nl.harm27.obswebsocket.api.requests.scenes.SetCurrentScene;
 
 import java.util.function.Consumer;
@@ -35,5 +36,16 @@ public class ScenesRequestSender extends RequestSender {
     public void getCurrentScene(Consumer<GetCurrentScene.Response> responseConsumer) {
         sendRequest(new GetCurrentScene.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((GetCurrentScene.Response) baseResponse));
+    }
+
+    /**
+     * Get a list of scenes in the currently active profile.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#GetSceneList">OBS WebSocket Documentation</a>
+     * @since v0.3
+     */
+    public void getSceneList(Consumer<GetSceneList.Response> responseConsumer) {
+        sendRequest(new GetSceneList.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((GetSceneList.Response) baseResponse));
     }
 }
