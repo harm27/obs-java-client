@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket;
 
-import nl.harm27.obswebsocket.api.requests.general.GetVideoInfo;
+import nl.harm27.obswebsocket.api.requests.scenes.SetCurrentScene;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -40,10 +40,10 @@ public class TestClass {
     }
 
     private void enable() {
-        obsWebSocket.getGeneralRequestSender().getVideoInfo(this::response);
+        obsWebSocket.getScenesRequestSender().setCurrentScene("Scene 1", this::response);
     }
 
-    private void response(GetVideoInfo.Response response) {
+    private void response(SetCurrentScene.Response response) {
         System.out.println("Response received");
     }
 }

@@ -10,6 +10,7 @@ import nl.harm27.obswebsocket.processor.MessageReceiver;
 import nl.harm27.obswebsocket.processor.MessageSender;
 import nl.harm27.obswebsocket.sender.GeneralRequestSender;
 import nl.harm27.obswebsocket.sender.RequestSenderManager;
+import nl.harm27.obswebsocket.sender.ScenesRequestSender;
 import nl.harm27.obswebsocket.websocket.OBSWebSocketClient;
 
 import java.net.http.WebSocket;
@@ -76,5 +77,9 @@ public class OBSWebSocket {
 
     public GeneralRequestSender getGeneralRequestSender() {
         return requestSenderManager.getGeneralRequestSender();
+    }
+
+    public ScenesRequestSender getScenesRequestSender() {
+        return requestSenderManager.getScenesRequestSender();
     }
 }
