@@ -21,6 +21,8 @@ public enum RequestType {
     BROADCAST_CUSTOM_MESSAGE,
     @SerializedName("GetVideoInfo")
     GET_VIDEO_INFO,
+    @SerializedName("OpenProjector")
+    OPEN_PROJECTOR,
     @SerializedName("ListOutputs")
     LIST_OUTPUTS,
     @SerializedName("GetOutputInfo")
