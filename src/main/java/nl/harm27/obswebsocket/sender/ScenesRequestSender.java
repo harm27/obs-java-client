@@ -18,6 +18,7 @@ public class ScenesRequestSender extends RequestSender {
      * Switch to the specified scene.
      *
      * @param sceneName Name of the scene to switch to.
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#SetCurrentScene">OBS WebSocket Documentation</a>
      * @since v0.3
      */
     public void setCurrentScene(String sceneName, Consumer<SetCurrentScene.Response> responseConsumer) {
@@ -28,6 +29,7 @@ public class ScenesRequestSender extends RequestSender {
     /**
      * Get the current scene's name and source items.
      *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#GetCurrentScene">OBS WebSocket Documentation</a>
      * @since v0.3
      */
     public void getCurrentScene(Consumer<GetCurrentScene.Response> responseConsumer) {

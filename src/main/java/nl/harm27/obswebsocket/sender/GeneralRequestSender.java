@@ -16,6 +16,7 @@ public class GeneralRequestSender extends RequestSender {
     /**
      * Returns the latest version of the plugin and the API.
      *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#getversion">OBS WebSocket Documentation</a>
      * @since v0.3
      */
     public void getVersion(Consumer<GetVersion.Response> responseConsumer) {
@@ -27,6 +28,7 @@ public class GeneralRequestSender extends RequestSender {
      * Enable/disable sending of the Heartbeat event
      *
      * @param enable Starts/Stops emitting heartbeat messages
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#SetHeartbeat">OBS WebSocket Documentation</a>
      * @since v4.3.0
      */
     public void setHeartbeat(boolean enable, Consumer<SetHeartbeat.Response> responseConsumer) {
@@ -39,6 +41,7 @@ public class GeneralRequestSender extends RequestSender {
      *
      * @param realm Identifier to be choosen by the client
      * @param data  User-defined data
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#BroadcastCustomMessage-1">OBS WebSocket Documentation</a>
      * @since v4.7.0
      */
     public void broadcastCustomMessage(String realm, Object data, Consumer<BroadcastCustomMessage.Response> responseConsumer) {
@@ -50,6 +53,7 @@ public class GeneralRequestSender extends RequestSender {
      * Set the filename formatting string
      *
      * @param filenameFormatting Filename formatting string to set.
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#SetFilenameFormatting">OBS WebSocket Documentation</a>
      * @since v4.3.0
      */
     public void setFilenameFormatting(String filenameFormatting, Consumer<SetFilenameFormatting.Response> responseConsumer) {
@@ -60,6 +64,7 @@ public class GeneralRequestSender extends RequestSender {
     /**
      * Get the filename formatting string
      *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#GetFilenameFormatting">OBS WebSocket Documentation</a>
      * @since v4.3.0
      */
     public void getFilenameFormatting(Consumer<GetFilenameFormatting.Response> responseConsumer) {
@@ -70,6 +75,7 @@ public class GeneralRequestSender extends RequestSender {
     /**
      * Get OBS stats (almost the same info as provided in OBS' stats window)
      *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#GetStats">OBS WebSocket Documentation</a>
      * @since v4.6.0
      */
     public void getStats(Consumer<GetStats.Response> responseConsumer) {
@@ -80,6 +86,7 @@ public class GeneralRequestSender extends RequestSender {
     /**
      * Get basic OBS video information
      *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#GetVideoInfo">OBS WebSocket Documentation</a>
      * @since v4.6.0
      */
     public void getVideoInfo(Consumer<GetVideoInfo.Response> responseConsumer) {
@@ -97,6 +104,7 @@ public class GeneralRequestSender extends RequestSender {
      *                 Encoded in Base64 using Qt's geometry encoding (https://doc.qt.io/qt-5/qwidget.html#saveGeometry).
      *                 Corresponds to OBS's saved projectors.
      * @param name     Name of the source or scene to be displayed (ignored for other projector types).
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#OpenProjector">OBS WebSocket Documentation</a>
      * @since v4.8.0
      */
     public void openProjector(OpenProjector.Type type, Integer monitor, String geometry, String name, Consumer<OpenProjector.Response> responseConsumer) {
