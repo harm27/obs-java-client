@@ -1,10 +1,13 @@
 package nl.harm27.obswebsocket.sender;
 
 import nl.harm27.obswebsocket.OBSWebSocket;
+import nl.harm27.obswebsocket.api.complex.SceneItem;
 import nl.harm27.obswebsocket.api.requests.scenes.GetCurrentScene;
 import nl.harm27.obswebsocket.api.requests.scenes.GetSceneList;
+import nl.harm27.obswebsocket.api.requests.scenes.ReorderSceneItems;
 import nl.harm27.obswebsocket.api.requests.scenes.SetCurrentScene;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -47,5 +50,22 @@ public class ScenesRequestSender extends RequestSender {
     public void getSceneList(Consumer<GetSceneList.Response> responseConsumer) {
         sendRequest(new GetSceneList.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((GetSceneList.Response) baseResponse));
+    }
+
+    /**
+     * Changes the order of scene items in the requested scene.
+     *
+     * @param scene Name of the scene to reorder (defaults to current).
+     * @param items Ordered list of objects with name and/or id specified. Id preferred due to uniqueness per scene.
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#ReorderSceneItems">OBS WebSocket Documentation</a>
+     * @since v4.5.0
+     */
+    public void reorderSceneItems(String scene, List<SceneItem> items, Consumer<ReorderSceneItems.Response> responseConsumer) {
+        ReorderSceneItems.Request request = new ReorderSceneItems.Request(getNextMessageId(), items);
+        if (scene != null)
+            request.setScene(scene);
+
+        sendRequest(request,
+                baseResponse -> responseConsumer.accept((ReorderSceneItems.Response) baseResponse));
     }
 }
