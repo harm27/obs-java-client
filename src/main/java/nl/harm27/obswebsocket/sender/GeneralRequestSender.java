@@ -37,4 +37,8 @@ public class GeneralRequestSender extends RequestSender {
         sendRequest(new GetFilenameFormatting.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((GetFilenameFormatting.Response) baseResponse));
     }
+
+    public void getStats(Consumer<GetStats.Response> responseConsumer) {
+        sendRequest(new GetStats.Request(getNextMessageId()), baseResponse -> responseConsumer.accept((GetStats.Response) baseResponse));
+    }
 }
