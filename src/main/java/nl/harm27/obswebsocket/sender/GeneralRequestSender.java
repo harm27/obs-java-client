@@ -3,6 +3,7 @@ package nl.harm27.obswebsocket.sender;
 import nl.harm27.obswebsocket.OBSWebSocket;
 import nl.harm27.obswebsocket.api.requests.general.BroadcastCustomMessage;
 import nl.harm27.obswebsocket.api.requests.general.GetVersion;
+import nl.harm27.obswebsocket.api.requests.general.SetFilenameFormatting;
 import nl.harm27.obswebsocket.api.requests.general.SetHeartbeat;
 
 import java.util.function.Consumer;
@@ -28,5 +29,10 @@ public class GeneralRequestSender extends RequestSender {
     public void broadcastCustomMessage(String realm, Object data, Consumer<BroadcastCustomMessage.Response> responseConsumer) {
         sendRequest(new BroadcastCustomMessage.Request(getNextMessageId(), realm, data),
                 baseResponse -> responseConsumer.accept((BroadcastCustomMessage.Response) baseResponse));
+    }
+
+    public void setFilenameFormatting(String filenameFormatting, Consumer<SetFilenameFormatting.Response> responseConsumer) {
+        sendRequest(new SetFilenameFormatting.Request(getNextMessageId(), filenameFormatting),
+                baseResponse -> responseConsumer.accept((SetFilenameFormatting.Response) baseResponse));
     }
 }
