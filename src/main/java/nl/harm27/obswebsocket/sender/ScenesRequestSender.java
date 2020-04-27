@@ -1,6 +1,7 @@
 package nl.harm27.obswebsocket.sender;
 
 import nl.harm27.obswebsocket.OBSWebSocket;
+import nl.harm27.obswebsocket.api.requests.scenes.GetCurrentScene;
 import nl.harm27.obswebsocket.api.requests.scenes.SetCurrentScene;
 
 import java.util.function.Consumer;
@@ -22,5 +23,15 @@ public class ScenesRequestSender extends RequestSender {
     public void setCurrentScene(String sceneName, Consumer<SetCurrentScene.Response> responseConsumer) {
         sendRequest(new SetCurrentScene.Request(getNextMessageId(), sceneName),
                 baseResponse -> responseConsumer.accept((SetCurrentScene.Response) baseResponse));
+    }
+
+    /**
+     * Get the current scene's name and source items.
+     *
+     * @since v0.3
+     */
+    public void getCurrentScene(Consumer<GetCurrentScene.Response> responseConsumer) {
+        sendRequest(new GetCurrentScene.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((GetCurrentScene.Response) baseResponse));
     }
 }
