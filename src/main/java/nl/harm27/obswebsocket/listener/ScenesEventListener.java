@@ -52,7 +52,6 @@ public abstract class ScenesEventListener implements EventListener {
      * @param switchScenes The received event.
      */
     public void switchScenes(SwitchScenes switchScenes) {
-
     }
 
     /**
