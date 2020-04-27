@@ -64,6 +64,15 @@ public class GeneralRequestSender extends RequestSender {
      * Get OBS stats (almost the same info as provided in OBS' stats window)
      */
     public void getStats(Consumer<GetStats.Response> responseConsumer) {
-        sendRequest(new GetStats.Request(getNextMessageId()), baseResponse -> responseConsumer.accept((GetStats.Response) baseResponse));
+        sendRequest(new GetStats.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((GetStats.Response) baseResponse));
+    }
+
+    /**
+     * Get basic OBS video information
+     */
+    public void getVideoInfo(Consumer<GetVideoInfo.Response> responseConsumer) {
+        sendRequest(new GetVideoInfo.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((GetVideoInfo.Response) baseResponse));
     }
 }
