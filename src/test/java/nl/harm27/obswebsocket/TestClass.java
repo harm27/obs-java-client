@@ -1,11 +1,8 @@
 package nl.harm27.obswebsocket;
 
-import com.google.gson.annotations.SerializedName;
-import nl.harm27.obswebsocket.api.requests.general.BroadcastCustomMessage;
-import nl.harm27.obswebsocket.listener.GeneralEventListener;
+import nl.harm27.obswebsocket.api.requests.general.GetVideoInfo;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Scanner;
 
 import static nl.harm27.obswebsocket.authentication.AuthenticationResult.*;
@@ -16,14 +13,6 @@ public class TestClass {
 
     private TestClass() {
         obsWebSocket = new OBSWebSocket("localhost", 4444, "test1234");
-        obsWebSocket.registerListener(new GeneralEventListener() {
-            @Override
-            public void broadcastCustomMessage(nl.harm27.obswebsocket.api.events.general.BroadcastCustomMessage broadcastCustomMessage) {
-                System.out.println(broadcastCustomMessage.getRealm());
-                for (Map.Entry<String, Object> entry : broadcastCustomMessage.getData().entrySet())
-                    System.out.println(String.format("%s:%s", entry.getKey(), entry.getValue()));
-            }
-        });
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -51,19 +40,10 @@ public class TestClass {
     }
 
     private void enable() {
-        obsWebSocket.getGeneralRequestSender().broadcastCustomMessage("dummy", new TestData("dummy"), this::broadcasted);
+        obsWebSocket.getGeneralRequestSender().getVideoInfo(this::response);
     }
 
-    private void broadcasted(BroadcastCustomMessage.Response response) {
-        System.out.println("Broadcasted");
-    }
-
-    public static class TestData {
-        @SerializedName("data")
-        private final String data;
-
-        public TestData(String data) {
-            this.data = data;
-        }
+    private void response(GetVideoInfo.Response response) {
+        System.out.println("Response received");
     }
 }
