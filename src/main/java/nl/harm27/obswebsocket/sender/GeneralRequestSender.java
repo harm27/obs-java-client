@@ -15,6 +15,8 @@ public class GeneralRequestSender extends RequestSender {
 
     /**
      * Returns the latest version of the plugin and the API.
+     *
+     * @since v0.3
      */
     public void getVersion(Consumer<GetVersion.Response> responseConsumer) {
         sendRequest(new GetVersion.Request(getNextMessageId()),
@@ -25,6 +27,7 @@ public class GeneralRequestSender extends RequestSender {
      * Enable/disable sending of the Heartbeat event
      *
      * @param enable Starts/Stops emitting heartbeat messages
+     * @since v4.3.0
      */
     public void setHeartbeat(boolean enable, Consumer<SetHeartbeat.Response> responseConsumer) {
         sendRequest(new SetHeartbeat.Request(getNextMessageId(), enable),
@@ -36,6 +39,7 @@ public class GeneralRequestSender extends RequestSender {
      *
      * @param realm Identifier to be choosen by the client
      * @param data  User-defined data
+     * @since v4.7.0
      */
     public void broadcastCustomMessage(String realm, Object data, Consumer<BroadcastCustomMessage.Response> responseConsumer) {
         sendRequest(new BroadcastCustomMessage.Request(getNextMessageId(), realm, data),
@@ -46,6 +50,7 @@ public class GeneralRequestSender extends RequestSender {
      * Set the filename formatting string
      *
      * @param filenameFormatting Filename formatting string to set.
+     * @since v4.3.0
      */
     public void setFilenameFormatting(String filenameFormatting, Consumer<SetFilenameFormatting.Response> responseConsumer) {
         sendRequest(new SetFilenameFormatting.Request(getNextMessageId(), filenameFormatting),
@@ -54,6 +59,8 @@ public class GeneralRequestSender extends RequestSender {
 
     /**
      * Get the filename formatting string
+     *
+     * @since v4.3.0
      */
     public void getFilenameFormatting(Consumer<GetFilenameFormatting.Response> responseConsumer) {
         sendRequest(new GetFilenameFormatting.Request(getNextMessageId()),
@@ -62,6 +69,8 @@ public class GeneralRequestSender extends RequestSender {
 
     /**
      * Get OBS stats (almost the same info as provided in OBS' stats window)
+     *
+     * @since v4.6.0
      */
     public void getStats(Consumer<GetStats.Response> responseConsumer) {
         sendRequest(new GetStats.Request(getNextMessageId()),
@@ -70,6 +79,8 @@ public class GeneralRequestSender extends RequestSender {
 
     /**
      * Get basic OBS video information
+     *
+     * @since v4.6.0
      */
     public void getVideoInfo(Consumer<GetVideoInfo.Response> responseConsumer) {
         sendRequest(new GetVideoInfo.Request(getNextMessageId()),
