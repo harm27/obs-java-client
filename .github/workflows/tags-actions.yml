@@ -6,7 +6,7 @@ on:
       - v*
 
 jobs:
-  release:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,34 +14,66 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Releasenotes: https://harm27.github.io/obs-websocket-java/release/1.0/releasenotes.md
-            Javadoc: https://harm27.github.io/obs-websocket-java/release/1.0/javadoc
-          draft: false
-          prerelease: false
-
-  javadoc:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Generate Javadoc
-        run: mvn -B javadoc:javadoc --file pom.xml
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
-          BRANCH: gh-pages
-          FOLDER: target/site/apidocs
-          TARGET_FOLDER: release/{{github.event.title}}/javadoc
+      - name: log
+        run: echo ${{ github.ref }}
+#  release:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Set up JDK 11
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 11
+#      - name: Create Release
+#        id: create_release
+#        uses: actions/create-release@latest
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ github.ref }}
+#          release_name: Release ${{ github.ref }}
+#          body: |
+#            Releasenotes: https://harm27.github.io/obs-websocket-java/release/1.0/releasenotes.md
+#            Javadoc: https://harm27.github.io/obs-websocket-java/release/1.0/javadoc
+#          draft: false
+#          prerelease: false
+#        - name: Build with Maven
+#          run: mvn -B package --file pom.xml
+#        - name: Upload file
+#            id: upload-release-jar-asset
+#            uses: actions/upload-release-asset@v1
+#            env:
+#              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#            with:
+#              upload_url: ${{ steps.create_release.outputs.upload_url }}
+#              asset_path: target/obs-websocket-java-${{}}.jar
+#              asset_name: obs-websocket-java-${{}}.jar
+#              asset_content_type: application/jar
+#        - name: Upload Javadoc file
+#            id: upload-release-javadoc-jar-asset
+#            uses: actions/upload-release-asset@v1
+#            env:
+#              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#            with:
+#              upload_url: ${{ steps.create_release.outputs.upload_url }}
+#              asset_path: target/obs-websocket-java-${{}}-javadoc.jar
+#              asset_name: obs-websocket-java-${{}}-javadoc.jar
+#              asset_content_type: application/jar
+#
+#  javadoc:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Set up JDK 11
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 11
+#      - name: Generate Javadoc
+#        run: mvn -B javadoc:javadoc --file pom.xml
+#      - name: Deploy
+#        uses: JamesIves/github-pages-deploy-action@releases/v3
+#        with:
+#          ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
+#          BRANCH: gh-pages
+#          FOLDER: target/site/apidocs
+#          TARGET_FOLDER: release/{{github.event.title}}/javadoc
