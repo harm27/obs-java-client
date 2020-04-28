@@ -21,3 +21,25 @@ jobs:
           git commit -m "Updated to version ${{github.event.title }}"
           git tag v${{github.event.title }}
           git push --tags
+
+  releasenotes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Create Release Notes
+        uses: docker://decathlon/release-notes-generator-action:2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OUTPUT_FOLDER: temp_release_notes
+          USE_MILESTONE_TITLE: "true"
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
+          BRANCH: gh-pages
+          FOLDER: temp_release_notes
+          TARGET_FOLDER: release/{{github.event.title}}
