@@ -14,8 +14,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Set env
+        run: echo ::set-env name=TAG_VERSION::${GITHUB_REF:10}
       - name: log
-        run: echo ${{ github.ref }}
+        run: echo ${{ env.TAG_VERSION }}
 #  release:
 #    runs-on: ubuntu-latest
 #    steps:
