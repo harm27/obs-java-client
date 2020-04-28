@@ -15,7 +15,7 @@ jobs:
         with:
           java-version: 11
       - name: Set env
-        run: echo ::set-env name=TAG_VERSION::${GITHUB_REF:10}
+        run: echo ::set-env name=TAG_VERSION::${GITHUB_REF:11}
       - name: log
         run: echo ${{ env.TAG_VERSION }}
 #  release:
@@ -26,6 +26,8 @@ jobs:
 #        uses: actions/setup-java@v1
 #        with:
 #          java-version: 11
+#      - name: Set env
+#        run: echo ::set-env name=TAG_VERSION::${GITHUB_REF:11}
 #      - name: Create Release
 #        id: create_release
 #        uses: actions/create-release@latest
