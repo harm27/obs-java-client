@@ -42,10 +42,24 @@ public class SceneItem {
     }
 
     /**
-     * Scene item ID
+     * Set the name of a scene item.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Scene item ID.
      */
     public int getId() {
         return id;
+    }
+
+    /**
+     * Set the scene item ID.
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
