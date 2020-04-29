@@ -14,12 +14,12 @@ jobs:
         with:
           java-version: 11
       - name: Update version
-        run: mvn -B versions:set -DnewVersion=${{github.event.title }} --file pom.xml
+        run: mvn -B versions:set -DnewVersion=${{ github.event.milestone.title }} --file pom.xml
       - name: Commit version change
         run: |
           git add .
-          git commit -m "Updated to version ${{github.event.title }}"
-          git tag v${{github.event.title }}
+          git commit -m "Updated to version ${{ github.event.milestone.title }}"
+          git tag v${{ github.event.milestone.title }}
           git push --tags
 
   releasenotes:
@@ -42,4 +42,4 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
           BRANCH: gh-pages
           FOLDER: releasenotes
-          TARGET_FOLDER: release/{{github.event.title}}/
+          TARGET_FOLDER: release/${{github.event.milestone.title}}/
