@@ -22,7 +22,11 @@ jobs:
           git add .
           git commit -m "Updated to version ${{ github.event.milestone.title }}"
           git tag v${{ github.event.milestone.title }}
-          git push --tags
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.JAVADOC_GITHUB_PAGES }}
+          tags: true
 
   releasenotes:
     runs-on: ubuntu-latest
