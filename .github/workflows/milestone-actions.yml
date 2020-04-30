@@ -34,6 +34,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OUTPUT_FOLDER: releasenotes
           USE_MILESTONE_TITLE: "true"
+      - name: Search for release notes
+        run: ls
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
