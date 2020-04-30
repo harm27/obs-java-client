@@ -5,26 +5,26 @@ on:
     types: [closed]
 
 jobs:
-#  releaseversion:
-  #    runs-on: ubuntu-latest
-  #    steps:
-  #      - uses: actions/checkout@v2
-  #        with:
-  #          token: '${{ secrets.JAVADOC_GITHUB_PAGES }}'
-  #      - name: Set up JDK 11
-  #        uses: actions/setup-java@v1
-  #        with:
-  #          java-version: 11
-  #      - name: Update version
-  #        run: mvn -B versions:set -DnewVersion=${{ github.event.milestone.title }} --file pom.xml
-  #      - name: Commit version change
-  #        run: |
-  #          git config --local user.email "action@github.com"
-  #          git config --local user.name "GitHub Action"
-  #          git add .
-  #          git commit -m "Updated to version ${{ github.event.milestone.title }}"
-  #          git tag v${{ github.event.milestone.title }}
-  #          git push origin master --tags
+  releaseversion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: '${{ secrets.JAVADOC_GITHUB_PAGES }}'
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Update version
+        run: mvn -B versions:set -DnewVersion=${{ github.event.milestone.title }} --file pom.xml
+      - name: Commit version change
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Updated to version ${{ github.event.milestone.title }}"
+          git tag v${{ github.event.milestone.title }}
+          git push origin master --tags
 
   releasenotes:
     runs-on: ubuntu-latest
