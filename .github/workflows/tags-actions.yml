@@ -25,8 +25,8 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            Releasenotes: https://harm27.github.io/obs-websocket-java/release/${{env.TAG_VERSION}}/releasenotes.md
-            Javadoc: https://harm27.github.io/obs-websocket-java/release/${{env.TAG_VERSION}}/javadoc
+            Releasenotes: https://harm27.github.io/obs-websocket-java/releasenotes/${{env.TAG_VERSION}}.md
+            Javadoc: https://harm27.github.io/obs-websocket-java/release/${{env.TAG_VERSION}}
           draft: false
           prerelease: false
       - name: Build with Maven
