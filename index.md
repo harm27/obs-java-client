@@ -1,7 +1,9 @@
 # Documentation
 On this site you can find the following information:
 - Javadoc for [Master](#snapshots) and [all released versions](#releases)
-- 
+- Releasenotes for [all released version](#releasenotes)
+- Documentation [how to extend obs-websocket-java](#how-to-extend-obs-websocket-java)
+- Documentation [how to use obs-websocket-java](how-to-use-obs-websocket-java)
 
 ## Javadoc
 ### Snapshots
