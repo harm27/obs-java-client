@@ -30,8 +30,8 @@ If you want to use Maven, you can find the latest jars in https://github.com/har
 At [harm27.github.io/obs-websocket-java](https://harm27.github.io/obs-websocket-java) you can find the following information:
 - Javadoc for master and every released version
 - Releasenotes for every released version
-- (**WIP**) Documentation how to extend this libary
-- (**WIP**) Documentation how to use this library
+- (**WIP**) Documentation how to extend obs-websocket-java
+- (**WIP**) Documentation how to use obs-websocket-java
 
 # SonarCloud codequality
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=ncloc)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
