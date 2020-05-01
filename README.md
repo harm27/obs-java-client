@@ -4,18 +4,18 @@ A Java API for communicating with OBS Websocket based on Java 11+ Websocket clie
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
 ![Master Build](https://github.com/harm27/obs-websocket-java/workflows/Master%20Build/badge.svg)
 
-# NOTE
-The initial version is still in development and there is no jar or maven dependency available yet. 
-If you want to use it already you need to build it yourself. 
+# News
+Version 1.0 is released. It includes the events and requests from the following categories:
+- Scenes
+- General
+- Other
 
-It does already includes the following features:
-* Authentication
-* Events system
-* Requests system
+This initial version includes the following basic features:
+- Authentication
+- Sending and receiving requests
+- Receiving requests
 
-But it does not support all events and requests yet. 
-
-Check https://github.com/harm27/obs-websocket-java/milestones for which version what events are planned
+Check https://github.com/harm27/obs-websocket-java/milestones for which version the other events are planned.
 
 # Download options
 To be able to use this project you can either download the jars or use the maven dependency. 
