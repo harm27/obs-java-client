@@ -15,7 +15,7 @@ This initial version includes the following basic features:
 - Sending and receiving requests
 - Receiving requests
 
-Check https://github.com/harm27/obs-websocket-java/milestones for which version the other events are planned.
+Check https://github.com/harm27/obs-websocket-java/milestones for which version the other events and requests are planned.
 
 # Download options
 To be able to use this project you can either download the jars or use the maven dependency. 
