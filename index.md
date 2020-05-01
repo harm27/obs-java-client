@@ -7,13 +7,13 @@ On this site you can find the following information:
 
 ## Javadoc
 ### Snapshots
-[Latest (Master)](https://harm27.github.io/obs-websocket-java/snapshot)
+[Latest (Master)](snapshot)
  
 ### Releases
-- [1.0](https://harm27.github.io/obs-websocket-java/release/1.0)
+- [1.0](release/1.0)
 
 ## Releasenotes
-- [1.0](https://harm27.github.io/obs-websocket-java/releasenotes/1.0)
+- [1.0](releasenotes/1.0)
 
 ## How to extend obs-websocket-java
 **WIP**
