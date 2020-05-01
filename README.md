@@ -24,8 +24,12 @@ If you want to use the jar directly, you can download it at https://github.com/h
 
 If you want to use Maven, you can find the latest jars in https://github.com/harm27/obs-websocket-java/packages
 
-# Javadoc
-The javadoc can be found at https://harm27.github.io/obs-websocket-java/
+# Documentation
+At https://harm27.github.io/obs-websocket-java you can find the following information:
+- Javadoc for master and every released version
+- Releasenotes for every released version
+- (**WIP**) Documentation how to extend this libary
+- (**WIP**) Documentation how to use this library
 
 # SonarCloud codequality
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=ncloc)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
