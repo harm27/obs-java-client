@@ -6,55 +6,55 @@ on:
       - v*
 
 jobs:
-#  release:
-  #    runs-on: ubuntu-latest
-  #    steps:
-  #      - uses: actions/checkout@v2
-  #      - name: Set up JDK 11
-  #        uses: actions/setup-java@v1
-  #        with:
-  #          java-version: 11
-  #      - name: Set env
-  #        run: echo ::set-env name=TAG_VERSION::${GITHUB_REF:11}
-  #      - name: Create Release
-  #        id: create_release
-  #        uses: actions/create-release@latest
-  #        env:
-  #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #        with:
-  #          tag_name: ${{ github.ref }}
-  #          release_name: Release ${{ github.ref }}
-  #          body: |
-  #            Releasenotes: https://harm27.github.io/obs-websocket-java/releasenotes/${{env.TAG_VERSION}}.md
-  #            Javadoc: https://harm27.github.io/obs-websocket-java/release/${{env.TAG_VERSION}}
-  #          draft: false
-  #          prerelease: false
-  #      - name: Build with Maven
-  #        run: mvn -B package --file pom.xml
-  #      - name: Publish to GitHub Packages Apache Maven
-  #        run: mvn deploy
-  #        env:
-  #          GITHUB_TOKEN: ${{ github.token }}
-  #      - name: Upload file
-  #        id: upload-release-jar-asset
-  #        uses: actions/upload-release-asset@v1
-  #        env:
-  #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #        with:
-  #          upload_url: ${{ steps.create_release.outputs.upload_url }}
-  #          asset_path: target/obs-websocket-java-${{env.TAG_VERSION}}.jar
-  #          asset_name: obs-websocket-java-${{env.TAG_VERSION}}.jar
-  #          asset_content_type: application/jar
-  #      - name: Upload Javadoc file
-  #        id: upload-release-javadoc-jar-asset
-  #        uses: actions/upload-release-asset@v1
-  #        env:
-  #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #        with:
-  #          upload_url: ${{ steps.create_release.outputs.upload_url }}
-  #          asset_path: target/obs-websocket-java-${{env.TAG_VERSION}}-javadoc.jar
-  #          asset_name: obs-websocket-java-${{env.TAG_VERSION}}-javadoc.jar
-  #          asset_content_type: application/jar
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Set env
+        run: echo ::set-env name=TAG_VERSION::${GITHUB_REF:11}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Releasenotes: https://harm27.github.io/obs-websocket-java/releasenotes/${{env.TAG_VERSION}}.md
+            Javadoc: https://harm27.github.io/obs-websocket-java/release/${{env.TAG_VERSION}}
+          draft: false
+          prerelease: false
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+      - name: Publish to GitHub Packages Apache Maven
+        run: mvn deploy
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Upload file
+        id: upload-release-jar-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: target/obs-websocket-java-${{env.TAG_VERSION}}.jar
+          asset_name: obs-websocket-java-${{env.TAG_VERSION}}.jar
+          asset_content_type: application/jar
+      - name: Upload Javadoc file
+        id: upload-release-javadoc-jar-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: target/obs-websocket-java-${{env.TAG_VERSION}}-javadoc.jar
+          asset_name: obs-websocket-java-${{env.TAG_VERSION}}-javadoc.jar
+          asset_content_type: application/jar
 
   javadoc:
     runs-on: ubuntu-latest
