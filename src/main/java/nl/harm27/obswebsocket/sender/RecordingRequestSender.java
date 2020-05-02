@@ -3,6 +3,7 @@ package nl.harm27.obswebsocket.sender;
 import nl.harm27.obswebsocket.OBSWebSocket;
 import nl.harm27.obswebsocket.api.requests.recording.StartRecording;
 import nl.harm27.obswebsocket.api.requests.recording.StartStopRecording;
+import nl.harm27.obswebsocket.api.requests.recording.StopRecording;
 
 import java.util.function.Consumer;
 
@@ -34,5 +35,16 @@ public class RecordingRequestSender extends RequestSender {
     public void startRecording(Consumer<StartRecording.Response> responseConsumer) {
         sendRequest(new StartRecording.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((StartRecording.Response) baseResponse));
+    }
+
+    /**
+     * Stop recording. Will return an error if recording is not active.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#StopRecording">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void stopRecording(Consumer<StopRecording.Response> responseConsumer) {
+        sendRequest(new StopRecording.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((StopRecording.Response) baseResponse));
     }
 }

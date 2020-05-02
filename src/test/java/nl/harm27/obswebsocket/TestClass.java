@@ -1,7 +1,7 @@
 package nl.harm27.obswebsocket;
 
 import nl.harm27.obswebsocket.api.requests.recording.StartRecording;
-import nl.harm27.obswebsocket.api.requests.recording.StartStopRecording;
+import nl.harm27.obswebsocket.api.requests.recording.StopRecording;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -46,10 +46,10 @@ public class TestClass {
 
     private void response(StartRecording.Response response) {
         System.out.println("StartRecording 1");
-        obsWebSocket.getRecordingRequestSender().startStopRecording(this::response2);
+        obsWebSocket.getRecordingRequestSender().stopRecording(this::response);
     }
 
-    private void response2(StartStopRecording.Response response) {
-        System.out.println("StartStopRecording 2");
+    private void response(StopRecording.Response response) {
+        System.out.println("StopRecording 1");
     }
 }
