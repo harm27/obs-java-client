@@ -1,10 +1,7 @@
 package nl.harm27.obswebsocket.sender;
 
 import nl.harm27.obswebsocket.OBSWebSocket;
-import nl.harm27.obswebsocket.api.requests.recording.PauseRecording;
-import nl.harm27.obswebsocket.api.requests.recording.StartRecording;
-import nl.harm27.obswebsocket.api.requests.recording.StartStopRecording;
-import nl.harm27.obswebsocket.api.requests.recording.StopRecording;
+import nl.harm27.obswebsocket.api.requests.recording.*;
 
 import java.util.function.Consumer;
 
@@ -58,5 +55,16 @@ public class RecordingRequestSender extends RequestSender {
     public void pauseRecording(Consumer<PauseRecording.Response> responseConsumer) {
         sendRequest(new PauseRecording.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((PauseRecording.Response) baseResponse));
+    }
+
+    /**
+     * Resume/unpause the current recording (if paused). Returns an error if recording is not active or not paused.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#ResumeRecording">OBS WebSocket Documentation</a>
+     * @since v4.7.0
+     */
+    public void resumeRecording(Consumer<ResumeRecording.Response> responseConsumer) {
+        sendRequest(new ResumeRecording.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((ResumeRecording.Response) baseResponse));
     }
 }

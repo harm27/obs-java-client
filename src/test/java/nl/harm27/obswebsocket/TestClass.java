@@ -1,6 +1,7 @@
 package nl.harm27.obswebsocket;
 
 import nl.harm27.obswebsocket.api.requests.recording.PauseRecording;
+import nl.harm27.obswebsocket.api.requests.recording.ResumeRecording;
 import nl.harm27.obswebsocket.api.requests.recording.StartRecording;
 import nl.harm27.obswebsocket.api.requests.recording.StopRecording;
 
@@ -46,16 +47,21 @@ public class TestClass {
     }
 
     private void response(StartRecording.Response response) {
-        System.out.println("StartRecording 1");
+        System.out.println("StartRecording");
         obsWebSocket.getRecordingRequestSender().pauseRecording(this::response);
     }
 
     private void response(PauseRecording.Response response) {
-        System.out.println("PauseRecording 1");
+        System.out.println("PauseRecording");
+        obsWebSocket.getRecordingRequestSender().resumeRecording(this::response);
+    }
+
+    private void response(ResumeRecording.Response response) {
+        System.out.println("ResumeRecording");
         obsWebSocket.getRecordingRequestSender().stopRecording(this::response);
     }
 
     private void response(StopRecording.Response response) {
-        System.out.println("StopRecording 1");
+        System.out.println("StopRecording");
     }
 }
