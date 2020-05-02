@@ -78,4 +78,15 @@ public class RecordingRequestSender extends RequestSender {
         sendRequest(new GetRecordingFolder.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((GetRecordingFolder.Response) baseResponse));
     }
+
+    /**
+     * Please note: if SetRecordingFolder is called while a recording is in progress, the change won't be applied immediately and will be effective on the next recording.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#SetRecordingFolder">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void setRecordingFolder(String recFolder, Consumer<SetRecordingFolder.Response> responseConsumer) {
+        sendRequest(new SetRecordingFolder.Request(getNextMessageId(), recFolder),
+                baseResponse -> responseConsumer.accept((SetRecordingFolder.Response) baseResponse));
+    }
 }
