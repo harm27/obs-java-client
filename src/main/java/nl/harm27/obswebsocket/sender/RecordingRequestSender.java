@@ -67,4 +67,15 @@ public class RecordingRequestSender extends RequestSender {
         sendRequest(new ResumeRecording.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((ResumeRecording.Response) baseResponse));
     }
+
+    /**
+     * Get the path of the current recording folder.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#GetRecordingFolder">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void getRecordingFolder(Consumer<GetRecordingFolder.Response> responseConsumer) {
+        sendRequest(new GetRecordingFolder.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((GetRecordingFolder.Response) baseResponse));
+    }
 }
