@@ -9,6 +9,7 @@ import nl.harm27.obswebsocket.listener.ListenerRegistry;
 import nl.harm27.obswebsocket.processor.MessageReceiver;
 import nl.harm27.obswebsocket.processor.MessageSender;
 import nl.harm27.obswebsocket.sender.GeneralRequestSender;
+import nl.harm27.obswebsocket.sender.RecordingRequestSender;
 import nl.harm27.obswebsocket.sender.RequestSenderManager;
 import nl.harm27.obswebsocket.sender.ScenesRequestSender;
 import nl.harm27.obswebsocket.websocket.OBSWebSocketClient;
@@ -81,5 +82,9 @@ public class OBSWebSocket {
 
     public ScenesRequestSender getScenesRequestSender() {
         return requestSenderManager.getScenesRequestSender();
+    }
+
+    public RecordingRequestSender getRecordingRequestSender() {
+        return requestSenderManager.getRecordingRequestSender();
     }
 }

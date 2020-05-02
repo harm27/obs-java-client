@@ -1,12 +1,8 @@
 package nl.harm27.obswebsocket;
 
-import nl.harm27.obswebsocket.api.complex.SceneItem;
-import nl.harm27.obswebsocket.api.requests.scenes.GetCurrentScene;
-import nl.harm27.obswebsocket.api.requests.scenes.ReorderSceneItems;
+import nl.harm27.obswebsocket.api.requests.recording.StartStopRecording;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 import static nl.harm27.obswebsocket.authentication.AuthenticationResult.*;
@@ -14,7 +10,6 @@ import static nl.harm27.obswebsocket.authentication.AuthenticationResult.*;
 public class TestClass {
     private static final Object lockingMonitor = new Object();
     private final OBSWebSocket obsWebSocket;
-    private boolean completed = false;
 
     private TestClass() {
         obsWebSocket = new OBSWebSocket("localhost", 4444, "test1234");
@@ -45,29 +40,15 @@ public class TestClass {
     }
 
     private void enable() {
-        obsWebSocket.getScenesRequestSender().getCurrentScene(this::response);
+        obsWebSocket.getRecordingRequestSender().startStopRecording(this::response);
     }
 
-    private void response(GetCurrentScene.Response response) {
-        System.out.println("GetCurrentScene 1");
-        List<SceneItem> items = response.getSources();
-        Collections.reverse(items);
-        obsWebSocket.getScenesRequestSender().reorderSceneItems(null, items, this::response);
+    private void response(StartStopRecording.Response response) {
+        System.out.println("StartStopRecording 1");
+        obsWebSocket.getRecordingRequestSender().startStopRecording(this::response2);
     }
 
-    private void response(ReorderSceneItems.Response response) {
-        System.out.println("ReorderSceneItems 1");
-        obsWebSocket.getScenesRequestSender().getCurrentScene(this::response2);
-    }
-
-    private void response2(GetCurrentScene.Response response) {
-        System.out.println("GetCurrentScene 2");
-        List<SceneItem> items = response.getSources();
-        Collections.reverse(items);
-        obsWebSocket.getScenesRequestSender().reorderSceneItems(null, items, this::response2);
-    }
-
-    private void response2(ReorderSceneItems.Response response) {
-        System.out.println("ReorderSceneItems 2");
+    private void response2(StartStopRecording.Response response) {
+        System.out.println("StartStopRecording 2");
     }
 }
