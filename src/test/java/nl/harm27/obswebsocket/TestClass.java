@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket;
 
-import nl.harm27.obswebsocket.api.events.recording.RecordingStarted;
+import nl.harm27.obswebsocket.api.events.recording.RecordingStopping;
 import nl.harm27.obswebsocket.api.requests.recording.PauseRecording;
 import nl.harm27.obswebsocket.api.requests.recording.ResumeRecording;
 import nl.harm27.obswebsocket.api.requests.recording.StartRecording;
@@ -20,8 +20,8 @@ public class TestClass {
         obsWebSocket = new OBSWebSocket("localhost", 4444, "test1234");
         obsWebSocket.registerListener(new RecordingEventListener() {
             @Override
-            public void recordingStarted(RecordingStarted recordingStarted) {
-                System.out.println("Recording Started");
+            public void recordingStopping(RecordingStopping recordingStopping) {
+                System.out.println("Recording Stopping");
             }
         });
     }
