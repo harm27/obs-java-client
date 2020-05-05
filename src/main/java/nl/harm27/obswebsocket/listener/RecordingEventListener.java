@@ -21,6 +21,7 @@ public abstract class RecordingEventListener implements EventListener {
         supportedEvents.put(RECORDING_STOPPING, RecordingStopping.class);
         supportedEvents.put(RECORDING_STOPPED, RecordingStopped.class);
         supportedEvents.put(RECORDING_PAUSED, RecordingPaused.class);
+        supportedEvents.put(RECORDING_RESUMED, RecordingResumed.class);
         return supportedEvents;
     }
 
@@ -41,6 +42,9 @@ public abstract class RecordingEventListener implements EventListener {
                 break;
             case RECORDING_PAUSED:
                 recordingPaused((RecordingPaused) baseEvent);
+                break;
+            case RECORDING_RESUMED:
+                recordingResumed((RecordingResumed) baseEvent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected EventType for RecordingEventListener.");
@@ -85,5 +89,13 @@ public abstract class RecordingEventListener implements EventListener {
      * @param recordingPaused The received event.
      */
     public void recordingPaused(RecordingPaused recordingPaused) {
+    }
+
+    /**
+     * Implement this method to process RecordingResumed events.
+     *
+     * @param recordingResumed The received event.
+     */
+    public void recordingResumed(RecordingResumed recordingResumed) {
     }
 }
