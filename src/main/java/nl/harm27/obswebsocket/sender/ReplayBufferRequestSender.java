@@ -1,6 +1,7 @@
 package nl.harm27.obswebsocket.sender;
 
 import nl.harm27.obswebsocket.OBSWebSocket;
+import nl.harm27.obswebsocket.api.requests.replaybuffer.SaveReplayBuffer;
 import nl.harm27.obswebsocket.api.requests.replaybuffer.StartReplayBuffer;
 import nl.harm27.obswebsocket.api.requests.replaybuffer.StartStopReplayBuffer;
 import nl.harm27.obswebsocket.api.requests.replaybuffer.StopReplayBuffer;
@@ -48,5 +49,18 @@ public class ReplayBufferRequestSender extends RequestSender {
     public void stopReplayBuffer(Consumer<StopReplayBuffer.Response> responseConsumer) {
         sendRequest(new StopReplayBuffer.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((StopReplayBuffer.Response) baseResponse));
+    }
+
+    /**
+     * Flush and save the contents of the Replay Buffer to disk.
+     * This is basically the same as triggering the "Save Replay Buffer" hotkey.
+     * Will return an error if the Replay Buffer is not active.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#SaveReplayBuffer">OBS WebSocket Documentation</a>
+     * @since v4.2.0
+     */
+    public void saveReplayBuffer(Consumer<SaveReplayBuffer.Response> responseConsumer) {
+        sendRequest(new SaveReplayBuffer.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((SaveReplayBuffer.Response) baseResponse));
     }
 }
