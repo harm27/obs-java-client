@@ -1,8 +1,5 @@
 package nl.harm27.obswebsocket;
 
-import nl.harm27.obswebsocket.api.requests.recording.GetRecordingFolder;
-import nl.harm27.obswebsocket.api.requests.recording.SetRecordingFolder;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -41,27 +38,5 @@ public class TestClass {
     }
 
     private void enable() {
-        obsWebSocket.getRecordingRequestSender().getRecordingFolder(this::response);
-    }
-
-    private void response(GetRecordingFolder.Response response) {
-        String path = response.getRecFolder() + "\\obs";
-        System.out.println("Path: " + path);
-        obsWebSocket.getRecordingRequestSender().setRecordingFolder(path, this::response);
-    }
-
-    private void response(SetRecordingFolder.Response response) {
-        System.out.println("Reset");
-        obsWebSocket.getRecordingRequestSender().getRecordingFolder(this::response2);
-    }
-
-    private void response2(GetRecordingFolder.Response response) {
-        String path = response.getRecFolder().replace("\\obs", "");
-        System.out.println("Path: " + path);
-        obsWebSocket.getRecordingRequestSender().setRecordingFolder(path, this::response2);
-    }
-
-    private void response2(SetRecordingFolder.Response response) {
-        System.out.println("Completed");
     }
 }
