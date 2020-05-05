@@ -4,6 +4,7 @@ import nl.harm27.obswebsocket.api.events.BaseEvent;
 import nl.harm27.obswebsocket.api.events.EventType;
 import nl.harm27.obswebsocket.api.events.recording.RecordingStarted;
 import nl.harm27.obswebsocket.api.events.recording.RecordingStarting;
+import nl.harm27.obswebsocket.api.events.recording.RecordingStopped;
 import nl.harm27.obswebsocket.api.events.recording.RecordingStopping;
 
 import java.util.EnumMap;
@@ -21,6 +22,7 @@ public abstract class RecordingEventListener implements EventListener {
         supportedEvents.put(RECORDING_STARTING, RecordingStarting.class);
         supportedEvents.put(RECORDING_STARTED, RecordingStarted.class);
         supportedEvents.put(RECORDING_STOPPING, RecordingStopping.class);
+        supportedEvents.put(RECORDING_STOPPED, RecordingStopped.class);
         return supportedEvents;
     }
 
@@ -35,6 +37,9 @@ public abstract class RecordingEventListener implements EventListener {
                 break;
             case RECORDING_STOPPING:
                 recordingStopping((RecordingStopping) baseEvent);
+                break;
+            case RECORDING_STOPPED:
+                recordingStopped((RecordingStopped) baseEvent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected EventType for RecordingEventListener.");
@@ -63,5 +68,13 @@ public abstract class RecordingEventListener implements EventListener {
      * @param recordingStopping The received event.
      */
     public void recordingStopping(RecordingStopping recordingStopping) {
+    }
+
+    /**
+     * Implement this method to process RecordingStopped events.
+     *
+     * @param recordingStopped The received event.
+     */
+    public void recordingStopped(RecordingStopped recordingStopped) {
     }
 }
