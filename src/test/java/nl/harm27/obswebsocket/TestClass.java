@@ -1,7 +1,11 @@
 package nl.harm27.obswebsocket;
 
-import nl.harm27.obswebsocket.api.requests.recording.GetRecordingFolder;
-import nl.harm27.obswebsocket.api.requests.recording.SetRecordingFolder;
+import nl.harm27.obswebsocket.api.events.recording.RecordingStopped;
+import nl.harm27.obswebsocket.api.requests.recording.PauseRecording;
+import nl.harm27.obswebsocket.api.requests.recording.ResumeRecording;
+import nl.harm27.obswebsocket.api.requests.recording.StartRecording;
+import nl.harm27.obswebsocket.api.requests.recording.StopRecording;
+import nl.harm27.obswebsocket.listener.RecordingEventListener;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -14,6 +18,12 @@ public class TestClass {
 
     private TestClass() {
         obsWebSocket = new OBSWebSocket("localhost", 4444, "test1234");
+        obsWebSocket.registerListener(new RecordingEventListener() {
+            @Override
+            public void recordingStopped(RecordingStopped recordingStopped) {
+                System.out.println("Recording Stopped");
+            }
+        });
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -41,27 +51,22 @@ public class TestClass {
     }
 
     private void enable() {
-        obsWebSocket.getRecordingRequestSender().getRecordingFolder(this::response);
+        obsWebSocket.getRecordingRequestSender().startRecording(this::response);
     }
 
-    private void response(GetRecordingFolder.Response response) {
-        String path = response.getRecFolder() + "\\obs";
-        System.out.println("Path: " + path);
-        obsWebSocket.getRecordingRequestSender().setRecordingFolder(path, this::response);
+    private void response(StartRecording.Response response) {
+        obsWebSocket.getRecordingRequestSender().pauseRecording(this::response);
     }
 
-    private void response(SetRecordingFolder.Response response) {
-        System.out.println("Reset");
-        obsWebSocket.getRecordingRequestSender().getRecordingFolder(this::response2);
+    private void response(PauseRecording.Response response) {
+        obsWebSocket.getRecordingRequestSender().resumeRecording(this::response);
     }
 
-    private void response2(GetRecordingFolder.Response response) {
-        String path = response.getRecFolder().replace("\\obs", "");
-        System.out.println("Path: " + path);
-        obsWebSocket.getRecordingRequestSender().setRecordingFolder(path, this::response2);
+    private void response(ResumeRecording.Response response) {
+        obsWebSocket.getRecordingRequestSender().stopRecording(this::response);
     }
 
-    private void response2(SetRecordingFolder.Response response) {
+    private void response(StopRecording.Response response) {
         System.out.println("Completed");
     }
 }
