@@ -1,5 +1,12 @@
 package nl.harm27.obswebsocket;
 
+import nl.harm27.obswebsocket.api.events.recording.RecordingStarting;
+import nl.harm27.obswebsocket.api.requests.recording.PauseRecording;
+import nl.harm27.obswebsocket.api.requests.recording.ResumeRecording;
+import nl.harm27.obswebsocket.api.requests.recording.StartRecording;
+import nl.harm27.obswebsocket.api.requests.recording.StopRecording;
+import nl.harm27.obswebsocket.listener.RecordingEventListener;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -11,6 +18,12 @@ public class TestClass {
 
     private TestClass() {
         obsWebSocket = new OBSWebSocket("localhost", 4444, "test1234");
+        obsWebSocket.registerListener(new RecordingEventListener() {
+            @Override
+            public void recordingStarting(RecordingStarting recordingStarting) {
+                System.out.println("Recording Starting");
+            }
+        });
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -38,5 +51,22 @@ public class TestClass {
     }
 
     private void enable() {
+        obsWebSocket.getRecordingRequestSender().startRecording(this::response);
+    }
+
+    private void response(StartRecording.Response response) {
+        obsWebSocket.getRecordingRequestSender().pauseRecording(this::response);
+    }
+
+    private void response(PauseRecording.Response response) {
+        obsWebSocket.getRecordingRequestSender().resumeRecording(this::response);
+    }
+
+    private void response(ResumeRecording.Response response) {
+        obsWebSocket.getRecordingRequestSender().stopRecording(this::response);
+    }
+
+    private void response(StopRecording.Response response) {
+        System.out.println("Completed");
     }
 }
