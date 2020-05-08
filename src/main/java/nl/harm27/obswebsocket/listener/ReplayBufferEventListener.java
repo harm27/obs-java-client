@@ -2,11 +2,13 @@ package nl.harm27.obswebsocket.listener;
 
 import nl.harm27.obswebsocket.api.events.BaseEvent;
 import nl.harm27.obswebsocket.api.events.EventType;
+import nl.harm27.obswebsocket.api.events.replaybuffer.ReplayStarted;
 import nl.harm27.obswebsocket.api.events.replaybuffer.ReplayStarting;
 
 import java.util.EnumMap;
 import java.util.Map;
 
+import static nl.harm27.obswebsocket.api.events.EventType.REPLAY_STARTED;
 import static nl.harm27.obswebsocket.api.events.EventType.REPLAY_STARTING;
 
 /**
@@ -17,6 +19,7 @@ public abstract class ReplayBufferEventListener implements EventListener {
     public final Map<EventType, Class<?>> getSupportedEvents() {
         Map<EventType, Class<?>> supportedEvents = new EnumMap<>(EventType.class);
         supportedEvents.put(REPLAY_STARTING, ReplayStarting.class);
+        supportedEvents.put(REPLAY_STARTED, ReplayStarted.class);
         return supportedEvents;
     }
 
@@ -25,6 +28,9 @@ public abstract class ReplayBufferEventListener implements EventListener {
         switch (baseEvent.getEventType()) {
             case REPLAY_STARTING:
                 replayStarting((ReplayStarting) baseEvent);
+                break;
+            case REPLAY_STARTED:
+                replayStarted((ReplayStarted) baseEvent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected EventType for ReplayBufferEventListener.");
@@ -38,5 +44,13 @@ public abstract class ReplayBufferEventListener implements EventListener {
      */
     public void replayStarting(ReplayStarting replayStarting) {
 
+    }
+
+    /**
+     * Implement this method to process ReplayStarted events.
+     *
+     * @param replayStarted The received event.
+     */
+    public void replayStarted(ReplayStarted replayStarted) {
     }
 }
