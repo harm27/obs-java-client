@@ -4,6 +4,7 @@ import nl.harm27.obswebsocket.api.events.BaseEvent;
 import nl.harm27.obswebsocket.api.events.EventType;
 import nl.harm27.obswebsocket.api.events.replaybuffer.ReplayStarted;
 import nl.harm27.obswebsocket.api.events.replaybuffer.ReplayStarting;
+import nl.harm27.obswebsocket.api.events.replaybuffer.ReplayStopped;
 import nl.harm27.obswebsocket.api.events.replaybuffer.ReplayStopping;
 
 import java.util.EnumMap;
@@ -21,6 +22,7 @@ public abstract class ReplayBufferEventListener implements EventListener {
         supportedEvents.put(REPLAY_STARTING, ReplayStarting.class);
         supportedEvents.put(REPLAY_STARTED, ReplayStarted.class);
         supportedEvents.put(REPLAY_STOPPING, ReplayStopping.class);
+        supportedEvents.put(REPLAY_STOPPED, ReplayStopped.class);
         return supportedEvents;
     }
 
@@ -35,6 +37,9 @@ public abstract class ReplayBufferEventListener implements EventListener {
                 break;
             case REPLAY_STOPPING:
                 replayStopping((ReplayStopping) baseEvent);
+                break;
+            case REPLAY_STOPPED:
+                replayStopped((ReplayStopped) baseEvent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected EventType for ReplayBufferEventListener.");
@@ -64,5 +69,13 @@ public abstract class ReplayBufferEventListener implements EventListener {
      * @param replayStopping The received event.
      */
     public void replayStopping(ReplayStopping replayStopping) {
+    }
+
+    /**
+     * Implement this method to process ReplayStopped events.
+     *
+     * @param replayStopped The received event.
+     */
+    public void replayStopped(ReplayStopped replayStopped) {
     }
 }
