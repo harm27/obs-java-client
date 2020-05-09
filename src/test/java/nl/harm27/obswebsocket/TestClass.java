@@ -1,11 +1,8 @@
 package nl.harm27.obswebsocket;
 
-import nl.harm27.obswebsocket.api.events.recording.RecordingStopped;
-import nl.harm27.obswebsocket.api.requests.recording.PauseRecording;
-import nl.harm27.obswebsocket.api.requests.recording.ResumeRecording;
-import nl.harm27.obswebsocket.api.requests.recording.StartRecording;
-import nl.harm27.obswebsocket.api.requests.recording.StopRecording;
-import nl.harm27.obswebsocket.listener.RecordingEventListener;
+import nl.harm27.obswebsocket.api.events.replaybuffer.ReplayStarting;
+import nl.harm27.obswebsocket.api.requests.replaybuffer.StartReplayBuffer;
+import nl.harm27.obswebsocket.listener.ReplayBufferEventListener;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -18,10 +15,10 @@ public class TestClass {
 
     private TestClass() {
         obsWebSocket = new OBSWebSocket("localhost", 4444, "test1234");
-        obsWebSocket.registerListener(new RecordingEventListener() {
+        obsWebSocket.registerListener(new ReplayBufferEventListener() {
             @Override
-            public void recordingStopped(RecordingStopped recordingStopped) {
-                System.out.println("Recording Stopped");
+            public void replayStarting(ReplayStarting replayStarting) {
+                System.out.println("Replay Starting");
             }
         });
     }
@@ -51,22 +48,10 @@ public class TestClass {
     }
 
     private void enable() {
-        obsWebSocket.getRecordingRequestSender().startRecording(this::response);
+        obsWebSocket.getReplayBufferRequestSender().startReplayBuffer(this::response);
     }
 
-    private void response(StartRecording.Response response) {
-        obsWebSocket.getRecordingRequestSender().pauseRecording(this::response);
-    }
-
-    private void response(PauseRecording.Response response) {
-        obsWebSocket.getRecordingRequestSender().resumeRecording(this::response);
-    }
-
-    private void response(ResumeRecording.Response response) {
-        obsWebSocket.getRecordingRequestSender().stopRecording(this::response);
-    }
-
-    private void response(StopRecording.Response response) {
+    private void response(StartReplayBuffer.Response response) {
         System.out.println("Completed");
     }
 }
