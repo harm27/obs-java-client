@@ -13,11 +13,8 @@ import nl.harm27.obswebsocket.websocket.OBSWebSocketClient;
 
 import java.net.http.WebSocket;
 import java.util.function.Consumer;
-import java.util.regex.Pattern;
 
 public class OBSWebSocket {
-    public static final Pattern NUMERIC_FORMAT_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
-
     private final MessageSender messageSender;
     private final OBSWebSocketClient obsWebSocketClient;
     private final AuthenticationHandler authenticationHandler;
