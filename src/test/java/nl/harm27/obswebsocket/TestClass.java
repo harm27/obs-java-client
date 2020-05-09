@@ -1,7 +1,7 @@
 package nl.harm27.obswebsocket;
 
 import nl.harm27.obswebsocket.api.events.replaybuffer.ReplayStarting;
-import nl.harm27.obswebsocket.api.requests.replaybuffer.StartReplayBuffer;
+import nl.harm27.obswebsocket.api.requests.streaming.GetStreamingStatus;
 import nl.harm27.obswebsocket.listener.ReplayBufferEventListener;
 
 import java.util.Arrays;
@@ -48,10 +48,10 @@ public class TestClass {
     }
 
     private void enable() {
-        obsWebSocket.getReplayBufferRequestSender().startReplayBuffer(this::response);
+        obsWebSocket.getStreamingRequestSender().getStreamingStatus(this::response);
     }
 
-    private void response(StartReplayBuffer.Response response) {
+    private void response(GetStreamingStatus.Response response) {
         System.out.println("Completed");
     }
 }

@@ -85,4 +85,8 @@ public class OBSWebSocket {
     public ReplayBufferRequestSender getReplayBufferRequestSender() {
         return requestSenderManager.getReplayBufferRequestSender();
     }
+
+    public StreamingRequestSender getStreamingRequestSender() {
+        return requestSenderManager.getStreamingRequestSender();
+    }
 }
