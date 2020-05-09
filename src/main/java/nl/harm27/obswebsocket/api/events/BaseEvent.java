@@ -57,7 +57,7 @@ public abstract class BaseEvent {
      */
     public Optional<Duration> getRecordingDuration() {
         if (recordingTimecode != null)
-            return parseDuration(streamTimecode);
+            return parseDuration(recordingTimecode);
         return Optional.empty();
     }
 }
