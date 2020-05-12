@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName;
 public class StreamSettings {
     @SerializedName("server")
     private String server;
+    @SerializedName("service")
+    private String service;
+    @SerializedName("bwtest")
+    private boolean bandwidthTest;
     @SerializedName("key")
     private String key;
     @SerializedName("use_auth")
@@ -89,5 +93,33 @@ public class StreamSettings {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * The used service
+     */
+    public String getService() {
+        return service;
+    }
+
+    /**
+     * The used service
+     */
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    /**
+     * Bandwidth Test enabled
+     */
+    public boolean isBandwidthTest() {
+        return bandwidthTest;
+    }
+
+    /**
+     * Bandwidth Test enabled
+     */
+    public void setBandwidthTest(boolean bandwidthTest) {
+        this.bandwidthTest = bandwidthTest;
     }
 }
