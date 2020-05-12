@@ -1,6 +1,7 @@
 package nl.harm27.obswebsocket.api.requests.streaming;
 
 import com.google.gson.annotations.SerializedName;
+import nl.harm27.obswebsocket.api.complex.StreamSettings;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
@@ -57,36 +58,4 @@ public class StartStreaming {
         }
     }
 
-    public static class StreamSettings {
-        @SerializedName("server")
-        private String server;
-        @SerializedName("key")
-        private String key;
-        @SerializedName("use_auth")
-        private boolean useAuth;
-        @SerializedName("username")
-        private String username;
-        @SerializedName("password")
-        private String password;
-
-        public void setServer(String server) {
-            this.server = server;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
-
-        public void setUseAuth(boolean useAuth) {
-            this.useAuth = useAuth;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-    }
 }
