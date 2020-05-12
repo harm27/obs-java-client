@@ -3,6 +3,7 @@ package nl.harm27.obswebsocket.sender;
 import nl.harm27.obswebsocket.OBSWebSocket;
 import nl.harm27.obswebsocket.api.requests.streaming.GetStreamingStatus;
 import nl.harm27.obswebsocket.api.requests.streaming.StartStopStreaming;
+import nl.harm27.obswebsocket.api.requests.streaming.StartStreaming;
 
 import java.util.function.Consumer;
 
@@ -34,5 +35,20 @@ public class StreamingRequestSender extends RequestSender {
     public void startStopStreaming(Consumer<StartStopStreaming.Response> responseConsumer) {
         sendRequest(new StartStopStreaming.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((StartStopStreaming.Response) baseResponse));
+    }
+
+    /**
+     * Start streaming. Will return an error if streaming is already active.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#StartStreaming">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void startStreaming(StartStreaming.Stream stream, Consumer<StartStreaming.Response> responseConsumer) {
+        StartStreaming.Request request = new StartStreaming.Request(getNextMessageId());
+        if (stream != null)
+            request.setStream(stream);
+
+        sendRequest(request,
+                baseResponse -> responseConsumer.accept((StartStreaming.Response) baseResponse));
     }
 }
