@@ -1,10 +1,8 @@
 package nl.harm27.obswebsocket.sender;
 
 import nl.harm27.obswebsocket.OBSWebSocket;
-import nl.harm27.obswebsocket.api.requests.streaming.GetStreamingStatus;
-import nl.harm27.obswebsocket.api.requests.streaming.StartStopStreaming;
-import nl.harm27.obswebsocket.api.requests.streaming.StartStreaming;
-import nl.harm27.obswebsocket.api.requests.streaming.StopStreaming;
+import nl.harm27.obswebsocket.api.complex.StreamSettings;
+import nl.harm27.obswebsocket.api.requests.streaming.*;
 
 import java.util.function.Consumer;
 
@@ -62,5 +60,20 @@ public class StreamingRequestSender extends RequestSender {
     public void stopStreaming(Consumer<StopStreaming.Response> responseConsumer) {
         sendRequest(new StopStreaming.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((StopStreaming.Response) baseResponse));
+    }
+
+    /**
+     * Sets one or more attributes of the current streaming server settings.
+     * Any options not passed will remain unchanged.
+     * Returns the updated settings in response.
+     * If 'type' is different than the current streaming service type, all settings are required.
+     * Returns the full settings of the stream (the same as GetStreamSettings).
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#SetStreamSettings">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void setStreamSettings(String type, StreamSettings settings, boolean save, Consumer<SetStreamSettings.Response> responseConsumer) {
+        sendRequest(new SetStreamSettings.Request(getNextMessageId(), type, settings, save),
+                baseResponse -> responseConsumer.accept((SetStreamSettings.Response) baseResponse));
     }
 }

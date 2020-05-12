@@ -1,7 +1,8 @@
 package nl.harm27.obswebsocket;
 
+import nl.harm27.obswebsocket.api.complex.StreamSettings;
 import nl.harm27.obswebsocket.api.events.replaybuffer.ReplayStarting;
-import nl.harm27.obswebsocket.api.requests.streaming.GetStreamingStatus;
+import nl.harm27.obswebsocket.api.requests.streaming.SetStreamSettings;
 import nl.harm27.obswebsocket.listener.ReplayBufferEventListener;
 
 import java.util.Arrays;
@@ -48,10 +49,10 @@ public class TestClass {
     }
 
     private void enable() {
-        obsWebSocket.getStreamingRequestSender().getStreamingStatus(this::response);
+        obsWebSocket.getStreamingRequestSender().setStreamSettings("rtmp_common", new StreamSettings(), false, this::response);
     }
 
-    private void response(GetStreamingStatus.Response response) {
+    private void response(SetStreamSettings.Response response) {
         System.out.println("Completed");
     }
 }
