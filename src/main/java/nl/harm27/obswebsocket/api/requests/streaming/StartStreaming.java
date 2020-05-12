@@ -37,6 +37,9 @@ public class StartStreaming {
     public static class Response extends BaseResponse {
     }
 
+    /**
+     * Special stream configuration. Please note: these won't be saved to OBS' configuration.
+     */
     public static class Stream {
         @SerializedName("type")
         private String type;
@@ -45,17 +48,29 @@ public class StartStreaming {
         @SerializedName("settings")
         private StreamSettings settings;
 
+        /**
+         * If specified ensures the type of stream matches the given type (usually 'rtmp_custom' or 'rtmp_common').
+         * If the currently configured stream type does not match the given stream type,
+         * all settings must be specified in the settings object or an error will occur when starting the stream.
+         */
         public void setType(String type) {
             this.type = type;
         }
 
+        /**
+         * Adds the given object parameters as encoded query string parameters to the 'key' of the RTMP stream.
+         * Used to pass data to the RTMP service about the streaming.
+         * May be any String, Numeric, or Boolean field.
+         */
         public void setMetadata(Object metadata) {
             this.metadata = metadata;
         }
 
+        /**
+         * Settings for the stream.
+         */
         public void setSettings(StreamSettings settings) {
             this.settings = settings;
         }
     }
-
 }
