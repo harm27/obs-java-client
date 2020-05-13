@@ -76,4 +76,15 @@ public class StreamingRequestSender extends RequestSender {
         sendRequest(new SetStreamSettings.Request(getNextMessageId(), type, settings, save),
                 baseResponse -> responseConsumer.accept((SetStreamSettings.Response) baseResponse));
     }
+
+    /**
+     * Get the current streaming server settings.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#GetStreamSettings">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void getStreamSettings(Consumer<GetStreamSettings.Response> responseConsumer) {
+        sendRequest(new GetStreamSettings.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((GetStreamSettings.Response) baseResponse));
+    }
 }
