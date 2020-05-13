@@ -87,4 +87,15 @@ public class StreamingRequestSender extends RequestSender {
         sendRequest(new GetStreamSettings.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((GetStreamSettings.Response) baseResponse));
     }
+
+    /**
+     * Save the current streaming server settings to disk.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#SaveStreamSettings">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void saveStreamSettings(Consumer<SaveStreamSettings.Response> responseConsumer) {
+        sendRequest(new SaveStreamSettings.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((SaveStreamSettings.Response) baseResponse));
+    }
 }
