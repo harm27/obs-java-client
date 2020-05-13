@@ -98,4 +98,16 @@ public class StreamingRequestSender extends RequestSender {
         sendRequest(new SaveStreamSettings.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((SaveStreamSettings.Response) baseResponse));
     }
+
+    /**
+     * Send the provided text as embedded CEA-608 caption data.
+     * As of OBS Studio 23.1, captions are not yet available on Linux.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#SendCaptions">OBS WebSocket Documentation</a>
+     * @since v4.6.0
+     */
+    public void sendCaptions(String text, Consumer<SendCaptions.Response> responseConsumer) {
+        sendRequest(new SendCaptions.Request(getNextMessageId(), text),
+                baseResponse -> responseConsumer.accept((SendCaptions.Response) baseResponse));
+    }
 }
