@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#obsstats">OBS WebSocket Documentation</a>
  */
 public class OBSStats {
+    @SerializedName("fps")
     private double fps;
     @SerializedName("render-total-frames")
     private int renderTotalFrames;

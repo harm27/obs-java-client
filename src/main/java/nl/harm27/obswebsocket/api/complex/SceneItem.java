@@ -9,21 +9,33 @@ import java.util.Optional;
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#sceneitem">OBS WebSocket Documentation</a>
  */
 public class SceneItem {
+    @SerializedName("cy")
     private Number cy;
+    @SerializedName("cx")
     private Number cx;
+    @SerializedName("name")
     private String name;
+    @SerializedName("id")
     private int id;
+    @SerializedName("render")
     private boolean render;
+    @SerializedName("locked")
     private boolean locked;
     @SerializedName("source_cx")
     private Number sourceCx;
     @SerializedName("source_cy")
     private Number sourceCy;
+    @SerializedName("type")
     private SourceType type;
+    @SerializedName("volume")
     private Number volume;
+    @SerializedName("x")
     private Number x;
+    @SerializedName("y")
     private Number y;
+    @SerializedName("parentGroupName")
     private String parentGroupName;
+    @SerializedName("groupChildren")
     private List<SceneItem> groupChildren;
 
     public Number getCy() {

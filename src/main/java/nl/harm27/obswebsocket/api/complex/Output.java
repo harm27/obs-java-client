@@ -6,12 +6,17 @@ import com.google.gson.annotations.SerializedName;
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#output">OBS WebSocket Documentation</a>
  */
 public class Output {
+    @SerializedName("name")
     private String name;
+    @SerializedName("type")
     private String type;
+    @SerializedName("width")
     private int width;
+    @SerializedName("height")
     private int height;
+    @SerializedName("flags")
     private Object flags;
-    @SerializedName("falags.rawValue")
+    @SerializedName("flags.rawValue")
     private int flagsRawValue;
     @SerializedName("flags.audio")
     private boolean flagsAudio;
@@ -23,12 +28,19 @@ public class Output {
     private boolean flagsMultiTrack;
     @SerializedName("flags.service")
     private boolean flagsService;
+    @SerializedName("settings")
     private Object settings;
+    @SerializedName("active")
     private boolean active;
+    @SerializedName("reconnecting")
     private boolean reconnecting;
+    @SerializedName("congestion")
     private double congestion;
+    @SerializedName("totalFrames")
     private int totalFrames;
+    @SerializedName("droppedFrames")
     private int droppedFrames;
+    @SerializedName("totalBytes")
     private int totalBytes;
 
     /**
