@@ -15,6 +15,7 @@ public class SceneItemTransform {
     private int positionY;
     @SerializedName("position.alignment")
     private int positionAlignment;
+    @SerializedName("rotation")
     private double rotation;
     @SerializedName("scale.x")
     private double scaleX;
@@ -28,7 +29,9 @@ public class SceneItemTransform {
     private int cropBottom;
     @SerializedName("crop.left")
     private int cropLeft;
+    @SerializedName("visible")
     private boolean visible;
+    @SerializedName("locked")
     private boolean locked;
     @SerializedName("bounds.type")
     private BoundsType boundsType;
@@ -38,11 +41,17 @@ public class SceneItemTransform {
     private double boundsX;
     @SerializedName("bounds.y")
     private double boundsY;
+    @SerializedName("sourceWidth")
     private int sourceWidth;
+    @SerializedName("sourceHeight")
     private int sourceHeight;
+    @SerializedName("width")
     private double width;
+    @SerializedName("height")
     private double height;
+    @SerializedName("parentGroupName")
     private String parentGroupName;
+    @SerializedName("groupChildren")
     private List<SceneItemTransform> groupChildren;
 
     /**
