@@ -47,10 +47,16 @@ public class SetStreamSettings {
         @SerializedName("settings")
         private StreamSettings settings;
 
+        /**
+         * The type of streaming service configuration, usually rtmp_custom or rtmp_common.
+         */
         public String getType() {
             return type;
         }
 
+        /**
+         * The actual settings of the stream.
+         */
         public StreamSettings getSettings() {
             return settings;
         }
