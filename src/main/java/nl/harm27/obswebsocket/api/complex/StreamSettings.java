@@ -2,6 +2,8 @@ package nl.harm27.obswebsocket.api.complex;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Optional;
+
 /**
  * Settings for the stream.
  */
@@ -24,8 +26,8 @@ public class StreamSettings {
     /**
      * The publish URL.
      */
-    public String getServer() {
-        return server;
+    public Optional<String> getServer() {
+        return Optional.ofNullable(server);
     }
 
     /**
@@ -38,8 +40,8 @@ public class StreamSettings {
     /**
      * The publish key of the stream.
      */
-    public String getKey() {
-        return key;
+    public Optional<String> getKey() {
+        return Optional.ofNullable(key);
     }
 
     /**
@@ -67,8 +69,8 @@ public class StreamSettings {
      * If authentication is enabled, the username for the streaming server.
      * Ignored if use_auth is not set to true.
      */
-    public String getUsername() {
-        return username;
+    public Optional<String> getUsername() {
+        return Optional.ofNullable(username);
     }
 
     /**
@@ -83,8 +85,8 @@ public class StreamSettings {
      * If authentication is enabled, the password for the streaming server.
      * Ignored if use_auth is not set to true.
      */
-    public String getPassword() {
-        return password;
+    public Optional<String> getPassword() {
+        return Optional.ofNullable(password);
     }
 
     /**
@@ -98,8 +100,8 @@ public class StreamSettings {
     /**
      * The used service
      */
-    public String getService() {
-        return service;
+    public Optional<String> getService() {
+        return Optional.ofNullable(service);
     }
 
     /**
