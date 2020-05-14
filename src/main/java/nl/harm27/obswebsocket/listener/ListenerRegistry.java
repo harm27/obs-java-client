@@ -5,8 +5,8 @@ import nl.harm27.obswebsocket.api.events.EventType;
 import java.util.*;
 
 public class ListenerRegistry {
-    private Map<EventListener, List<EventType>> eventListenersMap;
-    private Map<EventType, Class<?>> requestedEventTypes;
+    private final Map<EventListener, List<EventType>> eventListenersMap;
+    private final Map<EventType, Class<?>> requestedEventTypes;
 
     public ListenerRegistry() {
         eventListenersMap = new HashMap<>();
