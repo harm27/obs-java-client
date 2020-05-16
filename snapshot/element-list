@@ -7,6 +7,7 @@ nl.harm27.obswebsocket.api.events.other
 nl.harm27.obswebsocket.api.events.recording
 nl.harm27.obswebsocket.api.events.replaybuffer
 nl.harm27.obswebsocket.api.events.scenes
+nl.harm27.obswebsocket.api.events.streaming
 nl.harm27.obswebsocket.api.requests
 nl.harm27.obswebsocket.api.requests.general
 nl.harm27.obswebsocket.api.requests.recording
