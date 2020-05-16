@@ -29,6 +29,12 @@ jobs:
             Javadoc: https://harm27.github.io/obs-websocket-java/release/${{env.TAG_VERSION}}
           draft: false
           prerelease: false
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Publish to GitHub Packages Apache Maven
@@ -66,6 +72,12 @@ jobs:
           java-version: 11
       - name: Set env
         run: echo ::set-env name=TAG_VERSION::${GITHUB_REF:11}
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
       - name: Generate Javadoc
         run: mvn -B javadoc:javadoc --file pom.xml
       - name: Deploy
