@@ -2,11 +2,13 @@ package nl.harm27.obswebsocket.listener;
 
 import nl.harm27.obswebsocket.api.events.BaseEvent;
 import nl.harm27.obswebsocket.api.events.EventType;
+import nl.harm27.obswebsocket.api.events.streaming.StreamStarted;
 import nl.harm27.obswebsocket.api.events.streaming.StreamStarting;
 
 import java.util.EnumMap;
 import java.util.Map;
 
+import static nl.harm27.obswebsocket.api.events.EventType.STREAM_STARTED;
 import static nl.harm27.obswebsocket.api.events.EventType.STREAM_STARTING;
 
 /**
@@ -17,6 +19,7 @@ public abstract class StreamingEventListener implements EventListener {
     public final Map<EventType, Class<?>> getSupportedEvents() {
         Map<EventType, Class<?>> supportedEvents = new EnumMap<>(EventType.class);
         supportedEvents.put(STREAM_STARTING, StreamStarting.class);
+        supportedEvents.put(STREAM_STARTED, StreamStarted.class);
         return supportedEvents;
     }
 
@@ -25,6 +28,9 @@ public abstract class StreamingEventListener implements EventListener {
         switch (baseEvent.getEventType()) {
             case STREAM_STARTING:
                 streamStarting((StreamStarting) baseEvent);
+                break;
+            case STREAM_STARTED:
+                streamStarted((StreamStarted) baseEvent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected EventType for StreamingEventListener.");
@@ -37,5 +43,13 @@ public abstract class StreamingEventListener implements EventListener {
      * @param streamStarting The received event.
      */
     public void streamStarting(StreamStarting streamStarting) {
+    }
+
+    /**
+     * Implement this method to process StreamStarted events.
+     *
+     * @param streamStarted The received event.
+     */
+    public void streamStarted(StreamStarted streamStarted) {
     }
 }
