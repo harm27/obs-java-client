@@ -4,6 +4,7 @@ import nl.harm27.obswebsocket.api.events.BaseEvent;
 import nl.harm27.obswebsocket.api.events.EventType;
 import nl.harm27.obswebsocket.api.events.streaming.StreamStarted;
 import nl.harm27.obswebsocket.api.events.streaming.StreamStarting;
+import nl.harm27.obswebsocket.api.events.streaming.StreamStopped;
 import nl.harm27.obswebsocket.api.events.streaming.StreamStopping;
 
 import java.util.EnumMap;
@@ -21,6 +22,7 @@ public abstract class StreamingEventListener implements EventListener {
         supportedEvents.put(STREAM_STARTING, StreamStarting.class);
         supportedEvents.put(STREAM_STARTED, StreamStarted.class);
         supportedEvents.put(STREAM_STOPPING, StreamStopping.class);
+        supportedEvents.put(STREAM_STOPPED, StreamStopped.class);
         return supportedEvents;
     }
 
@@ -35,6 +37,9 @@ public abstract class StreamingEventListener implements EventListener {
                 break;
             case STREAM_STOPPING:
                 streamStopping((StreamStopping) baseEvent);
+                break;
+            case STREAM_STOPPED:
+                streamStopped((StreamStopped) baseEvent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected EventType for StreamingEventListener.");
@@ -63,5 +68,13 @@ public abstract class StreamingEventListener implements EventListener {
      * @param streamStopping The received event.
      */
     public void streamStopping(StreamStopping streamStopping) {
+    }
+
+    /**
+     * Implement this method to process StreamStopped events.
+     *
+     * @param streamStopped The received event.
+     */
+    public void streamStopped(StreamStopped streamStopped) {
     }
 }
