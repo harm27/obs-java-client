@@ -11,26 +11,36 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 import static nl.harm27.obswebsocket.authentication.AuthenticationResult.*;
 
 public class AuthenticationHandler {
     private final OBSWebSocket obsWebSocket;
     private final String password;
+    private final Consumer<AuthenticationResult> authenticationResultConsumer;
     private AuthenticationResult authenticationResult;
 
-    public AuthenticationHandler(OBSWebSocket obsWebSocket, String password) {
+    public AuthenticationHandler(OBSWebSocket obsWebSocket, String password, Consumer<AuthenticationResult> authenticationResultConsumer) {
         this.obsWebSocket = obsWebSocket;
         this.password = password;
-        authenticationResult = UN_AVAILABLE;
+        this.authenticationResultConsumer = authenticationResultConsumer;
+        this.authenticationResult = UN_AVAILABLE;
     }
 
     public AuthenticationResult getAuthenticationResult() {
         return authenticationResult;
     }
 
+    private void setAuthenticationResult(AuthenticationResult newAuthenticationResult) {
+        this.authenticationResult = newAuthenticationResult;
+        if (authenticationResult.isComplete())
+            CompletableFuture.runAsync(() -> authenticationResultConsumer.accept(authenticationResult));
+    }
+
     public void checkAuthenticationRequired() {
-        authenticationResult = AUTHENTICATION_REQUIRED_CHECKING;
+        setAuthenticationResult(AUTHENTICATION_REQUIRED_CHECKING);
         obsWebSocket.sendMessage(new GetAuthRequired.Request(obsWebSocket.getMessageId()), this::processGetAuthRequiredResponse);
     }
 
@@ -40,17 +50,17 @@ public class AuthenticationHandler {
 
         GetAuthRequired.Response response = (GetAuthRequired.Response) baseResponse;
         if (!response.isAuthRequired()) {
-            authenticationResult = AUTHENTICATION_NOT_REQUIRED;
+            setAuthenticationResult(AUTHENTICATION_NOT_REQUIRED);
             return;
         }
 
         if (password == null) {
             obsWebSocket.notifyShutdown();
-            authenticationResult = AUTHENTICATION_PASSWORD_MISSING;
+            setAuthenticationResult(AUTHENTICATION_PASSWORD_MISSING);
             return;
         }
 
-        authenticationResult = AUTHENTICATION_REQUIRED;
+        setAuthenticationResult(AUTHENTICATION_REQUIRED);
 
         try {
             Optional<String> challenge = response.getChallenge();
@@ -82,9 +92,9 @@ public class AuthenticationHandler {
 
         Authenticate.Response response = (Authenticate.Response) baseResponse;
         if (response.getStatus().equals(Status.OK))
-            authenticationResult = AUTHENTICATION_SUCCESS;
+            setAuthenticationResult(AUTHENTICATION_SUCCESS);
         else {
-            authenticationResult = AUTHENTICATION_FAILED;
+            setAuthenticationResult(AUTHENTICATION_FAILED);
             obsWebSocket.notifyShutdown();
         }
     }
