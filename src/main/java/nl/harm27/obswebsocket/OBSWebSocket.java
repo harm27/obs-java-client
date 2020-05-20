@@ -24,12 +24,8 @@ public class OBSWebSocket {
 
     private int lastMessageId = 0;
 
-    public OBSWebSocket(String ip, int port) {
-        this(ip, port, null);
-    }
-
-    public OBSWebSocket(String ip, int port, String password) {
-        authenticationHandler = new AuthenticationHandler(this, password);
+    private OBSWebSocket(String ip, int port, Consumer<AuthenticationResult> authenticationResultConsumer, String password) {
+        authenticationHandler = new AuthenticationHandler(this, password, authenticationResultConsumer);
         obsWebSocketClient = new OBSWebSocketClient(this, ip, port);
         messageSender = new MessageSender(obsWebSocketClient);
         requestSenderManager = new RequestSenderManager(this);
@@ -88,5 +84,36 @@ public class OBSWebSocket {
 
     public StreamingRequestSender getStreamingRequestSender() {
         return requestSenderManager.getStreamingRequestSender();
+    }
+
+    public static class Builder {
+        private String ip;
+        private int port;
+        private String password;
+        private Consumer<AuthenticationResult> authenticationResultConsumer;
+
+        public OBSWebSocket build() {
+            return new OBSWebSocket(ip, port, authenticationResultConsumer, password);
+        }
+
+        public Builder setIp(String ip) {
+            this.ip = ip;
+            return this;
+        }
+
+        public Builder setPort(int port) {
+            this.port = port;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder setAuthenticationResultConsumer(Consumer<AuthenticationResult> authenticationResultConsumer) {
+            this.authenticationResultConsumer = authenticationResultConsumer;
+            return this;
+        }
     }
 }
