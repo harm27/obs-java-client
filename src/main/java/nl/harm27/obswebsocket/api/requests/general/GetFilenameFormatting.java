@@ -24,6 +24,11 @@ public class GetFilenameFormatting {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return GetFilenameFormatting.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

@@ -11,7 +11,6 @@ import nl.harm27.obswebsocket.processor.MessageSender;
 import nl.harm27.obswebsocket.sender.*;
 import nl.harm27.obswebsocket.websocket.OBSWebSocketClient;
 
-import java.net.http.WebSocket;
 import java.util.function.Consumer;
 
 public class OBSWebSocket {
@@ -25,13 +24,14 @@ public class OBSWebSocket {
     private int lastMessageId = 0;
 
     private OBSWebSocket(String ip, int port, Consumer<AuthenticationResult> authenticationResultConsumer, String password) {
-        authenticationHandler = new AuthenticationHandler(this, password, authenticationResultConsumer);
-        obsWebSocketClient = new OBSWebSocketClient(this, ip, port);
-        messageSender = new MessageSender(obsWebSocketClient);
+        authenticationHandler = new AuthenticationHandler(this, password);
+        authenticationHandler.addAuthenticationResultConsumer(authenticationResultConsumer);
+        obsWebSocketClient = new OBSWebSocketClient(ip, port);
+        messageSender = new MessageSender(this, obsWebSocketClient, authenticationHandler);
         requestSenderManager = new RequestSenderManager(this);
         listenerRegistry = new ListenerRegistry();
         messageReceiver = new MessageReceiver(listenerRegistry);
-        obsWebSocketClient.connect();
+        obsWebSocketClient.connect(messageSender, messageReceiver);
     }
 
     public synchronized String getMessageId() {
@@ -46,20 +46,6 @@ public class OBSWebSocket {
 
     public void registerListener(EventListener eventListener) {
         listenerRegistry.registerListener(eventListener);
-    }
-
-    public void notifyShutdown() {
-        obsWebSocketClient.notifyShutdown();
-    }
-
-    public void receiveMessage(String message) {
-        messageReceiver.receiveMessage(message);
-    }
-
-    public void connected(WebSocket webSocket) {
-        obsWebSocketClient.setWebSocket(webSocket);
-        messageSender.processQueuedMessages();
-        authenticationHandler.checkAuthenticationRequired();
     }
 
     public AuthenticationResult getAuthenticationResult() {
@@ -84,6 +70,10 @@ public class OBSWebSocket {
 
     public StreamingRequestSender getStreamingRequestSender() {
         return requestSenderManager.getStreamingRequestSender();
+    }
+
+    public void notifyShutdown() {
+        obsWebSocketClient.notifyShutdown();
     }
 
     public static class Builder {

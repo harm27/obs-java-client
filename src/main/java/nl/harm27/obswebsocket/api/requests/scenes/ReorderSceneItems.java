@@ -37,6 +37,11 @@ public class ReorderSceneItems {
             return Response.class;
         }
 
+        @Override
+        public String getRequestName() {
+            return ReorderSceneItems.class.getSimpleName();
+        }
+
         /**
          * Name of the scene to reorder (defaults to current).
          */

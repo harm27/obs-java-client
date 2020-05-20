@@ -31,6 +31,11 @@ public class SetRecordingFolder {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return SetRecordingFolder.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

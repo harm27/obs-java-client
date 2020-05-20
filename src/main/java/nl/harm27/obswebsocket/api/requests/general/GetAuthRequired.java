@@ -26,6 +26,16 @@ public class GetAuthRequired {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public boolean isAuthenticationRequired() {
+            return false;
+        }
+
+        @Override
+        public String getRequestName() {
+            return GetAuthRequired.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

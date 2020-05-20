@@ -35,6 +35,11 @@ public class BroadcastCustomMessage {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return BroadcastCustomMessage.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

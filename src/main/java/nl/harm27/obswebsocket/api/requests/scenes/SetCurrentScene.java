@@ -31,6 +31,11 @@ public class SetCurrentScene {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return SetCurrentScene.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

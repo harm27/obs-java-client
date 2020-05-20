@@ -5,6 +5,9 @@ import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Returns the latest version of the plugin and the API.
  *
@@ -23,6 +26,16 @@ public class GetVersion {
         @Override
         public Class<?> getResponseType() {
             return Response.class;
+        }
+
+        @Override
+        public boolean isAuthenticationRequired() {
+            return false;
+        }
+
+        @Override
+        public String getRequestName() {
+            return GetVersion.class.getSimpleName();
         }
     }
 
@@ -62,6 +75,13 @@ public class GetVersion {
          */
         public String getAvailableRequests() {
             return availableRequests;
+        }
+
+        /**
+         * List of available request types.
+         */
+        public List<String> getAvailableRequestsAsList() {
+            return Arrays.asList(availableRequests.split(","));
         }
     }
 }

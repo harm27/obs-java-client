@@ -9,7 +9,9 @@ import nl.harm27.obswebsocket.api.requests.general.GetAuthRequired;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
@@ -19,24 +21,28 @@ import static nl.harm27.obswebsocket.authentication.AuthenticationResult.*;
 public class AuthenticationHandler {
     private final OBSWebSocket obsWebSocket;
     private final String password;
-    private final Consumer<AuthenticationResult> authenticationResultConsumer;
+    private final List<Consumer<AuthenticationResult>> authenticationResultConsumers;
     private AuthenticationResult authenticationResult;
 
-    public AuthenticationHandler(OBSWebSocket obsWebSocket, String password, Consumer<AuthenticationResult> authenticationResultConsumer) {
+    public AuthenticationHandler(OBSWebSocket obsWebSocket, String password) {
         this.obsWebSocket = obsWebSocket;
         this.password = password;
-        this.authenticationResultConsumer = authenticationResultConsumer;
         this.authenticationResult = UN_AVAILABLE;
+        authenticationResultConsumers = new ArrayList<>();
     }
 
     public AuthenticationResult getAuthenticationResult() {
         return authenticationResult;
     }
 
+    public void addAuthenticationResultConsumer(Consumer<AuthenticationResult> authenticationResultConsumer) {
+        authenticationResultConsumers.add(authenticationResultConsumer);
+    }
+
     private void setAuthenticationResult(AuthenticationResult newAuthenticationResult) {
         this.authenticationResult = newAuthenticationResult;
         if (authenticationResult.isComplete())
-            CompletableFuture.runAsync(() -> authenticationResultConsumer.accept(authenticationResult));
+            authenticationResultConsumers.forEach(consumer -> CompletableFuture.runAsync(() -> consumer.accept(authenticationResult)));
     }
 
     public void checkAuthenticationRequired() {

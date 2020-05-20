@@ -23,6 +23,11 @@ public class SaveStreamSettings {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return SaveStreamSettings.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

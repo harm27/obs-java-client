@@ -23,6 +23,11 @@ public class StartStopStreaming {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return StartStopStreaming.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

@@ -25,6 +25,11 @@ public class SaveReplayBuffer {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return SaveReplayBuffer.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

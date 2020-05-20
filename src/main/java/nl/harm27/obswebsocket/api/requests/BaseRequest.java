@@ -34,4 +34,16 @@ public abstract class BaseRequest {
      * Response type class to map the response to the correct datatype.
      */
     public abstract Class<?> getResponseType();
+
+    /**
+     * Says if request needs to wait for authentication.
+     */
+    public boolean isAuthenticationRequired() {
+        return true;
+    }
+
+    /**
+     * Says what the name is of this class.
+     */
+    public abstract String getRequestName();
 }

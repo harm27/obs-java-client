@@ -27,6 +27,11 @@ public class GetSceneList {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return GetSceneList.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {
