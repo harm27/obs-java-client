@@ -29,6 +29,11 @@ public class StartStreaming {
             return Response.class;
         }
 
+        @Override
+        public String getRequestName() {
+            return StartStreaming.class.getSimpleName();
+        }
+
         public void setStream(Stream stream) {
             this.stream = stream;
         }

@@ -19,6 +19,7 @@ public class MessageSender {
     private final Gson gson;
     private final OBSWebSocket obsWebSocket;
     private final AuthenticationHandler authenticationHandler;
+    private List<String> supportedRequests;
 
     public MessageSender(OBSWebSocket obsWebSocket, OBSWebSocketClient obsWebSocketClient, AuthenticationHandler authenticationHandler) {
         this.obsWebSocket = obsWebSocket;
@@ -29,8 +30,10 @@ public class MessageSender {
         gson = new GsonBuilder().create();
     }
 
-    public void checkAuthenticationRequired() {
+    public void onWebSocketOpen() {
         authenticationHandler.checkAuthenticationRequired();
+        obsWebSocket.sendMessage(new GetVersion.Request(obsWebSocket.getMessageId()), this::parseVersionAndMethods);
+        processQueuedMessages();
     }
 
     private void processQueuedMessages(AuthenticationResult authenticationResult) {
@@ -38,15 +41,26 @@ public class MessageSender {
             processQueuedMessages();
     }
 
-    public void processQueuedMessages() {
+    private void processQueuedMessages() {
         for (BaseRequest request : queuedMessages) {
             if (authenticationHandler.getAuthenticationResult().isSuccessful() || !request.isAuthenticationRequired())
                 sendMessage(request);
         }
     }
 
+    private void parseVersionAndMethods(BaseResponse baseResponse) {
+        if (!(baseResponse instanceof GetVersion.Response))
+            return;
+
+        GetVersion.Response response = (GetVersion.Response) baseResponse;
+        supportedRequests = response.getAvailableRequestsAsList();
+    }
+
     public void sendMessage(BaseRequest request) {
-        if (!obsWebSocketClient.isConnected() || (request.isAuthenticationRequired() && !authenticationHandler.getAuthenticationResult().isSuccessful()))
+        String requestName = request.getRequestName();
+        if (supportedRequests != null && supportedRequests.contains(requestName))
+            throw new InvalidMethodException(requestName);
+        else if (!obsWebSocketClient.isConnected() || (request.isAuthenticationRequired() && !authenticationHandler.getAuthenticationResult().isSuccessful()))
             queuedMessages.add(request);
         else
             obsWebSocketClient.sendText(gson.toJson(request));

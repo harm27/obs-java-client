@@ -47,6 +47,11 @@ public class OpenProjector {
             return Response.class;
         }
 
+        @Override
+        public String getRequestName() {
+            return OpenProjector.class.getSimpleName();
+        }
+
         /**
          * Type of projector
          */

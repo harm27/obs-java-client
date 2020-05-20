@@ -32,6 +32,11 @@ public class GetVersion {
         public boolean isAuthenticationRequired() {
             return false;
         }
+
+        @Override
+        public String getRequestName() {
+            return GetVersion.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

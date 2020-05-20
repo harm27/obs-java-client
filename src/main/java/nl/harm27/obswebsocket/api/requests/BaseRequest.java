@@ -41,4 +41,9 @@ public abstract class BaseRequest {
     public boolean isAuthenticationRequired() {
         return true;
     }
+
+    /**
+     * Says what the name is of this class.
+     */
+    public abstract String getRequestName();
 }

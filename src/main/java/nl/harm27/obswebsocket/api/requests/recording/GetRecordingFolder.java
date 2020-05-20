@@ -24,6 +24,11 @@ public class GetRecordingFolder {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return GetRecordingFolder.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

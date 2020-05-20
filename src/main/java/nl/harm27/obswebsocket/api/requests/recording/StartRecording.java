@@ -23,6 +23,11 @@ public class StartRecording {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return StartRecording.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

@@ -23,6 +23,11 @@ public class PauseRecording {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return PauseRecording.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

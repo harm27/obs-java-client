@@ -31,6 +31,11 @@ public class SetHeartbeat {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return SetHeartbeat.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

@@ -31,6 +31,11 @@ public class SetFilenameFormatting {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return SetFilenameFormatting.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

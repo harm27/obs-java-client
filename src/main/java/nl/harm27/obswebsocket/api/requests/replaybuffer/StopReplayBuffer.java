@@ -23,6 +23,11 @@ public class StopReplayBuffer {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return StopReplayBuffer.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

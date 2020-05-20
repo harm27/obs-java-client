@@ -29,6 +29,11 @@ public class GetStreamingStatus {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public String getRequestName() {
+            return GetStreamingStatus.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

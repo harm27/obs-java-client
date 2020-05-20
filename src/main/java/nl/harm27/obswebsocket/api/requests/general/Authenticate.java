@@ -36,6 +36,11 @@ public class Authenticate {
         public boolean isAuthenticationRequired() {
             return false;
         }
+
+        @Override
+        public String getRequestName() {
+            return Authenticate.class.getSimpleName();
+        }
     }
 
     public static class Response extends BaseResponse {

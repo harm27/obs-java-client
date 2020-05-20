@@ -24,8 +24,7 @@ public class OBSWebSocketListener implements WebSocket.Listener {
     @Override
     public void onOpen(WebSocket webSocket) {
         obsWebSocketClient.setWebSocket(webSocket);
-        messageSender.processQueuedMessages();
-        messageSender.checkAuthenticationRequired();
+        messageSender.onWebSocketOpen();
         webSocket.request(1);
     }
 
