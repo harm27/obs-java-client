@@ -31,6 +31,11 @@ public class Authenticate {
         public Class<?> getResponseType() {
             return Response.class;
         }
+
+        @Override
+        public boolean isAuthenticationRequired() {
+            return false;
+        }
     }
 
     public static class Response extends BaseResponse {

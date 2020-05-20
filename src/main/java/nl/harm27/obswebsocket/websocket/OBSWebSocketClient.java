@@ -1,6 +1,7 @@
 package nl.harm27.obswebsocket.websocket;
 
-import nl.harm27.obswebsocket.OBSWebSocket;
+import nl.harm27.obswebsocket.processor.MessageReceiver;
+import nl.harm27.obswebsocket.processor.MessageSender;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -8,22 +9,20 @@ import java.net.http.WebSocket;
 import java.time.Duration;
 
 public class OBSWebSocketClient {
-    private final OBSWebSocket obsWebSocket;
     private final String ip;
     private final int port;
     private WebSocket webSocket;
 
-    public OBSWebSocketClient(OBSWebSocket obsWebSocket, String ip, int port) {
-        this.obsWebSocket = obsWebSocket;
+    public OBSWebSocketClient(String ip, int port) {
         this.ip = ip;
         this.port = port;
     }
 
-    public void connect() {
+    public void connect(MessageSender messageSender, MessageReceiver messageReceiver) {
         HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(30))
                 .build().newWebSocketBuilder()
-                .buildAsync(URI.create(String.format("ws://%s:%d", ip, port)), new OBSWebSocketListener(obsWebSocket));
+                .buildAsync(URI.create(String.format("ws://%s:%d", ip, port)), new OBSWebSocketListener(this, messageSender, messageReceiver));
     }
 
     public void setWebSocket(WebSocket webSocket) {
