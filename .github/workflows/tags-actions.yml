@@ -80,6 +80,10 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Generate Javadoc
         run: mvn -B javadoc:javadoc --file pom.xml
+      - name: Sleep for 30 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '30s'
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
