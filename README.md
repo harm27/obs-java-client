@@ -5,17 +5,16 @@ A Java API for communicating with OBS Websocket based on Java 11+ Websocket clie
 ![Master Build](https://github.com/harm27/obs-websocket-java/workflows/Master%20Build/badge.svg)
 
 # News
-Version 1.0 is released. 
+Version 1.1 is released. 
 
 It includes the events and requests from the following categories:
-- Scenes
-- General
-- Other
+- Streaming
+- Replay Buffer
+- Recording
 
 This initial version includes the following basic features:
-- Authentication
-- Sending and receiving requests
-- Receiving requests
+- Improved checks for supported methods.
+- Improved authentication system
 
 Check https://github.com/harm27/obs-websocket-java/milestones for which version the other events and requests are planned.
 
