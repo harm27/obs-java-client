@@ -58,7 +58,7 @@ public class MessageSender {
 
     public void sendMessage(BaseRequest request) {
         String requestName = request.getRequestName();
-        if (supportedRequests != null && supportedRequests.contains(requestName))
+        if (supportedRequests != null && !supportedRequests.contains(requestName))
             throw new InvalidMethodException(requestName);
         else if (!obsWebSocketClient.isConnected() || (request.isAuthenticationRequired() && !authenticationHandler.getAuthenticationResult().isSuccessful()))
             queuedMessages.add(request);
