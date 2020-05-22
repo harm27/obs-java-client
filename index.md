@@ -11,9 +11,11 @@ On this site you can find the following information:
  
 ### Releases
 - [1.0](release/1.0)
+- [1.1](release/1.1)
 
 ## Releasenotes
 - [1.0](releasenotes/1.0)
+- [1.1](releasenotes/1.1)
 
 ## How to extend obs-websocket-java
 **WIP**
