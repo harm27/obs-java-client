@@ -1,16 +1,17 @@
 package nl.harm27.obswebsocket.api.complex;
 
-import com.google.gson.annotations.SerializedName;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum SourceType {
-    @SerializedName("input")
+    @JsonProperty("input")
     INPUT,
-    @SerializedName("filter")
+    @JsonProperty("filter")
     FILTER,
-    @SerializedName("transition")
+    @JsonProperty("transition")
     TRANSITION,
-    @SerializedName("scene")
+    @JsonProperty("scene")
     SCENE,
-    @SerializedName("unknown")
+    @JsonProperty("unknown")
     UNKNOWN
 }

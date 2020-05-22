@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Requests are sent by the client.
@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#requests>OBS WebSocket Documentation</a>
  */
 public abstract class BaseRequest {
-    @SerializedName("request-type")
+    @JsonProperty("request-type")
     private final RequestType requestType;
 
-    @SerializedName("message-id")
+    @JsonProperty("message-id")
     private final String messageId;
 
     /**

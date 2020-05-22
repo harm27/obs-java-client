@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.streaming;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.complex.StreamSettings;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
@@ -33,9 +33,9 @@ public class GetStreamSettings {
     }
 
     public static class Response extends BaseResponse {
-        @SerializedName("type")
+        @JsonProperty("type")
         private String type;
-        @SerializedName("settings")
+        @JsonProperty("settings")
         private StreamSettings settings;
 
         /**

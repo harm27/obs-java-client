@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.scenes;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.complex.SceneItem;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
@@ -19,9 +19,9 @@ public class ReorderSceneItems {
     }
 
     public static class Request extends BaseRequest {
-        @SerializedName("items")
+        @JsonProperty("items")
         private final List<SceneItem> items;
-        @SerializedName("scene")
+        @JsonProperty("scene")
         private String scene;
 
         /**

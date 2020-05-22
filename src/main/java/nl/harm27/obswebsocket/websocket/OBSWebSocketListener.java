@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OBSWebSocketListener implements WebSocket.Listener {
-    private final Logger logger = Logger.getLogger(OBSWebSocketListener.class.getName());
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
     private final OBSWebSocketClient obsWebSocketClient;
     private final MessageSender messageSender;
     private final MessageReceiver messageReceiver;

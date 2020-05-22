@@ -1,188 +1,188 @@
 package nl.harm27.obswebsocket.api.requests;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum RequestType {
-    @SerializedName("GetVersion")
+    @JsonProperty("GetVersion")
     GET_VERSION,
-    @SerializedName("GetAuthRequired")
+    @JsonProperty("GetAuthRequired")
     GET_AUTH_REQUIRED,
-    @SerializedName("Authenticate")
+    @JsonProperty("Authenticate")
     AUTHENTICATE,
-    @SerializedName("SetHeartbeat")
+    @JsonProperty("SetHeartbeat")
     SET_HEARTBEAT,
-    @SerializedName("SetFilenameFormatting")
+    @JsonProperty("SetFilenameFormatting")
     SET_FILENAME_FORMATTING,
-    @SerializedName("GetFilenameFormatting")
+    @JsonProperty("GetFilenameFormatting")
     GET_FILENAME_FORMATTING,
-    @SerializedName("GetStats")
+    @JsonProperty("GetStats")
     GET_STATS,
-    @SerializedName("BroadcastCustomMessage")
+    @JsonProperty("BroadcastCustomMessage")
     BROADCAST_CUSTOM_MESSAGE,
-    @SerializedName("GetVideoInfo")
+    @JsonProperty("GetVideoInfo")
     GET_VIDEO_INFO,
-    @SerializedName("OpenProjector")
+    @JsonProperty("OpenProjector")
     OPEN_PROJECTOR,
-    @SerializedName("ListOutputs")
+    @JsonProperty("ListOutputs")
     LIST_OUTPUTS,
-    @SerializedName("GetOutputInfo")
+    @JsonProperty("GetOutputInfo")
     GET_OUTPUT_INFO,
-    @SerializedName("StartOutput")
+    @JsonProperty("StartOutput")
     START_OUTPUT,
-    @SerializedName("StopOutput")
+    @JsonProperty("StopOutput")
     STOP_OUTPUT,
-    @SerializedName("SetCurrentProfile")
+    @JsonProperty("SetCurrentProfile")
     SET_CURRENT_PROFILE,
-    @SerializedName("GetCurrentProfile")
+    @JsonProperty("GetCurrentProfile")
     GET_CURRENT_PROFILE,
-    @SerializedName("ListProfiles")
+    @JsonProperty("ListProfiles")
     LIST_PROFILES,
-    @SerializedName("StartStopRecording")
+    @JsonProperty("StartStopRecording")
     START_STOP_RECORDING,
-    @SerializedName("StartRecording")
+    @JsonProperty("StartRecording")
     START_RECORDING,
-    @SerializedName("StopRecording")
+    @JsonProperty("StopRecording")
     STOP_RECORDING,
-    @SerializedName("PauseRecording")
+    @JsonProperty("PauseRecording")
     PAUSE_RECORDING,
-    @SerializedName("ResumeRecording")
+    @JsonProperty("ResumeRecording")
     RESUME_RECORDING,
-    @SerializedName("SetRecordingFolder")
+    @JsonProperty("SetRecordingFolder")
     SET_RECORDING_FOLDER,
-    @SerializedName("GetRecordingFolder")
+    @JsonProperty("GetRecordingFolder")
     GET_RECORDING_FOLDER,
-    @SerializedName("StartStopReplayBuffer")
+    @JsonProperty("StartStopReplayBuffer")
     START_STOP_REPLAY_BUFFER,
-    @SerializedName("StartReplayBuffer")
+    @JsonProperty("StartReplayBuffer")
     START_REPLAY_BUFFER,
-    @SerializedName("StopReplayBuffer")
+    @JsonProperty("StopReplayBuffer")
     STOP_REPLAY_BUFFER,
-    @SerializedName("SaveReplayBuffer")
+    @JsonProperty("SaveReplayBuffer")
     SAVE_REPLAY_BUFFER,
-    @SerializedName("SetCurrentSceneCollection")
+    @JsonProperty("SetCurrentSceneCollection")
     SET_CURRENT_SCENE_COLLECTION,
-    @SerializedName("GetCurrentSceneCollection")
+    @JsonProperty("GetCurrentSceneCollection")
     GET_CURRENT_SCENE_COLLECTION,
-    @SerializedName("ListSceneCollections")
+    @JsonProperty("ListSceneCollections")
     LIST_SCENE_COLLECTIONS,
-    @SerializedName("GetSceneItemProperties")
+    @JsonProperty("GetSceneItemProperties")
     GET_SCENE_ITEM_PROPERTIES,
-    @SerializedName("SetSceneItemProperties")
+    @JsonProperty("SetSceneItemProperties")
     SET_SCENE_ITEM_PROPERTIES,
-    @SerializedName("ResetSceneItem")
+    @JsonProperty("ResetSceneItem")
     RESET_SCENE_ITEM,
-    @SerializedName("SetSceneItemRender")
+    @JsonProperty("SetSceneItemRender")
     SET_SCENE_ITEM_RENDER,
-    @SerializedName("SetSceneItemPosition")
+    @JsonProperty("SetSceneItemPosition")
     SET_SCENE_ITEM_POSITION,
-    @SerializedName("SetSceneItemTransform")
+    @JsonProperty("SetSceneItemTransform")
     SET_SCENE_ITEM_TRANSFORM,
-    @SerializedName("SetSceneItemCrop")
+    @JsonProperty("SetSceneItemCrop")
     SET_SCENE_ITEM_CROP,
-    @SerializedName("DeleteSceneItem")
+    @JsonProperty("DeleteSceneItem")
     DELETE_SCENE_ITEM,
-    @SerializedName("DuplicateSceneItem")
+    @JsonProperty("DuplicateSceneItem")
     DUPLICATE_SCENE_ITEM,
-    @SerializedName("SetCurrentScene")
+    @JsonProperty("SetCurrentScene")
     SET_CURRENT_SCENE,
-    @SerializedName("GetCurrentScene")
+    @JsonProperty("GetCurrentScene")
     GET_CURRENT_SCENE,
-    @SerializedName("GetSceneList")
+    @JsonProperty("GetSceneList")
     GET_SCENE_LIST,
-    @SerializedName("ReorderSceneItems")
+    @JsonProperty("ReorderSceneItems")
     REORDER_SCENE_ITEMS,
-    @SerializedName("GetSourcesList")
+    @JsonProperty("GetSourcesList")
     GET_SOURCES_LIST,
-    @SerializedName("GetSourceTypesList")
+    @JsonProperty("GetSourceTypesList")
     GET_SOURCE_TYPES_LIST,
-    @SerializedName("GetVolume")
+    @JsonProperty("GetVolume")
     GET_VOLUME,
-    @SerializedName("SetVolume")
+    @JsonProperty("SetVolume")
     SET_VOLUME,
-    @SerializedName("GetMute")
+    @JsonProperty("GetMute")
     GET_MUTE,
-    @SerializedName("SetMute")
+    @JsonProperty("SetMute")
     SET_MUTE,
-    @SerializedName("ToggleMute")
+    @JsonProperty("ToggleMute")
     TOGGLE_MUTE,
-    @SerializedName("SetSyncOffset")
+    @JsonProperty("SetSyncOffset")
     SET_SYNC_OFFSET,
-    @SerializedName("GetSyncOffset")
+    @JsonProperty("GetSyncOffset")
     GET_SYNC_OFFSET,
-    @SerializedName("GetSourceSettings")
+    @JsonProperty("GetSourceSettings")
     GET_SOURCE_SETTINGS,
-    @SerializedName("SetSourceSettings")
+    @JsonProperty("SetSourceSettings")
     SET_SOURCE_SETTINGS,
-    @SerializedName("GetTextGDIPlusProperties")
+    @JsonProperty("GetTextGDIPlusProperties")
     GET_TEXT_GDI_PLUS_PROPERTIES,
-    @SerializedName("SetTextGDIPlusProperties")
+    @JsonProperty("SetTextGDIPlusProperties")
     SET_TEXT_GDI_PLUS_PROPERTIES,
-    @SerializedName("GetTextFreetype2Properties")
+    @JsonProperty("GetTextFreetype2Properties")
     GET_TEXT_FREE_TYPE_2_PROPERTIES,
-    @SerializedName("SetTextFreetype2Properties")
+    @JsonProperty("SetTextFreetype2Properties")
     SET_TEXT_FREE_TYPE_2_PROPERTIES,
-    @SerializedName("GetBrowserSourceProperties")
+    @JsonProperty("GetBrowserSourceProperties")
     GET_BROWSER_SOURCE_PROPERTIES,
-    @SerializedName("SetBrowserSourceProperties")
+    @JsonProperty("SetBrowserSourceProperties")
     SET_BROWSER_SOURCE_PROPERTIES,
-    @SerializedName("GetSpecialSources")
+    @JsonProperty("GetSpecialSources")
     GET_SPECIAL_SOURCES,
-    @SerializedName("GetSourceFilters")
+    @JsonProperty("GetSourceFilters")
     GET_SOURCE_FILTERS,
-    @SerializedName("GetSourceFilterInfo")
+    @JsonProperty("GetSourceFilterInfo")
     GET_SOURCE_FILTER_INFO,
-    @SerializedName("AddFilterToSource")
+    @JsonProperty("AddFilterToSource")
     ADD_FILTER_TO_SOURCE,
-    @SerializedName("RemoveFilterFromSource")
+    @JsonProperty("RemoveFilterFromSource")
     REMOVE_FILTER_FROM_SOURCE,
-    @SerializedName("ReorderSourceFilter")
+    @JsonProperty("ReorderSourceFilter")
     REORDER_SOURCE_FILTER,
-    @SerializedName("MoveSourceFilter")
+    @JsonProperty("MoveSourceFilter")
     MOVE_SOURCE_FILTER,
-    @SerializedName("SetSourceFilterSettings")
+    @JsonProperty("SetSourceFilterSettings")
     SET_SOURCE_FILTER_SETTINGS,
-    @SerializedName("SetSourceFilterVisibility")
+    @JsonProperty("SetSourceFilterVisibility")
     SET_SOURCE_FILTER_VISIBILITY,
-    @SerializedName("TakeSourceScreenshot")
+    @JsonProperty("TakeSourceScreenshot")
     TAKE_SOURCE_SCREENSHOT,
-    @SerializedName("GetStreamingStatus")
+    @JsonProperty("GetStreamingStatus")
     GET_STREAMING_STATUS,
-    @SerializedName("StartStopStreaming")
+    @JsonProperty("StartStopStreaming")
     START_STOP_STREAMING,
-    @SerializedName("StartStreaming")
+    @JsonProperty("StartStreaming")
     START_STREAMING,
-    @SerializedName("StopStreaming")
+    @JsonProperty("StopStreaming")
     STOP_STREAMING,
-    @SerializedName("SetStreamSettings")
+    @JsonProperty("SetStreamSettings")
     SET_STREAM_SETTINGS,
-    @SerializedName("GetStreamSettings")
+    @JsonProperty("GetStreamSettings")
     GET_STREAM_SETTINGS,
-    @SerializedName("SaveStreamSettings")
+    @JsonProperty("SaveStreamSettings")
     SAVE_STREAM_SETTINGS,
-    @SerializedName("SendCaptions")
+    @JsonProperty("SendCaptions")
     SEND_CAPTIONS,
-    @SerializedName("GetStudioModeStatus")
+    @JsonProperty("GetStudioModeStatus")
     GET_STUDIO_MODE_STATUS,
-    @SerializedName("GetPreviewScene")
+    @JsonProperty("GetPreviewScene")
     GET_PREVIEW_SCENE,
-    @SerializedName("SetPreviewScene")
+    @JsonProperty("SetPreviewScene")
     SET_PREVIEW_SCENE,
-    @SerializedName("TransitionToProgram")
+    @JsonProperty("TransitionToProgram")
     TRANSITION_TO_PROGRAM,
-    @SerializedName("EnableStudioMode")
+    @JsonProperty("EnableStudioMode")
     ENABLE_STUDIO_MODE,
-    @SerializedName("DisableStudioMode")
+    @JsonProperty("DisableStudioMode")
     DISABLE_STUDIO_MODE,
-    @SerializedName("ToggleStudioMode")
+    @JsonProperty("ToggleStudioMode")
     TOGGLE_STUDIO_MODE,
-    @SerializedName("GetTransitionList")
+    @JsonProperty("GetTransitionList")
     GET_TRANSITION_LIST,
-    @SerializedName("GetCurrentTransition")
+    @JsonProperty("GetCurrentTransition")
     GET_CURRENT_TRANSITION,
-    @SerializedName("SetCurrentTransition")
+    @JsonProperty("SetCurrentTransition")
     SET_CURRENT_TRANSITION,
-    @SerializedName("SetTransitionDuration")
+    @JsonProperty("SetTransitionDuration")
     SET_TRANSITION_DURATION,
-    @SerializedName("GetTransitionDuration")
+    @JsonProperty("GetTransitionDuration")
     GET_TRANSITION_DURATION
 }

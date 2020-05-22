@@ -1,10 +1,10 @@
 package nl.harm27.obswebsocket.api.requests;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Status {
-    @SerializedName("ok")
+    @JsonProperty("ok")
     OK,
-    @SerializedName("error")
+    @JsonProperty("error")
     ERROR
 }

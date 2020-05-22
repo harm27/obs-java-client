@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.streaming;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.complex.StreamSettings;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
@@ -17,7 +17,7 @@ public class StartStreaming {
     }
 
     public static class Request extends BaseRequest {
-        @SerializedName("stream")
+        @JsonProperty("stream")
         private Stream stream;
 
         public Request(String messageId) {
@@ -46,11 +46,11 @@ public class StartStreaming {
      * Special stream configuration. Please note: these won't be saved to OBS' configuration.
      */
     public static class Stream {
-        @SerializedName("type")
+        @JsonProperty("type")
         private String type;
-        @SerializedName("metadata")
+        @JsonProperty("metadata")
         private Object metadata;
-        @SerializedName("settings")
+        @JsonProperty("settings")
         private StreamSettings settings;
 
         /**

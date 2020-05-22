@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.streaming;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
@@ -17,7 +17,7 @@ public class SendCaptions {
     }
 
     public static class Request extends BaseRequest {
-        @SerializedName("text")
+        @JsonProperty("text")
         private final String text;
 
         public Request(String messageId, String text) {

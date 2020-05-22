@@ -1,46 +1,47 @@
 package nl.harm27.obswebsocket.api.complex;
 
-import com.google.gson.annotations.SerializedName;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#output">OBS WebSocket Documentation</a>
  */
 public class Output {
-    @SerializedName("name")
+    @JsonProperty("name")
     private String name;
-    @SerializedName("type")
+    @JsonProperty("type")
     private String type;
-    @SerializedName("width")
+    @JsonProperty("width")
     private int width;
-    @SerializedName("height")
+    @JsonProperty("height")
     private int height;
-    @SerializedName("flags")
+    @JsonProperty("flags")
     private Object flags;
-    @SerializedName("flags.rawValue")
+    @JsonProperty("flags.rawValue")
     private int flagsRawValue;
-    @SerializedName("flags.audio")
+    @JsonProperty("flags.audio")
     private boolean flagsAudio;
-    @SerializedName("flags.video")
+    @JsonProperty("flags.video")
     private boolean flagsVideo;
-    @SerializedName("flags.encoded")
+    @JsonProperty("flags.encoded")
     private boolean flagsEncoded;
-    @SerializedName("flags.multiTrack")
+    @JsonProperty("flags.multiTrack")
     private boolean flagsMultiTrack;
-    @SerializedName("flags.service")
+    @JsonProperty("flags.service")
     private boolean flagsService;
-    @SerializedName("settings")
+    @JsonProperty("settings")
     private Object settings;
-    @SerializedName("active")
+    @JsonProperty("active")
     private boolean active;
-    @SerializedName("reconnecting")
+    @JsonProperty("reconnecting")
     private boolean reconnecting;
-    @SerializedName("congestion")
+    @JsonProperty("congestion")
     private double congestion;
-    @SerializedName("totalFrames")
+    @JsonProperty("totalFrames")
     private int totalFrames;
-    @SerializedName("droppedFrames")
+    @JsonProperty("droppedFrames")
     private int droppedFrames;
-    @SerializedName("totalBytes")
+    @JsonProperty("totalBytes")
     private int totalBytes;
 
     /**

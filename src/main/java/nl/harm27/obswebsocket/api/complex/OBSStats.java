@@ -1,28 +1,29 @@
 package nl.harm27.obswebsocket.api.complex;
 
-import com.google.gson.annotations.SerializedName;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#obsstats">OBS WebSocket Documentation</a>
  */
 public class OBSStats {
-    @SerializedName("fps")
+    @JsonProperty("fps")
     private double fps;
-    @SerializedName("render-total-frames")
+    @JsonProperty("render-total-frames")
     private int renderTotalFrames;
-    @SerializedName("render-missed-frames")
+    @JsonProperty("render-missed-frames")
     private int renderMissedFrames;
-    @SerializedName("output-total-frames")
+    @JsonProperty("output-total-frames")
     private int outputTotalFrames;
-    @SerializedName("output-skipped-frames")
+    @JsonProperty("output-skipped-frames")
     private int outputSkippedFrames;
-    @SerializedName("average-frame-time")
+    @JsonProperty("average-frame-time")
     private double averageFrameTime;
-    @SerializedName("cpu-usage")
+    @JsonProperty("cpu-usage")
     private double cpuUsage;
-    @SerializedName("memory-usage")
+    @JsonProperty("memory-usage")
     private double memoryUsage;
-    @SerializedName("free-disk-space")
+    @JsonProperty("free-disk-space")
     private double freeDiskSpace;
 
     /**

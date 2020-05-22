@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.general;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
@@ -32,23 +32,23 @@ public class GetVideoInfo {
     }
 
     public static class Response extends BaseResponse {
-        @SerializedName("baseWidth")
+        @JsonProperty("baseWidth")
         private int baseWidth;
-        @SerializedName("baseHeight")
+        @JsonProperty("baseHeight")
         private int baseHeight;
-        @SerializedName("outputWidth")
+        @JsonProperty("outputWidth")
         private int outputWidth;
-        @SerializedName("outputHeight")
+        @JsonProperty("outputHeight")
         private int outputHeight;
-        @SerializedName("scaleType")
+        @JsonProperty("scaleType")
         private String scaleType;
-        @SerializedName("fps")
+        @JsonProperty("fps")
         private double fps;
-        @SerializedName("videoFormat")
+        @JsonProperty("videoFormat")
         private String videoFormat;
-        @SerializedName("colorSpace")
+        @JsonProperty("colorSpace")
         private String colorSpace;
-        @SerializedName("colorRange")
+        @JsonProperty("colorRange")
         private String colorRange;
 
         /**

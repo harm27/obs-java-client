@@ -1,6 +1,7 @@
 package nl.harm27.obswebsocket.api.complex;
 
-import com.google.gson.annotations.SerializedName;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,33 +10,33 @@ import java.util.Optional;
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#sceneitem">OBS WebSocket Documentation</a>
  */
 public class SceneItem {
-    @SerializedName("cy")
+    @JsonProperty("cy")
     private Number cy;
-    @SerializedName("cx")
+    @JsonProperty("cx")
     private Number cx;
-    @SerializedName("name")
+    @JsonProperty("name")
     private String name;
-    @SerializedName("id")
+    @JsonProperty("id")
     private int id;
-    @SerializedName("render")
+    @JsonProperty("render")
     private boolean render;
-    @SerializedName("locked")
+    @JsonProperty("locked")
     private boolean locked;
-    @SerializedName("source_cx")
+    @JsonProperty("source_cx")
     private Number sourceCx;
-    @SerializedName("source_cy")
+    @JsonProperty("source_cy")
     private Number sourceCy;
-    @SerializedName("type")
+    @JsonProperty("type")
     private SourceType type;
-    @SerializedName("volume")
+    @JsonProperty("volume")
     private Number volume;
-    @SerializedName("x")
+    @JsonProperty("x")
     private Number x;
-    @SerializedName("y")
+    @JsonProperty("y")
     private Number y;
-    @SerializedName("parentGroupName")
+    @JsonProperty("parentGroupName")
     private String parentGroupName;
-    @SerializedName("groupChildren")
+    @JsonProperty("groupChildren")
     private List<SceneItem> groupChildren;
 
     public Number getCy() {

@@ -1,6 +1,8 @@
 package nl.harm27.obswebsocket.api.events.streaming;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import nl.harm27.obswebsocket.api.complex.OBSStats;
 import nl.harm27.obswebsocket.api.events.BaseEvent;
 
 /**
@@ -10,43 +12,27 @@ import nl.harm27.obswebsocket.api.events.BaseEvent;
  * @since v0.3
  */
 public class StreamStatus extends BaseEvent {
-    @SerializedName("streaming")
+    @JsonProperty("streaming")
     private boolean streaming;
-    @SerializedName("recording")
+    @JsonProperty("recording")
     private boolean recording;
-    @SerializedName("replay-buffer-active")
+    @JsonProperty("replay-buffer-active")
     private boolean replayBufferActive;
-    @SerializedName("bytes-per-sec")
+    @JsonProperty("bytes-per-sec")
     private int bytesPerSec;
-    @SerializedName("kbits-per-sec")
+    @JsonProperty("kbits-per-sec")
     private int kbitsPerSec;
-    @SerializedName("strain")
+    @JsonProperty("strain")
     private double strain;
-    @SerializedName("total-stream-time")
+    @JsonProperty("total-stream-time")
     private int totalStreamTime;
-    @SerializedName("num-total-frames")
+    @JsonProperty("num-total-frames")
     private int numTotalFrames;
-    @SerializedName("num-dropped-frames")
+    @JsonProperty("num-dropped-frames")
     private int numDroppedFrames;
-    @SerializedName("fps")
-    private double fps;
-    @SerializedName("render-total-frames")
-    private int renderTotalFrames;
-    @SerializedName("render-missed-frames")
-    private int renderMissedFrames;
-    @SerializedName("output-total-frames")
-    private int outputTotalFrames;
-    @SerializedName("output-skipped-frames")
-    private int outputSkippedFrames;
-    @SerializedName("average-frame-time")
-    private double averageFrameTime;
-    @SerializedName("cpu-usage")
-    private double cpuUsage;
-    @SerializedName("memory-usage")
-    private double memoryUsage;
-    @SerializedName("free-disk-space")
-    private double freeDiskSpace;
-    @SerializedName("preview-only")
+    @JsonUnwrapped
+    private OBSStats stats;
+    @JsonProperty("preview-only")
     private boolean previewOnly;
 
     /**
@@ -113,66 +99,10 @@ public class StreamStatus extends BaseEvent {
     }
 
     /**
-     * Current framerate.
+     * Gets data from the OBSStats.
      */
-    public double getFps() {
-        return fps;
-    }
-
-    /**
-     * Number of frames rendered.
-     */
-    public int getRenderTotalFrames() {
-        return renderTotalFrames;
-    }
-
-    /**
-     * Number of frames missed due to rendering lag.
-     */
-    public int getRenderMissedFrames() {
-        return renderMissedFrames;
-    }
-
-    /**
-     * Number of frames outputted.
-     */
-    public int getOutputTotalFrames() {
-        return outputTotalFrames;
-    }
-
-    /**
-     * Number of frames skipped due to encoding lag.
-     */
-    public int getOutputSkippedFrames() {
-        return outputSkippedFrames;
-    }
-
-    /**
-     * Average frame render time (in milliseconds).
-     */
-    public double getAverageFrameTime() {
-        return averageFrameTime;
-    }
-
-    /**
-     * Current CPU usage (percentage).
-     */
-    public double getCpuUsage() {
-        return cpuUsage;
-    }
-
-    /**
-     * Current RAM usage (in megabytes).
-     */
-    public double getMemoryUsage() {
-        return memoryUsage;
-    }
-
-    /**
-     * Free recording disk space (in megabytes).
-     */
-    public double getFreeDiskSpace() {
-        return freeDiskSpace;
+    public OBSStats getStats() {
+        return stats;
     }
 
     /**
@@ -181,4 +111,6 @@ public class StreamStatus extends BaseEvent {
     public boolean isPreviewOnly() {
         return previewOnly;
     }
+
+
 }
