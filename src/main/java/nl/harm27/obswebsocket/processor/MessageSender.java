@@ -1,5 +1,8 @@
 package nl.harm27.obswebsocket.processor;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.harm27.obswebsocket.OBSWebSocket;
@@ -27,7 +30,10 @@ public class MessageSender {
         authenticationHandler.addAuthenticationResultConsumer(this::processQueuedMessages);
         queuedMessages = new ArrayList<>();
         this.obsWebSocketClient = obsWebSocketClient;
-        objectMapper = new ObjectMapper();
+        objectMapper = new ObjectMapper().
+                setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE).
+                setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY).
+                setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
     public void onWebSocketOpen() {

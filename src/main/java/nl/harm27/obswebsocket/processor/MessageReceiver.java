@@ -1,5 +1,7 @@
 package nl.harm27.obswebsocket.processor;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -28,7 +30,10 @@ public class MessageReceiver {
         this.listenerRegistry = listenerRegistry;
         messageResponseTypes = new HashMap<>();
         messageCallbacks = new HashMap<>();
-        objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper = new ObjectMapper().
+                configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).
+                setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE).
+                setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
     }
 
     public void receiveMessage(String data) {
