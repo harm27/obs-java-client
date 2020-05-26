@@ -1,7 +1,10 @@
 package nl.harm27.obswebsocket.processor;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.harm27.obswebsocket.OBSWebSocket;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
@@ -16,7 +19,7 @@ import java.util.List;
 public class MessageSender {
     private final OBSWebSocketClient obsWebSocketClient;
     private final List<BaseRequest> queuedMessages;
-    private final Gson gson;
+    private final ObjectMapper objectMapper;
     private final OBSWebSocket obsWebSocket;
     private final AuthenticationHandler authenticationHandler;
     private List<String> supportedRequests;
@@ -27,7 +30,10 @@ public class MessageSender {
         authenticationHandler.addAuthenticationResultConsumer(this::processQueuedMessages);
         queuedMessages = new ArrayList<>();
         this.obsWebSocketClient = obsWebSocketClient;
-        gson = new GsonBuilder().create();
+        objectMapper = new ObjectMapper().
+                setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE).
+                setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY).
+                setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
     public void onWebSocketOpen() {
@@ -58,11 +64,16 @@ public class MessageSender {
 
     public void sendMessage(BaseRequest request) {
         String requestName = request.getRequestName();
-        if (supportedRequests != null && supportedRequests.contains(requestName))
+        if (supportedRequests != null && !supportedRequests.contains(requestName))
             throw new InvalidMethodException(requestName);
         else if (!obsWebSocketClient.isConnected() || (request.isAuthenticationRequired() && !authenticationHandler.getAuthenticationResult().isSuccessful()))
             queuedMessages.add(request);
-        else
-            obsWebSocketClient.sendText(gson.toJson(request));
+        else {
+            try {
+                obsWebSocketClient.sendText(objectMapper.writeValueAsString(request));
+            } catch (JsonProcessingException e) {
+                throw new SendingException(e);
+            }
+        }
     }
 }

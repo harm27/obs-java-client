@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.events.general;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.complex.OBSStats;
 import nl.harm27.obswebsocket.api.events.BaseEvent;
 
@@ -14,25 +14,28 @@ import java.util.Optional;
  * @since v4.3.0
  */
 public class Heartbeat extends BaseEvent {
+    @JsonProperty("pulse")
     private boolean pulse;
-    @SerializedName("current-profile")
+    @JsonProperty("current-profile")
     private String currentProfile;
-    @SerializedName("current-scene")
+    @JsonProperty("current-scene")
     private String currentScene;
+    @JsonProperty("streaming")
     private Boolean streaming;
-    @SerializedName("total-stream-time")
+    @JsonProperty("total-stream-time")
     private Integer totalStreamTime;
-    @SerializedName("total-stream-bytes")
+    @JsonProperty("total-stream-bytes")
     private Integer totalStreamBytes;
-    @SerializedName("total-stream-frames")
+    @JsonProperty("total-stream-frames")
     private Integer totalStreamFrames;
     private Boolean recording;
-    @SerializedName("total-record-time")
+    @JsonProperty("total-record-time")
     private Integer totalRecordTime;
-    @SerializedName("total-record-bytes")
+    @JsonProperty("total-record-bytes")
     private Integer totalRecordBytes;
-    @SerializedName("total-record-frames")
+    @JsonProperty("total-record-frames")
     private Integer totalRecordFrames;
+    @JsonProperty("stats")
     private OBSStats stats;
 
     /**

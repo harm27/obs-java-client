@@ -1,102 +1,102 @@
 package nl.harm27.obswebsocket.api.events;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum EventType {
-    @SerializedName("SwitchScenes")
+    @JsonProperty("SwitchScenes")
     SWITCH_SCENES,
-    @SerializedName("ScenesChanged")
+    @JsonProperty("ScenesChanged")
     SCENES_CHANGED,
-    @SerializedName("SceneCollectionChanged")
+    @JsonProperty("SceneCollectionChanged")
     SCENE_COLLECTION_CHANGED,
-    @SerializedName("SceneCollectionListChanged")
+    @JsonProperty("SceneCollectionListChanged")
     SCENE_COLLECTION_LIST_CHANGED,
-    @SerializedName("SwitchTransition")
+    @JsonProperty("SwitchTransition")
     SWITCH_TRANSITION,
-    @SerializedName("TransitionListChanged")
+    @JsonProperty("TransitionListChanged")
     TRANSITION_LIST_CHANGED,
-    @SerializedName("TransitionDurationChanged")
+    @JsonProperty("TransitionDurationChanged")
     TRANSITION_DURATION_CHANGED,
-    @SerializedName("TransitionBegin")
+    @JsonProperty("TransitionBegin")
     TRANSITION_BEGIN,
-    @SerializedName("ProfileChanged")
+    @JsonProperty("ProfileChanged")
     PROFILE_CHANGED,
-    @SerializedName("ProfileListChanged")
+    @JsonProperty("ProfileListChanged")
     PROFILE_LIST_CHANGED,
-    @SerializedName("StreamStarting")
+    @JsonProperty("StreamStarting")
     STREAM_STARTING,
-    @SerializedName("StreamStarted")
+    @JsonProperty("StreamStarted")
     STREAM_STARTED,
-    @SerializedName("StreamStopping")
+    @JsonProperty("StreamStopping")
     STREAM_STOPPING,
-    @SerializedName("StreamStopped")
+    @JsonProperty("StreamStopped")
     STREAM_STOPPED,
-    @SerializedName("StreamStatus")
+    @JsonProperty("StreamStatus")
     STREAM_STATUS,
-    @SerializedName("RecordingStarting")
+    @JsonProperty("RecordingStarting")
     RECORDING_STARTING,
-    @SerializedName("RecordingStarted")
+    @JsonProperty("RecordingStarted")
     RECORDING_STARTED,
-    @SerializedName("RecordingStopping")
+    @JsonProperty("RecordingStopping")
     RECORDING_STOPPING,
-    @SerializedName("RecordingStopped")
+    @JsonProperty("RecordingStopped")
     RECORDING_STOPPED,
-    @SerializedName("RecordingPaused")
+    @JsonProperty("RecordingPaused")
     RECORDING_PAUSED,
-    @SerializedName("RecordingResumed")
+    @JsonProperty("RecordingResumed")
     RECORDING_RESUMED,
-    @SerializedName("ReplayStarting")
+    @JsonProperty("ReplayStarting")
     REPLAY_STARTING,
-    @SerializedName("ReplayStarted")
+    @JsonProperty("ReplayStarted")
     REPLAY_STARTED,
-    @SerializedName("ReplayStopping")
+    @JsonProperty("ReplayStopping")
     REPLAY_STOPPING,
-    @SerializedName("ReplayStopped")
+    @JsonProperty("ReplayStopped")
     REPLAY_STOPPED,
-    @SerializedName("Exiting")
+    @JsonProperty("Exiting")
     EXITING,
-    @SerializedName("Heartbeat")
+    @JsonProperty("Heartbeat")
     HEARTBEAT,
-    @SerializedName("BroadcastCustomMessage")
+    @JsonProperty("BroadcastCustomMessage")
     BROADCAST_CUSTOM_MESSAGE,
-    @SerializedName("SourceCreated")
+    @JsonProperty("SourceCreated")
     SOURCE_CREATED,
-    @SerializedName("SourceDestroyed")
+    @JsonProperty("SourceDestroyed")
     SOURCE_DESTROYED,
-    @SerializedName("SourceVolumeChanged")
+    @JsonProperty("SourceVolumeChanged")
     SOURCE_VOLUME_CHANGED,
-    @SerializedName("SourceMuteStateChanged")
+    @JsonProperty("SourceMuteStateChanged")
     SOURCE_MUTE_STATE_CHANGED,
-    @SerializedName("SourceAudioSyncOffsetChanged")
+    @JsonProperty("SourceAudioSyncOffsetChanged")
     SOURCE_AUDIO_SYNC_OFFSET_CHANGED,
-    @SerializedName("SourceAudioMixersChanged")
+    @JsonProperty("SourceAudioMixersChanged")
     SOURCE_AUDIO_MIXERS_CHANGED,
-    @SerializedName("SourceRenamed")
+    @JsonProperty("SourceRenamed")
     SOURCE_RENAMED,
-    @SerializedName("SourceFilterAdded")
+    @JsonProperty("SourceFilterAdded")
     SOURCE_FILTER_ADDED,
-    @SerializedName("SourceFilterRemoved")
+    @JsonProperty("SourceFilterRemoved")
     SOURCE_FILTER_REMOVED,
-    @SerializedName("SourceFilterVisibilityChanged")
+    @JsonProperty("SourceFilterVisibilityChanged")
     SOURCE_FILTER_VISIBILITY_CHANGED,
-    @SerializedName("SourceFiltersReordered")
+    @JsonProperty("SourceFiltersReordered")
     SOURCE_FILTERS_REORDERED,
-    @SerializedName("SourceOrderChanged")
+    @JsonProperty("SourceOrderChanged")
     SOURCE_ORDER_CHANGED,
-    @SerializedName("SceneItemAdded")
+    @JsonProperty("SceneItemAdded")
     SCENE_ITEM_ADDED,
-    @SerializedName("SceneItemRemoved")
+    @JsonProperty("SceneItemRemoved")
     SCENE_ITEM_REMOVED,
-    @SerializedName("SceneItemVisibilityChanged")
+    @JsonProperty("SceneItemVisibilityChanged")
     SCENE_ITEM_VISIBILITY_CHANGED,
-    @SerializedName("SceneItemTransformChanged")
+    @JsonProperty("SceneItemTransformChanged")
     SCENE_ITEM_TRANSFORM_CHANGED,
-    @SerializedName("SceneItemSelected")
+    @JsonProperty("SceneItemSelected")
     SCENE_ITEM_SELECTED,
-    @SerializedName("SceneItemDeselected")
+    @JsonProperty("SceneItemDeselected")
     SCENE_ITEM_DESELECTED,
-    @SerializedName("PreviewSceneChanged")
+    @JsonProperty("PreviewSceneChanged")
     PREVIEW_SCENE_CHANGED,
-    @SerializedName("StudioModeSwitched")
+    @JsonProperty("StudioModeSwitched")
     STUDIO_MODE_SWITCHED
 }

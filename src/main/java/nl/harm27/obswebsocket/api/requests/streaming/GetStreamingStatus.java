@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.streaming;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
@@ -37,15 +37,15 @@ public class GetStreamingStatus {
     }
 
     public static class Response extends BaseResponse {
-        @SerializedName("streaming")
+        @JsonProperty("streaming")
         private boolean streaming;
-        @SerializedName("recording")
+        @JsonProperty("recording")
         private boolean recording;
-        @SerializedName("stream-timecode")
+        @JsonProperty("stream-timecode")
         private String streamTimecode;
-        @SerializedName("rec-timecode")
+        @JsonProperty("rec-timecode")
         private String recordingTimecode;
-        @SerializedName("preview-only")
+        @JsonProperty("preview-only")
         private boolean previewOnly;
 
         /**

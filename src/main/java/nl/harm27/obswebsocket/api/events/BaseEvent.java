@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.events;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.Duration;
 import java.util.Optional;
@@ -13,13 +13,11 @@ import static nl.harm27.obswebsocket.api.TimeUtil.parseDuration;
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#events">OBS WebSocket Documentation</a>
  */
 public abstract class BaseEvent {
-    @SerializedName("update-type")
+    @JsonProperty("update-type")
     private EventType eventType;
-
-    @SerializedName("stream-timecode")
+    @JsonProperty("stream-timecode")
     private String streamTimecode;
-
-    @SerializedName("rec-timecode")
+    @JsonProperty("rec-timecode")
     private String recordingTimecode;
 
     /**

@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.events.scenes;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.complex.SceneItem;
 import nl.harm27.obswebsocket.api.events.BaseEvent;
 
@@ -13,8 +13,9 @@ import java.util.List;
  * @since v0.3
  */
 public class SwitchScenes extends BaseEvent {
-    @SerializedName("scene-name")
+    @JsonProperty("scene-name")
     private String sceneName;
+    @JsonProperty("sources")
     private List<SceneItem> sources;
 
     /**

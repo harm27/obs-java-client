@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.complex;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,49 +9,49 @@ import java.util.Optional;
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#sceneitemtransform">OBS WebSocket Documentation</a>
  */
 public class SceneItemTransform {
-    @SerializedName("position.x")
+    @JsonProperty("position.x")
     private int positionX;
-    @SerializedName("position.y")
+    @JsonProperty("position.y")
     private int positionY;
-    @SerializedName("position.alignment")
+    @JsonProperty("position.alignment")
     private int positionAlignment;
-    @SerializedName("rotation")
+    @JsonProperty("rotation")
     private double rotation;
-    @SerializedName("scale.x")
+    @JsonProperty("scale.x")
     private double scaleX;
-    @SerializedName("scale.y")
+    @JsonProperty("scale.y")
     private double scaleY;
-    @SerializedName("crop.top")
+    @JsonProperty("crop.top")
     private int cropTop;
-    @SerializedName("crop.right")
+    @JsonProperty("crop.right")
     private int cropRight;
-    @SerializedName("crop.bottom")
+    @JsonProperty("crop.bottom")
     private int cropBottom;
-    @SerializedName("crop.left")
+    @JsonProperty("crop.left")
     private int cropLeft;
-    @SerializedName("visible")
+    @JsonProperty("visible")
     private boolean visible;
-    @SerializedName("locked")
+    @JsonProperty("locked")
     private boolean locked;
-    @SerializedName("bounds.type")
+    @JsonProperty("bounds.type")
     private BoundsType boundsType;
-    @SerializedName("bounds.alignment")
+    @JsonProperty("bounds.alignment")
     private int boundsAlignment;
-    @SerializedName("bounds.x")
+    @JsonProperty("bounds.x")
     private double boundsX;
-    @SerializedName("bounds.y")
+    @JsonProperty("bounds.y")
     private double boundsY;
-    @SerializedName("sourceWidth")
+    @JsonProperty("sourceWidth")
     private int sourceWidth;
-    @SerializedName("sourceHeight")
+    @JsonProperty("sourceHeight")
     private int sourceHeight;
-    @SerializedName("width")
+    @JsonProperty("width")
     private double width;
-    @SerializedName("height")
+    @JsonProperty("height")
     private double height;
-    @SerializedName("parentGroupName")
+    @JsonProperty("parentGroupName")
     private String parentGroupName;
-    @SerializedName("groupChildren")
+    @JsonProperty("groupChildren")
     private List<SceneItemTransform> groupChildren;
 
     /**

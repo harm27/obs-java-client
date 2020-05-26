@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.scenes;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.complex.SceneItem;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
@@ -35,9 +35,9 @@ public class GetCurrentScene {
     }
 
     public static class Response extends BaseResponse {
-        @SerializedName("name")
+        @JsonProperty("name")
         private String name;
-        @SerializedName("sources")
+        @JsonProperty("sources")
         private List<SceneItem> sources;
 
         /**

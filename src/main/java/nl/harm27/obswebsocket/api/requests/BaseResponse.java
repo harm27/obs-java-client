@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Response on the requests that are sent by the client.
@@ -8,11 +8,11 @@ import com.google.gson.annotations.SerializedName;
  * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#requests>OBS WebSocket Documentation</a>
  */
 public abstract class BaseResponse {
-    @SerializedName("message-id")
+    @JsonProperty("message-id")
     private String messageId;
-
+    @JsonProperty("status")
     private Status status;
-
+    @JsonProperty("error")
     private String error;
 
     /**

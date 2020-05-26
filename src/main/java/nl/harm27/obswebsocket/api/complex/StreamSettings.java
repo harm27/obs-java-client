@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.complex;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Optional;
 
@@ -8,19 +8,19 @@ import java.util.Optional;
  * Settings for the stream.
  */
 public class StreamSettings {
-    @SerializedName("server")
+    @JsonProperty("server")
     private String server;
-    @SerializedName("service")
+    @JsonProperty("service")
     private String service;
-    @SerializedName("bwtest")
+    @JsonProperty("bwtest")
     private boolean bandwidthTest;
-    @SerializedName("key")
+    @JsonProperty("key")
     private String key;
-    @SerializedName("use_auth")
+    @JsonProperty("use_auth")
     private boolean useAuth;
-    @SerializedName("username")
+    @JsonProperty("username")
     private String username;
-    @SerializedName("password")
+    @JsonProperty("password")
     private String password;
 
     /**

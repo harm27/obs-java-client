@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.general;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
@@ -16,7 +16,7 @@ public class Authenticate {
     }
 
     public static class Request extends BaseRequest {
-        @SerializedName("auth")
+        @JsonProperty("auth")
         private final String auth;
 
         /**

@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.general;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.complex.OBSStats;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
@@ -33,7 +33,7 @@ public class GetStats {
     }
 
     public static class Response extends BaseResponse {
-        @SerializedName("stats")
+        @JsonProperty("stats")
         private OBSStats stats;
 
         /**

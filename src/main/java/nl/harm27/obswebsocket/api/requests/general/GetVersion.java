@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.general;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
@@ -40,13 +40,13 @@ public class GetVersion {
     }
 
     public static class Response extends BaseResponse {
-        @SerializedName("version")
+        @JsonProperty("version")
         private double version;
-        @SerializedName("obs-websocket-version")
+        @JsonProperty("obs-websocket-version")
         private String obsWebsocketVersion;
-        @SerializedName("obs-studio-version")
+        @JsonProperty("obs-studio-version")
         private String obsStudioVersion;
-        @SerializedName("available-requests")
+        @JsonProperty("available-requests")
         private String availableRequests;
 
         /**

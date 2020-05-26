@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.events.streaming;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.events.BaseEvent;
 
 /**
@@ -10,7 +10,7 @@ import nl.harm27.obswebsocket.api.events.BaseEvent;
  * @since v0.3
  */
 public class StreamStopping extends BaseEvent {
-    @SerializedName("preview-only")
+    @JsonProperty("preview-only")
     private boolean previewOnly;
 
     /**

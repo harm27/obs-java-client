@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.events.general;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.events.BaseEvent;
 
 import java.util.Map;
@@ -12,9 +12,9 @@ import java.util.Map;
  * @since v4.7.0
  */
 public class BroadcastCustomMessage extends BaseEvent {
-    @SerializedName("realm")
+    @JsonProperty("realm")
     private String realm;
-    @SerializedName("data")
+    @JsonProperty("data")
     private Map<String, Object> data;
 
     /**

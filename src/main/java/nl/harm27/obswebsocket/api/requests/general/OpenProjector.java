@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.general;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
@@ -16,26 +16,26 @@ public class OpenProjector {
     }
 
     public enum Type {
-        @SerializedName("Preview")
+        @JsonProperty("Preview")
         PREVIEW,
-        @SerializedName("Source")
+        @JsonProperty("Source")
         SOURCE,
-        @SerializedName("Scene")
+        @JsonProperty("Scene")
         SCENE,
-        @SerializedName("StudioProgram")
+        @JsonProperty("StudioProgram")
         STUDIO_PROGRAM,
-        @SerializedName("Multiview")
+        @JsonProperty("Multiview")
         MULTIVIEW
     }
 
     public static class Request extends BaseRequest {
-        @SerializedName("type")
+        @JsonProperty("type")
         private Type type;
-        @SerializedName("monitor")
+        @JsonProperty("monitor")
         private int monitor;
-        @SerializedName("geometry")
+        @JsonProperty("geometry")
         private String geometry;
-        @SerializedName("name")
+        @JsonProperty("name")
         private String name;
 
         public Request(String messageId) {

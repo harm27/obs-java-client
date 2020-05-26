@@ -1,6 +1,6 @@
 package nl.harm27.obswebsocket.api.requests.recording;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.harm27.obswebsocket.api.requests.BaseRequest;
 import nl.harm27.obswebsocket.api.requests.BaseResponse;
 import nl.harm27.obswebsocket.api.requests.RequestType;
@@ -32,7 +32,7 @@ public class GetRecordingFolder {
     }
 
     public static class Response extends BaseResponse {
-        @SerializedName("rec-folder")
+        @JsonProperty("rec-folder")
         private String recFolder;
 
         /**
