@@ -8,6 +8,7 @@ public class RequestSenderManager {
     private final RecordingRequestSender recordingRequestSender;
     private final ReplayBufferRequestSender replayBufferRequestSender;
     private final StreamingRequestSender streamingRequestSender;
+    private final StudioModeRequestSender studioModeRequestSender;
 
     public RequestSenderManager(OBSWebSocket obsWebSocket) {
         generalRequestSender = new GeneralRequestSender(obsWebSocket);
@@ -15,6 +16,7 @@ public class RequestSenderManager {
         recordingRequestSender = new RecordingRequestSender(obsWebSocket);
         replayBufferRequestSender = new ReplayBufferRequestSender(obsWebSocket);
         streamingRequestSender = new StreamingRequestSender(obsWebSocket);
+        studioModeRequestSender = new StudioModeRequestSender(obsWebSocket);
     }
 
     public GeneralRequestSender getGeneralRequestSender() {
@@ -35,5 +37,9 @@ public class RequestSenderManager {
 
     public StreamingRequestSender getStreamingRequestSender() {
         return streamingRequestSender;
+    }
+
+    public StudioModeRequestSender getStudioModeRequestSender() {
+        return studioModeRequestSender;
     }
 }
