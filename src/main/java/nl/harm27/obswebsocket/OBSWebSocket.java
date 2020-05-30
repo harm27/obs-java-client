@@ -8,7 +8,7 @@ import nl.harm27.obswebsocket.listener.EventListener;
 import nl.harm27.obswebsocket.listener.ListenerRegistry;
 import nl.harm27.obswebsocket.processor.MessageReceiver;
 import nl.harm27.obswebsocket.processor.MessageSender;
-import nl.harm27.obswebsocket.sender.*;
+import nl.harm27.obswebsocket.sender.RequestSenderManager;
 import nl.harm27.obswebsocket.websocket.OBSWebSocketClient;
 
 import java.util.function.Consumer;
@@ -52,24 +52,8 @@ public class OBSWebSocket {
         return authenticationHandler.getAuthenticationResult();
     }
 
-    public GeneralRequestSender getGeneralRequestSender() {
-        return requestSenderManager.getGeneralRequestSender();
-    }
-
-    public ScenesRequestSender getScenesRequestSender() {
-        return requestSenderManager.getScenesRequestSender();
-    }
-
-    public RecordingRequestSender getRecordingRequestSender() {
-        return requestSenderManager.getRecordingRequestSender();
-    }
-
-    public ReplayBufferRequestSender getReplayBufferRequestSender() {
-        return requestSenderManager.getReplayBufferRequestSender();
-    }
-
-    public StreamingRequestSender getStreamingRequestSender() {
-        return requestSenderManager.getStreamingRequestSender();
+    public RequestSenderManager getRequestSenderManager() {
+        return requestSenderManager;
     }
 
     public void notifyShutdown() {
