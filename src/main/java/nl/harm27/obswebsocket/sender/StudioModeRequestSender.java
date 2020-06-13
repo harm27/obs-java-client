@@ -73,4 +73,15 @@ public class StudioModeRequestSender extends RequestSender {
         sendRequest(new EnableStudioMode.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((EnableStudioMode.Response) baseResponse));
     }
+
+    /**
+     * Disables Studio Mode.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#DisableStudioMode">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void disableStudioMode(Consumer<DisableStudioMode.Response> responseConsumer) {
+        sendRequest(new DisableStudioMode.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((DisableStudioMode.Response) baseResponse));
+    }
 }
