@@ -1,10 +1,7 @@
 package nl.harm27.obswebsocket.sender;
 
 import nl.harm27.obswebsocket.OBSWebSocket;
-import nl.harm27.obswebsocket.api.requests.studiomode.GetPreviewScene;
-import nl.harm27.obswebsocket.api.requests.studiomode.GetStudioModeStatus;
-import nl.harm27.obswebsocket.api.requests.studiomode.SetPreviewScene;
-import nl.harm27.obswebsocket.api.requests.studiomode.TransitionToProgram;
+import nl.harm27.obswebsocket.api.requests.studiomode.*;
 
 import java.util.function.Consumer;
 
@@ -64,5 +61,16 @@ public class StudioModeRequestSender extends RequestSender {
 
         sendRequest(baseRequest,
                 baseResponse -> responseConsumer.accept((TransitionToProgram.Response) baseResponse));
+    }
+
+    /**
+     * Enables Studio Mode.
+     *
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#EnableStudioMode">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void enableStudioMode(Consumer<EnableStudioMode.Response> responseConsumer) {
+        sendRequest(new EnableStudioMode.Request(getNextMessageId()),
+                baseResponse -> responseConsumer.accept((EnableStudioMode.Response) baseResponse));
     }
 }
