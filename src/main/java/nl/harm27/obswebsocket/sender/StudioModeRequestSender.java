@@ -4,6 +4,7 @@ import nl.harm27.obswebsocket.OBSWebSocket;
 import nl.harm27.obswebsocket.api.requests.studiomode.GetPreviewScene;
 import nl.harm27.obswebsocket.api.requests.studiomode.GetStudioModeStatus;
 import nl.harm27.obswebsocket.api.requests.studiomode.SetPreviewScene;
+import nl.harm27.obswebsocket.api.requests.studiomode.TransitionToProgram;
 
 import java.util.function.Consumer;
 
@@ -47,5 +48,21 @@ public class StudioModeRequestSender extends RequestSender {
     public void setPreviewScene(String sceneName, Consumer<SetPreviewScene.Response> responseConsumer) {
         sendRequest(new SetPreviewScene.Request(getNextMessageId(), sceneName),
                 baseResponse -> responseConsumer.accept((SetPreviewScene.Response) baseResponse));
+    }
+
+    /**
+     * Transitions the currently previewed scene to the main output. Will return an error if Studio Mode is not enabled.
+     *
+     * @param transition Change the active transition before switching scenes. Defaults to the active transition.
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#TransitionToProgram">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void transitionToProgram(TransitionToProgram.Transition transition, Consumer<TransitionToProgram.Response> responseConsumer) {
+        TransitionToProgram.Request baseRequest = new TransitionToProgram.Request(getNextMessageId());
+        if (transition != null)
+            baseRequest.setWithTransition(transition);
+
+        sendRequest(baseRequest,
+                baseResponse -> responseConsumer.accept((TransitionToProgram.Response) baseResponse));
     }
 }
