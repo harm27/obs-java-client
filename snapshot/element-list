@@ -14,6 +14,7 @@ nl.harm27.obswebsocket.api.requests.recording
 nl.harm27.obswebsocket.api.requests.replaybuffer
 nl.harm27.obswebsocket.api.requests.scenes
 nl.harm27.obswebsocket.api.requests.streaming
+nl.harm27.obswebsocket.api.requests.studiomode
 nl.harm27.obswebsocket.authentication
 nl.harm27.obswebsocket.listener
 nl.harm27.obswebsocket.processor
