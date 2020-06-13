@@ -3,6 +3,7 @@ package nl.harm27.obswebsocket.sender;
 import nl.harm27.obswebsocket.OBSWebSocket;
 import nl.harm27.obswebsocket.api.requests.studiomode.GetPreviewScene;
 import nl.harm27.obswebsocket.api.requests.studiomode.GetStudioModeStatus;
+import nl.harm27.obswebsocket.api.requests.studiomode.SetPreviewScene;
 
 import java.util.function.Consumer;
 
@@ -34,5 +35,17 @@ public class StudioModeRequestSender extends RequestSender {
     public void getPreviewScene(Consumer<GetPreviewScene.Response> responseConsumer) {
         sendRequest(new GetPreviewScene.Request(getNextMessageId()),
                 baseResponse -> responseConsumer.accept((GetPreviewScene.Response) baseResponse));
+    }
+
+    /**
+     * Set the active preview scene. Will return an error if Studio Mode is not enabled.
+     *
+     * @param sceneName The name of the scene to preview.
+     * @see <a href="https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#SetPreviewScene">OBS WebSocket Documentation</a>
+     * @since v4.1.0
+     */
+    public void setPreviewScene(String sceneName, Consumer<SetPreviewScene.Response> responseConsumer) {
+        sendRequest(new SetPreviewScene.Request(getNextMessageId(), sceneName),
+                baseResponse -> responseConsumer.accept((SetPreviewScene.Response) baseResponse));
     }
 }
