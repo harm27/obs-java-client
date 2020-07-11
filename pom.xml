@@ -6,7 +6,7 @@
 
     <groupId>nl.harm27.obs-websocket-java</groupId>
     <artifactId>obs-websocket-java</artifactId>
-    <version>1.2</version>
+    <version>1.3-SNAPSHOT</version>
 
     <distributionManagement>
         <repository>
