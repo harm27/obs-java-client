@@ -1,20 +1,16 @@
 # Java API for the OBS Websocket API
-A Java API for communicating with OBS Websocket based on Java 11+ Websocket client and GSON (Jackson from version 1.2).
+A Java API for communicating with OBS Websocket based on Java 11+ Websocket client and Jackson.
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
 ![Master Build](https://github.com/harm27/obs-websocket-java/workflows/Master%20Build/badge.svg)
 
 # News
-Version 1.1 is released. 
+Version 1.2 is released. 
 
 It includes the events and requests from the following categories:
-- Streaming
-- Replay Buffer
-- Recording
+- Studio Mode
 
-This initial version includes the following basic features:
-- Improved checks for supported methods.
-- Improved authentication system
+In this version the library is migrated from GSON to Jackson. 
 
 Check https://github.com/harm27/obs-websocket-java/milestones for which version the other events and requests are planned.
 
