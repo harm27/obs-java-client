@@ -16,51 +16,6 @@
     </properties>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>nl.harm27.obs-websocket-java</groupId>
-                    <artifactId>generator-maven-plugin</artifactId>
-                    <version>${project.version}</version>
-                    <executions>
-                        <execution>
-                            <phase>generate-sources</phase>
-                            <goals>
-                                <goal>generate</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <url>
-                            https://raw.githubusercontent.com/Palakis/obs-websocket/4.x-current/docs/generated/comments.json
-                        </url>
-                        <debugLogging>true</debugLogging>
-                        <apiPackageName>nl.harm27.obswebsocket.api</apiPackageName>
-                        <listenerPackageName>nl.harm27.obswebsocket.listener</listenerPackageName>
-                        <senderPackageName>nl.harm27.obswebsocket.sender</senderPackageName>
-                        <targetFolder>${project.build.directory}/generated-sources/</targetFolder>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.2.0</version>
-                    <executions>
-                        <execution>
-                            <phase>generate-sources</phase>
-                            <goals>
-                                <goal>add-source</goal>
-                            </goals>
-                            <configuration>
-                                <sources>
-                                    <source>${project.build.directory}/generated-sources/</source>
-                                </sources>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
