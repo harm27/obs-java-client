@@ -79,7 +79,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Generate Javadoc
-        run: mvn -B javadoc:javadoc --file pom.xml
+        run: mvn -B javadoc:aggregate --file pom.xml
       - name: Sleep for 30 seconds
         uses: jakejarvis/wait-action@master
         with:
