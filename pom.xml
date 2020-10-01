@@ -175,12 +175,12 @@
             <!-- Internal libraries that get referenced -->
             <dependency>
                 <groupId>nl.harm27.obs-websocket-java</groupId>
-                <artifactId>obs-websocket-api</artifactId>
+                <artifactId>api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nl.harm27.obs-websocket-java</groupId>
-                <artifactId>obs-websocket-client</artifactId>
+                <artifactId>client</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

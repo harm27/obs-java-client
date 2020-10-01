@@ -35,11 +35,11 @@
     <dependencies>
         <dependency>
             <groupId>nl.harm27.obs-websocket-java</groupId>
-            <artifactId>obs-websocket-client</artifactId>
+            <artifactId>client</artifactId>
         </dependency>
         <dependency>
             <groupId>nl.harm27.obs-websocket-java</groupId>
-            <artifactId>obs-websocket-api</artifactId>
+            <artifactId>api</artifactId>
         </dependency>
     </dependencies>
 </project>

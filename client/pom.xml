@@ -43,7 +43,7 @@
         </dependency>
         <dependency>
             <groupId>nl.harm27.obs-websocket-java</groupId>
-            <artifactId>obs-websocket-api</artifactId>
+            <artifactId>api</artifactId>
             <scope>compile</scope>
         </dependency>
     </dependencies>
