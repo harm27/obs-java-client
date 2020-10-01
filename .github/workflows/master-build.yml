@@ -37,7 +37,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Generate Javadoc
-        run: mvn -B javadoc:javadoc --file pom.xml
+        run: mvn -B javadoc:aggregate --file pom.xml
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
