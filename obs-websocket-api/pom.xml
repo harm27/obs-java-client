@@ -30,10 +30,6 @@
                 <artifactId>versions-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>nl.harm27.obs-websocket-java</groupId>
                 <artifactId>generator-maven-plugin</artifactId>
             </plugin>
