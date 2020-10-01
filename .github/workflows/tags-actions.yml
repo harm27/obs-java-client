@@ -78,6 +78,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      - name: Build classes
+        run: mvn -B install --file pom.xml
       - name: Generate Javadoc
         run: mvn -B javadoc:aggregate --file pom.xml
       - name: Sleep for 30 seconds
