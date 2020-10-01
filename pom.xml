@@ -11,9 +11,9 @@
 
     <modules>
         <module>generator-maven-plugin</module>
-        <module>obs-websocket-client</module>
-        <module>obs-websocket-client-test</module>
-        <module>obs-websocket-api</module>
+        <module>client</module>
+        <module>client-test</module>
+        <module>api</module>
     </modules>
 
     <distributionManagement>

@@ -38,14 +38,14 @@ public class AuthenticationHandler {
         return authenticationResult;
     }
 
-    public void addAuthenticationResultConsumer(Consumer<AuthenticationResult> authenticationResultConsumer) {
-        authenticationResultConsumers.add(authenticationResultConsumer);
-    }
-
     private void setAuthenticationResult(AuthenticationResult authenticationResult) {
         this.authenticationResult = authenticationResult;
         if (authenticationResult.isComplete())
             authenticationResultConsumers.forEach(consumer -> CompletableFuture.runAsync(() -> consumer.accept(authenticationResult)));
+    }
+
+    public void addAuthenticationResultConsumer(Consumer<AuthenticationResult> authenticationResultConsumer) {
+        authenticationResultConsumers.add(authenticationResultConsumer);
     }
 
     public void checkAuthenticationRequired() {

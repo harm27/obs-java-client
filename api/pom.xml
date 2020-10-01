@@ -9,7 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>obs-websocket-api</artifactId>
+    <artifactId>api</artifactId>
+
+    <properties>
+        <sonar.projectKey>harm27_obs-websocket-java-api</sonar.projectKey>
+    </properties>
 
     <build>
         <plugins>

@@ -9,7 +9,11 @@
         <groupId>nl.harm27.obs-websocket-java</groupId>
         <version>1.3-SNAPSHOT</version>
     </parent>
-    <artifactId>obs-websocket-client</artifactId>
+    <artifactId>client</artifactId>
+
+    <properties>
+        <sonar.projectKey>harm27_obs-websocket-java-client</sonar.projectKey>
+    </properties>
 
     <build>
         <plugins>
