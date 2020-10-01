@@ -11,6 +11,7 @@ updates:
       interval: "daily"
     assignees:
       - "harm27"
+    open-pull-requests-limit: 10
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -18,3 +19,4 @@ updates:
       interval: "daily"
     assignees:
       - "harm27"
+    open-pull-requests-limit: 3
