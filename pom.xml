@@ -157,9 +157,6 @@
                         <reports>
                             <report>aggregate</report>
                         </reports>
-                        <configuration>
-
-                        </configuration>
                     </reportSet>
                     <reportSet>
                         <id>default</id>
