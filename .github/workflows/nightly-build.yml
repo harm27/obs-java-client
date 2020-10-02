@@ -30,7 +30,7 @@ jobs:
         with:
           value: ${{ env.PROJECT_VERSION }}
           regex: "(SNAPSHOT)"
-          replacement: "NIGHTLY-" ${ GITHUB_RUN_NUMBER }
+          replacement: "NIGHTLY-" ${{ GITHUB_RUN_NUMBER }}
       - name: branch
         run: echo "${{ steps.version.outputs.value }}"
       #      - name: Convert Maven version
