@@ -20,7 +20,9 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Set env
-        run: echo ::set-env name=VERSION::$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout //'-SNAPSHOT'/'$EPOCHSECONDS')
+        run:
+          echo ::set-env name=VERSION::$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout //'-SNAPSHOT'/'$EPOCHSECONDS')
+          echo ${{VERSION}}
       - name: Build with Maven
         run: mvn -B install --file pom.xml
       - name: Generate Javadoc
