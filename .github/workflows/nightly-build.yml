@@ -31,7 +31,7 @@ jobs:
           string: ${{ env.PROJECT_VERSION}}
           replace-with: '$1-NIGHTLY-${GITHUB-RUN-NUMBER}'
       - name: Echo Project version
-        run: echo ${{ env.replaced }}
+        run: echo ${{ replace-string-action.replaced }}
       #      - name: Convert Maven version
       #        run: echo TARGET_VERSION=${PROJECT_VERSION}-NIGHTLY-${GITHUB_RUN_NUMBER} >> $GITHUB_ENV
       #      - name: Update version
