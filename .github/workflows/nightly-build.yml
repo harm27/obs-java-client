@@ -24,10 +24,12 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Get Maven version
         run: echo PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
+      - name: Echo project version
+        run: echo ${{ env.PROJECT_VERSION }}
       - name: Convert Maven version
         run: echo TARGET_VERSION=$($PROJECT_VERSION/'-SNAPSHOT'/${GITHUB_RUN_NUMBER}) >> $GITHUB_ENV
-      - name: Echo project version
-        run: echo Target version ${{ env.TARGET_VERSION }} Project version ${{ env.PROjECT_VERSION }}
+      - name: Echo target version
+        run: echo ${{ env.TARGET_VERSION }}
       #      - name: Update version
       #        run: mvn -B versions:set -DnewVersion=${ TARGET_VERSION } --file pom.xml
       - name: Build with Maven
