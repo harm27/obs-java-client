@@ -34,4 +34,4 @@ jobs:
       - name: Update version
         run: mvn -B versions:set -DnewVersion=${{ steps.version.outputs.value }} --file pom.xml
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B deploy --file pom.xml
