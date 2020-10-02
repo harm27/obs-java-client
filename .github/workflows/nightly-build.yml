@@ -25,7 +25,7 @@ jobs:
       - name: Get Maven version
         run: echo PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
       - name: Convert Maven version
-        run: echo PROJECT_VERSION="${${PROJECT_VERSION}/'-SNAPSHOT'/${GITHUB_RUN_NUMBER}}" >> $GITHUB_ENV
+        run: echo PROJECT_VERSION="$(${PROJECT_VERSION}/'-SNAPSHOT'/${GITHUB_RUN_NUMBER})" >> $GITHUB_ENV
       - name: Update version
         run: mvn -B versions:set -DnewVersion=${PROJECT_VERSION} --file pom.xml
       - name: Build with Maven
