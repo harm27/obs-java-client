@@ -29,8 +29,8 @@ jobs:
         uses: ashley-taylor/regex-property-action@1.2
         with:
           value: ${{ env.PROJECT_VERSION }}
-          regex: '(SNAPSHOT)'
-          replacement: 'NIGHTLY- ${ GITHUB_RUN_NUMBER }'
+          regex: "(SNAPSHOT)"
+          replacement: "NIGHTLY- ${ GITHUB_RUN_NUMBER }"
       - name: Echo output
         run: echo "${{ steps.version.outputs.value }}"
       #      - name: Convert Maven version
