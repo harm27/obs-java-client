@@ -31,10 +31,6 @@ jobs:
           value: ${{ env.PROJECT_VERSION }}
           regex: "(SNAPSHOT)"
           replacement: "NIGHTLY-${GITHUB_RUN_NUMBER}"
-      #      - name: Echo output
-      #        run: echo "${{ steps.version.outputs.value }}"
-      #      - name: Convert Maven version
-      #        run: echo TARGET_VERSION=${PROJECT_VERSION}-NIGHTLY-${GITHUB_RUN_NUMBER} >> $GITHUB_ENV
       - name: Update version
         run: mvn -B versions:set -DnewVersion=${{ steps.version.outputs.value }} --file pom.xml
       - name: Build with Maven
