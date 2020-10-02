@@ -22,7 +22,7 @@ jobs:
       - name: Set env
         run:
           echo ::set-env name=VERSION::$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout //'-SNAPSHOT'/'$EPOCHSECONDS')
-          echo ${{ env.VERSION }}
+          echo $VERSION
       - name: Build with Maven
         run: mvn -B install --file pom.xml
       - name: Generate Javadoc
