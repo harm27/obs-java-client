@@ -24,15 +24,15 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Get Maven version
         run: echo PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
-      - name: Replace -SNAPSHOT
-        id: replace-snapshot
-        uses: frabert/replace-string-action@v1.2
+      - name: Convert Maven version
+        id: version
+        uses: ashley-taylor/regex-property-action@v1.2
         with:
-          pattern: '(\d\.\d)'
-          string: ${{ env.PROJECT_VERSION}}
-          replace-with: '$1-NIGHTLY-${GITHUB-RUN-NUMBER}'
-      - name: Echo Project version
-        run: echo ${{ steps.replace-snapshot.replaced }}
+          value: ${{ env.PROJECT_VERSION }}
+          regex: "(SNAPSHOT)"
+          replacement: "NIGHTLY-" ${ GITHUB_RUN_NUMBER }
+      - name: branch
+        run: echo "${{ steps.version.outputs.value }}"
       #      - name: Convert Maven version
       #        run: echo TARGET_VERSION=${PROJECT_VERSION}-NIGHTLY-${GITHUB_RUN_NUMBER} >> $GITHUB_ENV
       #      - name: Update version
