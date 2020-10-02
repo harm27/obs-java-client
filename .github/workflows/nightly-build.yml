@@ -1,8 +1,11 @@
 name: Nightly Build
 
+#on:
+#  schedule:
+#    - cron: 0 0 * * *
 on:
-  schedule:
-    - cron: 0 0 * * *
+  push:
+    branches: [ master ]
 
 jobs:
   build:
@@ -19,7 +22,11 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Set env
-        run: echo ::set-env name=VERSION::$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout // '-SNAPSHOT'/ '$EPOCHSECONDS')
+      - name: Get Maven version
+        run: echo VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
+      - name: Convert Maven version
+        run: echo VERSION=$($VERSION/'-SNAPSHOT'/${GITHUB_RUN_NUMBER}) >> $GITHUB_ENV
+      - name: Update version
+        run: mvn -B versions:set -DnewVersion=${{ env.VERSION }} --file pom.xml
       - name: Build with Maven
         run: mvn -B package --file pom.xml
