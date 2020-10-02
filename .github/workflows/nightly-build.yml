@@ -27,6 +27,6 @@ jobs:
       - name: Convert Maven version
         run: echo TARGET_VERSION=${PROJECT_VERSION}-NIGHTLY-${GITHUB_RUN_NUMBER} >> $GITHUB_ENV
       - name: Update version
-        run: mvn -B versions:set -DnewVersion=${ TARGET_VERSION } --file pom.xml
+        run: mvn -B versions:set -DnewVersion=${{ TARGET_VERSION }} --file pom.xml
       - name: Build with Maven
         run: mvn -B package --file pom.xml
