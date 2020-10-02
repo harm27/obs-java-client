@@ -19,19 +19,19 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-  `   - name: Set env
-          run: echo ::set-env name=VERSION::$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout //'-SNAPSHOT'/'$EPOCHSECONDS')
-          - name: Build with Maven
-            run: mvn -B install --file pom.xml
-          - name: Generate Javadoc
-            run: mvn -B javadoc:aggregate --file pom.xml
-          - name: Deploy
-            uses: JamesIves/github-pages-deploy-action@releases/v3
-            with:
-              ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
-              BRANCH: gh-pages
-              FOLDER: target/site/apidocs
-              TARGET_FOLDER: snapshot
+      - name: Set env
+        run: echo ::set-env name=VERSION::$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout //'-SNAPSHOT'/'$EPOCHSECONDS')
+      - name: Build with Maven
+        run: mvn -B install --file pom.xml
+      - name: Generate Javadoc
+        run: mvn -B javadoc:aggregate --file pom.xml
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
+          BRANCH: gh-pages
+          FOLDER: target/site/apidocs
+          TARGET_FOLDER: snapshot
 
   sonarcloud:
     runs-on: ubuntu-latest
