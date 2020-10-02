@@ -34,4 +34,8 @@ jobs:
       - name: Update version
         run: mvn -B versions:set -DnewVersion=${{ steps.version.outputs.value }} --file pom.xml
       - name: Build with Maven
-        run: mvn -B deploy --file pom.xml
+        run: mvn -B package --file pom.xml
+      - name: Publish to GitHub Packages Apache Maven
+        run: mvn deploy
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
