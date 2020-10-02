@@ -19,14 +19,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Get Maven Project version
-        uses: avides/actions-project-version-check@v1.1.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          file-to-check: pom.xml
-          only-return-version: true
-      - name: Convert snapshot to nightly
-        run: echo  ${{ steps.actions_project_version_check.outputs.version }}
+      - name: Get maven version
+        run: mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]'
       - name: Build with Maven
         run: mvn -B install --file pom.xml
       - name: Generate Javadoc
