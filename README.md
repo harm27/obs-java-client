@@ -5,21 +5,12 @@ A Java API for communicating with OBS Websocket based on Java 11+ Websocket clie
 ![Master Build](https://github.com/harm27/obs-websocket-java/workflows/Master%20Build/badge.svg)
 
 # News
-Version 1.2 is released. 
-
-It includes the events and requests from the following categories:
-- Studio Mode
-
-In this version the library is migrated from GSON to Jackson. 
-
-Check https://github.com/harm27/obs-websocket-java/milestones for which version the other events and requests are planned.
-
 Version 1.3 is in development to rebuild the requests en events to be generated based on obs-websocket protocol definition.
 Development is now in the stage of improving the code and waiting on the obs-websocket 4.9.0 release.
 There are nightly builds available to test the current version.
 
 # Download options
-To be able to use this project you can either download the jars or use the maven dependency. 
+To be able to use this project you can either download the jars or use the maven dependency. Nightly builds are only available as maven dependency.
 
 If you want to use the jar directly, you can download it at https://github.com/harm27/obs-websocket-java/releases
 
@@ -29,8 +20,6 @@ If you want to use Maven, you can find the latest jars in https://github.com/har
 At [harm27.github.io/obs-websocket-java](https://harm27.github.io/obs-websocket-java) you can find the following information:
 - Javadoc for master and every released version
 - Releasenotes for every released version
-- (**WIP**) Documentation how to extend obs-websocket-java
-- (**WIP**) Documentation how to use obs-websocket-java
 
 # SonarCloud codequality
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=ncloc)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
