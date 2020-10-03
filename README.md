@@ -6,7 +6,9 @@ A Java API for communicating with OBS Websocket based on Java 11+ Websocket clie
 
 # News
 Version 1.3 is in development to rebuild the requests en events to be generated based on obs-websocket protocol definition.
+
 Development is now in the stage of improving the code and waiting on the obs-websocket 4.9.0 release.
+
 There are nightly builds available to test the current version.
 
 # Download options
