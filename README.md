@@ -15,7 +15,8 @@ In this version the library is migrated from GSON to Jackson.
 Check https://github.com/harm27/obs-websocket-java/milestones for which version the other events and requests are planned.
 
 Version 1.3 is in development to rebuild the requests en events to be generated based on obs-websocket protocol definition.
-Development is now in the stage of checking the code, setting up a nightly build and waiting on the obs-websocket 4.9.0 release.
+Development is now in the stage of improving the code and waiting on the obs-websocket 4.9.0 release.
+There are nightly builds available to test the current version.
 
 # Download options
 To be able to use this project you can either download the jars or use the maven dependency. 
