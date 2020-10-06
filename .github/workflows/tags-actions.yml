@@ -15,7 +15,7 @@ jobs:
         with:
           java-version: 11
       - name: Set env
-        run: echo ::set-env name=TAG_VERSION::${GITHUB_REF:11}
+        run: echo TAG_VERSION=${GITHUB_REF:11}
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
@@ -71,7 +71,7 @@ jobs:
         with:
           java-version: 11
       - name: Set env
-        run: echo ::set-env name=TAG_VERSION::${GITHUB_REF:11}
+        run: echo TAG_VERSION=${GITHUB_REF:11}
       - name: Cache Maven packages
         uses: actions/cache@v2.1.1
         with:
