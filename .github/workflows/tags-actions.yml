@@ -30,7 +30,7 @@ jobs:
           draft: false
           prerelease: false
       - name: Cache Maven packages
-        uses: actions/cache@v2.1.1
+        uses: actions/cache@v2.1.2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
@@ -73,7 +73,7 @@ jobs:
       - name: Set env
         run: echo TAG_VERSION=${GITHUB_REF:11}
       - name: Cache Maven packages
-        uses: actions/cache@v2.1.1
+        uses: actions/cache@v2.1.2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
