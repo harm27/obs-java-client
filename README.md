@@ -1,8 +1,9 @@
-# Java API for the OBS Websocket API
-A Java API for communicating with OBS Websocket based on Java 11+ Websocket client and Jackson.
+# Java API for the OBS
+A Java API for communicating with OBS.
+Currently supporting [OBS-Websocket](https://github.com/Palakis/obs-websocket) with Java 11+ Websocket client and Jackson.
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
-![Master Build](https://github.com/harm27/obs-websocket-java/workflows/Master%20Build/badge.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=alert_status)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
+![Master Build](https://github.com/harm27/obs-java-client/workflows/Master%20Build/badge.svg)
 
 # News
 Version 1.3 is in development to rebuild the requests en events to be generated based on obs-websocket protocol definition.
@@ -14,26 +15,26 @@ There are nightly builds available to test the current version.
 # Download options
 To be able to use this project you can either download the jars or use the maven dependency. Nightly builds are only available as maven dependency.
 
-If you want to use the jar directly, you can download it at https://github.com/harm27/obs-websocket-java/releases
+If you want to use the jar directly, you can download it at https://github.com/harm27/obs-java-client/releases
 
-If you want to use Maven, you can find the latest jars in https://github.com/harm27/obs-websocket-java/packages
+If you want to use Maven, you can find the latest jars in https://github.com/harm27/obs-java-client/packages
 
 # Documentation
-At [harm27.github.io/obs-websocket-java](https://harm27.github.io/obs-websocket-java) you can find the following information:
+At [harm27.github.io/obs-java-client](https://harm27.github.io/obs-java-client) you can find the following information:
 - Javadoc for master and every released version
 - Releasenotes for every released version
 
 # SonarCloud codequality
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=ncloc)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=ncloc)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
 
 
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=bugs)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=code_smells)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=sqale_index)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=bugs)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=code_smells)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=sqale_index)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
 
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
 
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=security_rating)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-websocket-java&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=harm27_obs-websocket-java)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=security_rating)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=harm27_obs-java-client&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=harm27_obs-java-client)
