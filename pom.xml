@@ -4,29 +4,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>nl.harm27.obs-websocket-java</groupId>
-    <artifactId>obs-websocket-java</artifactId>
+    <groupId>nl.harm27.obs-java-client</groupId>
+    <artifactId>obs-java-client</artifactId>
     <packaging>pom</packaging>
     <version>1.3-SNAPSHOT</version>
 
     <modules>
-        <module>generator-maven-plugin</module>
-        <module>client</module>
-        <module>client-test</module>
-        <module>api</module>
+        <module>websocket-maven-plugin</module>
+        <module>websocket-client</module>
+        <module>websocket-client-test</module>
+        <module>websocket-api</module>
     </modules>
 
     <distributionManagement>
         <repository>
             <id>github</id>
             <name>GitHub Harm27 Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/harm27/obs-websocket-java</url>
+            <url>https://maven.pkg.github.com/harm27/obs-java-client</url>
         </repository>
     </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.projectKey>harm27_obs-websocket-java</sonar.projectKey>
+        <sonar.projectKey>harm27_obs-java-client</sonar.projectKey>
         <sonar.organization>harm27</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
@@ -75,8 +75,8 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>nl.harm27.obs-websocket-java</groupId>
-                    <artifactId>generator-maven-plugin</artifactId>
+                    <groupId>nl.harm27.obs-java-client</groupId>
+                    <artifactId>websocket-maven-plugin</artifactId>
                     <version>${project.version}</version>
                     <executions>
                         <execution>
@@ -91,9 +91,9 @@
                             https://raw.githubusercontent.com/Palakis/obs-websocket/4.x-current/docs/generated/comments.json
                         </url>
                         <debugLogging>true</debugLogging>
-                        <apiPackageName>nl.harm27.obswebsocket.api</apiPackageName>
-                        <listenerPackageName>nl.harm27.obswebsocket.listener</listenerPackageName>
-                        <senderPackageName>nl.harm27.obswebsocket.sender</senderPackageName>
+                        <apiPackageName>nl.harm27.obs.websocket.api</apiPackageName>
+                        <listenerPackageName>nl.harm27.obs.websocket.listener</listenerPackageName>
+                        <senderPackageName>nl.harm27.obs.websocket.sender</senderPackageName>
                         <targetFolder>${project.build.directory}/generated-sources/</targetFolder>
                     </configuration>
                 </plugin>
@@ -174,13 +174,13 @@
             </dependency>
             <!-- Internal libraries that get referenced -->
             <dependency>
-                <groupId>nl.harm27.obs-websocket-java</groupId>
-                <artifactId>api</artifactId>
+                <groupId>nl.harm27.obs-java-client</groupId>
+                <artifactId>websocket-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>nl.harm27.obs-websocket-java</groupId>
-                <artifactId>client</artifactId>
+                <groupId>nl.harm27.obs-java-client</groupId>
+                <artifactId>websocket-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
