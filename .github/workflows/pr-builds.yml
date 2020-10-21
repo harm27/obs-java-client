@@ -40,4 +40,4 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: SonarCloud Scan
-        run: mvn verify sonar:sonar -Dsonar.login=${{secrets.SONAR_LOGIN}} -DskipTests=true -Dmaven.javadoc.skip=true
+        run: mvn verify sonar:sonar -Dsonar.login=${{secrets.SONAR_LOGIN}} -Dmaven.javadoc.skip=true
