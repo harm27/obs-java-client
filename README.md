@@ -15,9 +15,9 @@ There are nightly builds available to test the current version.
 # Download options
 To be able to use this project you can either download the jars or use the maven dependency. Nightly builds are only available as maven dependency.
 
-If you want to use the jar directly, you can download it at https://github.com/harm27/obs-java-client/releases
+If you want to use the jar directly, you can download it at https://github.com/harm27/obs-java-client/releases. There you can find the uber/shaded-jar version with no further dependencies.
 
-If you want to use Maven, you can find the latest jars in https://github.com/harm27/obs-java-client/packages
+If you want to use Maven, you can find the latest jars in https://github.com/harm27/obs-java-client/packages. There you can find two versions, 1 uber/shaded-jar with all dependencies embeded and 1 jar with the dependencies through maven.
 
 # Documentation
 At [harm27.github.io/obs-java-client](https://harm27.github.io/obs-java-client) you can find the following information:
