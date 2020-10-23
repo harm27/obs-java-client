@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nl.harm27.obs.websocket.OBSWebSocket;
+import nl.harm27.obs.websocket.RequestSenderManager;
 import nl.harm27.obs.websocket.api.base.BaseRequest;
 import nl.harm27.obs.websocket.api.base.BaseResponse;
 import nl.harm27.obs.websocket.api.requests.general.GetVersion;
@@ -20,12 +20,12 @@ public class MessageSender {
     private final OBSWebSocketClient obsWebSocketClient;
     private final List<BaseRequest> queuedMessages;
     private final ObjectMapper objectMapper;
-    private final OBSWebSocket obsWebSocket;
+    private final RequestSenderManager requestSenderManager;
     private final AuthenticationHandler authenticationHandler;
     private List<String> supportedRequests;
 
-    public MessageSender(OBSWebSocket obsWebSocket, OBSWebSocketClient obsWebSocketClient, AuthenticationHandler authenticationHandler) {
-        this.obsWebSocket = obsWebSocket;
+    public MessageSender(RequestSenderManager requestSenderManager, OBSWebSocketClient obsWebSocketClient, AuthenticationHandler authenticationHandler) {
+        this.requestSenderManager = requestSenderManager;
         this.authenticationHandler = authenticationHandler;
         authenticationHandler.addAuthenticationResultConsumer(this::processQueuedMessages);
         queuedMessages = new ArrayList<>();
@@ -38,7 +38,7 @@ public class MessageSender {
 
     public void onWebSocketOpen() {
         authenticationHandler.checkAuthenticationRequired();
-        obsWebSocket.getRequestSenderManager().getGeneralRequestSender().getVersion().sendMessage(this::parseVersionAndMethods);
+        requestSenderManager.getGeneralRequestSender().getVersion().sendMessage(this::parseVersionAndMethods);
         processQueuedMessages();
     }
 

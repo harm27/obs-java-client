@@ -1,45 +1,24 @@
 package nl.harm27.obs.websocket;
 
-import nl.harm27.obs.websocket.api.base.BaseRequest;
-import nl.harm27.obs.websocket.api.base.BaseResponse;
 import nl.harm27.obs.websocket.authentication.AuthenticationHandler;
 import nl.harm27.obs.websocket.authentication.AuthenticationResult;
 import nl.harm27.obs.websocket.listener.EventListener;
-import nl.harm27.obs.websocket.processor.MessageReceiver;
-import nl.harm27.obs.websocket.processor.MessageSender;
 import nl.harm27.obs.websocket.websocket.OBSWebSocketClient;
 
 import java.util.function.Consumer;
 
 public class OBSWebSocket {
-    private final MessageSender messageSender;
     private final OBSWebSocketClient obsWebSocketClient;
     private final AuthenticationHandler authenticationHandler;
-    private final MessageReceiver messageReceiver;
     private final ListenerRegistry listenerRegistry;
     private final RequestSenderManager requestSenderManager;
-
-    private int lastMessageId = 0;
 
     private OBSWebSocket(String ip, int port, Consumer<AuthenticationResult> authenticationResultConsumer, String password) {
         authenticationHandler = new AuthenticationHandler(this, password);
         authenticationHandler.addAuthenticationResultConsumer(authenticationResultConsumer);
         obsWebSocketClient = new OBSWebSocketClient(ip, port);
-        messageSender = new MessageSender(this, obsWebSocketClient, authenticationHandler);
-        requestSenderManager = new RequestSenderManager(this);
         listenerRegistry = new ListenerRegistry();
-        messageReceiver = new MessageReceiver(listenerRegistry);
-        obsWebSocketClient.connect(messageSender, messageReceiver);
-    }
-
-    public synchronized String getMessageId() {
-        lastMessageId++;
-        return String.valueOf(lastMessageId);
-    }
-
-    public void sendMessage(BaseRequest request, Consumer<BaseResponse> responseConsumer) {
-        messageReceiver.addMessage(request.getMessageId(), request.getResponseType(), responseConsumer);
-        messageSender.sendMessage(request);
+        requestSenderManager = new RequestSenderManager(obsWebSocketClient, authenticationHandler, listenerRegistry);
     }
 
     public void registerListener(EventListener eventListener) {

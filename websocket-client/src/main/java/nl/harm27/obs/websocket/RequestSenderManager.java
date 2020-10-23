@@ -1,8 +1,19 @@
 package nl.harm27.obs.websocket;
 
+import nl.harm27.obs.websocket.api.base.BaseRequest;
+import nl.harm27.obs.websocket.api.base.BaseResponse;
+import nl.harm27.obs.websocket.authentication.AuthenticationHandler;
+import nl.harm27.obs.websocket.processor.MessageReceiver;
+import nl.harm27.obs.websocket.processor.MessageSender;
 import nl.harm27.obs.websocket.sender.*;
+import nl.harm27.obs.websocket.websocket.OBSWebSocketClient;
+
+import java.util.function.Consumer;
 
 public class RequestSenderManager {
+    private final MessageSender messageSender;
+    private final MessageReceiver messageReceiver;
+
     private final GeneralRequestSender generalRequestSender;
     private final MediaControlRequestSender mediaControlRequestSender;
     private final OutputsRequestSender outputsRequestSender;
@@ -17,20 +28,35 @@ public class RequestSenderManager {
     private final StudioModeRequestSender studioModeRequestSender;
     private final TransitionsRequestSender transitionsRequestSender;
 
-    public RequestSenderManager(OBSWebSocket obsWebSocket) {
-        generalRequestSender = new GeneralRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        mediaControlRequestSender = new MediaControlRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        outputsRequestSender = new OutputsRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        profilesRequestSender = new ProfilesRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        recordingRequestSender = new RecordingRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        replayBufferRequestSender = new ReplayBufferRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        sceneCollectionsRequestSender = new SceneCollectionsRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        sceneItemsRequestSender = new SceneItemsRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        scenesRequestSender = new ScenesRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        sourcesRequestSender = new SourcesRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        streamingRequestSender = new StreamingRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        studioModeRequestSender = new StudioModeRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
-        transitionsRequestSender = new TransitionsRequestSender(obsWebSocket::sendMessage, obsWebSocket::getMessageId);
+    private int lastMessageId = 0;
+
+    public RequestSenderManager(OBSWebSocketClient obsWebSocketClient, AuthenticationHandler authenticationHandler, ListenerRegistry listenerRegistry) {
+        generalRequestSender = new GeneralRequestSender(this::sendMessage, this::getMessageId);
+        mediaControlRequestSender = new MediaControlRequestSender(this::sendMessage, this::getMessageId);
+        outputsRequestSender = new OutputsRequestSender(this::sendMessage, this::getMessageId);
+        profilesRequestSender = new ProfilesRequestSender(this::sendMessage, this::getMessageId);
+        recordingRequestSender = new RecordingRequestSender(this::sendMessage, this::getMessageId);
+        replayBufferRequestSender = new ReplayBufferRequestSender(this::sendMessage, this::getMessageId);
+        sceneCollectionsRequestSender = new SceneCollectionsRequestSender(this::sendMessage, this::getMessageId);
+        sceneItemsRequestSender = new SceneItemsRequestSender(this::sendMessage, this::getMessageId);
+        scenesRequestSender = new ScenesRequestSender(this::sendMessage, this::getMessageId);
+        sourcesRequestSender = new SourcesRequestSender(this::sendMessage, this::getMessageId);
+        streamingRequestSender = new StreamingRequestSender(this::sendMessage, this::getMessageId);
+        studioModeRequestSender = new StudioModeRequestSender(this::sendMessage, this::getMessageId);
+        transitionsRequestSender = new TransitionsRequestSender(this::sendMessage, this::getMessageId);
+        messageSender = new MessageSender(this, obsWebSocketClient, authenticationHandler);
+        messageReceiver = new MessageReceiver(listenerRegistry);
+        obsWebSocketClient.connect(messageSender, messageReceiver);
+    }
+
+    private synchronized String getMessageId() {
+        lastMessageId++;
+        return String.valueOf(lastMessageId);
+    }
+
+    private void sendMessage(BaseRequest request, Consumer<BaseResponse> responseConsumer) {
+        messageReceiver.addMessage(request.getMessageId(), request.getResponseType(), responseConsumer);
+        messageSender.sendMessage(request);
     }
 
     public GeneralRequestSender getGeneralRequestSender() {
