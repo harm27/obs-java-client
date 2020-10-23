@@ -48,18 +48,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: target/obs-websocket-java-${{env.TAG_VERSION}}.jar
+          asset_path: target/obs-websocket-java-${{env.TAG_VERSION}}-shaded.jar
           asset_name: obs-websocket-java-${{env.TAG_VERSION}}.jar
-          asset_content_type: application/jar
-      - name: Upload Javadoc file
-        id: upload-release-javadoc-jar-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: target/obs-websocket-java-${{env.TAG_VERSION}}-javadoc.jar
-          asset_name: obs-websocket-java-${{env.TAG_VERSION}}-javadoc.jar
           asset_content_type: application/jar
 
   javadoc:
