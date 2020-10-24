@@ -6,7 +6,7 @@ Currently supporting [OBS-Websocket](https://github.com/Palakis/obs-websocket) w
 ![Master Build](https://github.com/harm27/obs-java-client/workflows/Master%20Build/badge.svg)
 
 # News
-Version 1.3 is in development to rebuild the requests en events to be generated based on obs-websocket protocol definition.
+Version 1.3 is in development and rebuilds the requests en events to be generated based on obs-websocket protocol definition.
 
 Development is now in the stage of improving the code and waiting on the obs-websocket 4.9.0 release.
 
