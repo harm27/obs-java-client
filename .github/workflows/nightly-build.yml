@@ -36,3 +36,12 @@ jobs:
         run: mvn deploy
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Generate Javadoc
+        run: mvn -B javadoc:aggregate --file pom.xml
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
+          BRANCH: gh-pages
+          FOLDER: target/site/apidocs
+          TARGET_FOLDER: snapshot  
