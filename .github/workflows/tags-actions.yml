@@ -14,8 +14,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Set env
-        run: echo TAG_VERSION=${GITHUB_REF:11}
+      - name: Get Maven version
+        run: echo PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
@@ -25,8 +25,8 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            Releasenotes: https://harm27.github.io/obs-websocket-java/releasenotes/${{env.TAG_VERSION}}.md
-            Javadoc: https://harm27.github.io/obs-websocket-java/release/${{env.TAG_VERSION}}
+            Releasenotes: https://harm27.github.io/obs-websocket-java/releasenotes/${{env.PROJECT_VERSION}}.md
+            Javadoc: https://harm27.github.io/obs-websocket-java/release/${{env.PROJECT_VERSION}}
           draft: false
           prerelease: false
       - name: Cache Maven packages
@@ -48,8 +48,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: target/obs-websocket-java-${{env.TAG_VERSION}}-shaded.jar
-          asset_name: obs-websocket-java-${{env.TAG_VERSION}}.jar
+          asset_path: websocket-client/target/websocket-client-${{env.PROJECT_VERSION}}-shaded.jar
+          asset_name: obs-java-client-websocket-${{env.PROJECT_VERSION}}.jar
           asset_content_type: application/jar
 
   javadoc:
@@ -60,8 +60,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Set env
-        run: echo TAG_VERSION=${GITHUB_REF:11}
+      - name: Get Maven version
+        run: echo PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
       - name: Cache Maven packages
         uses: actions/cache@v2.1.4
         with:
@@ -82,4 +82,4 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
           BRANCH: gh-pages
           FOLDER: target/site/apidocs
-          TARGET_FOLDER: release/${{env.TAG_VERSION}}/
+          TARGET_FOLDER: release/${{env.PROJECT_VERSION}}/
