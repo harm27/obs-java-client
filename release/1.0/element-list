@@ -1,0 +1,14 @@
+nl.harm27.obswebsocket
+nl.harm27.obswebsocket.api.complex
+nl.harm27.obswebsocket.api.events
+nl.harm27.obswebsocket.api.events.general
+nl.harm27.obswebsocket.api.events.other
+nl.harm27.obswebsocket.api.events.scenes
+nl.harm27.obswebsocket.api.requests
+nl.harm27.obswebsocket.api.requests.general
+nl.harm27.obswebsocket.api.requests.scenes
+nl.harm27.obswebsocket.authentication
+nl.harm27.obswebsocket.listener
+nl.harm27.obswebsocket.processor
+nl.harm27.obswebsocket.sender
+nl.harm27.obswebsocket.websocket
