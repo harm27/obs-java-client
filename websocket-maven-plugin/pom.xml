@@ -7,7 +7,7 @@
     <parent>
         <groupId>nl.harm27.obs-java-client</groupId>
         <artifactId>obs-java-client</artifactId>
-        <version>1.3.1</version>
+        <version>1.4-SNAPSHOT</version>
     </parent>
     <artifactId>websocket-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
