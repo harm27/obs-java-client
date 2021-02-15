@@ -6,11 +6,11 @@ Currently supporting [OBS-Websocket](https://github.com/Palakis/obs-websocket) w
 ![Master Build](https://github.com/harm27/obs-java-client/workflows/Master%20Build/badge.svg)
 
 # News
-Version 1.3 is in development and rebuilds the requests en events to be generated based on obs-websocket protocol definition.
+Version 1.3 is released and rebuilds the requests en events to be generated based on obs-websocket protocol definition.
 
-Development is now in the stage of improving the code and waiting on the obs-websocket 4.9.0 release.
+Also it supports all requests that are part of OBS v4.9.0. 
 
-There are nightly builds available to test the current version.
+Version 1.4 is targeted to improve the properties generation.
 
 # Download options
 To be able to use this project you can either download the jars or use the maven dependency. Nightly builds are only available as maven dependency.
