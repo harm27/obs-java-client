@@ -10,7 +10,7 @@ Version 1.3 is released and rebuilds the requests en events to be generated base
 
 Also it supports all requests that are part of OBS v4.9.0. 
 
-Version 1.4 is targeted to improve the properties generation.
+Version 1.4 is targeted to improve the properties generation and fully support the batch request.
 
 # Download options
 To be able to use this project you can either download the jars or use the maven dependency. Nightly builds are only available as maven dependency.
