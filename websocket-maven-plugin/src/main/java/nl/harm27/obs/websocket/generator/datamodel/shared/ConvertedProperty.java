@@ -55,7 +55,11 @@ public class ConvertedProperty {
     }
 
     public String getClassName() {
-        return generateValidClassName(getName());
+        String localName = getName();
+        if (isArray() && localName.endsWith("s"))
+            localName = localName.substring(0, localName.length() - 1);
+
+        return generateValidClassName(localName);
     }
 
     public boolean isArray() {
