@@ -36,7 +36,7 @@ public abstract class GenericClassGenerator extends GenericGenerator {
     }
 
     protected JFieldVar generateField(JDefinedClass targetClass, ConvertedProperty property, FunctionType functionType) throws JCodeModelException, UnknownTypeException {
-        AbstractJType fieldType = typeManager.getType(targetClass, property.getName(), property.getType(), property.getDescription());
+        AbstractJType fieldType = typeManager.getType(targetClass, property);
 
         JFieldVar fieldVar = targetClass.field(JMod.PRIVATE, fieldType, property.getFieldName());
         fieldVar.annotate(JsonProperty.class).param(property.getName());

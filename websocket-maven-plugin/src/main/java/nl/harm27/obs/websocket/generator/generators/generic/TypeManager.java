@@ -1,6 +1,7 @@
 package nl.harm27.obs.websocket.generator.generators.generic;
 
 import com.helger.jcodemodel.*;
+import nl.harm27.obs.websocket.generator.datamodel.shared.ConvertedProperty;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -21,29 +22,31 @@ public class TypeManager extends GenericGenerator {
         this.apiTypes = new HashMap<>();
     }
 
-    public AbstractJType getType(JDefinedClass targetClass, String fieldName, String typeName, String description) throws JCodeModelException, UnknownTypeException {
-        if (typeName.contains("Array")) {
-            AbstractJType arraySubType = getType(targetClass, fieldName, typeName.replace("Array<", "").replace(">", ""), description);
-            return codeModel.ref(List.class).narrow(arraySubType);
-        }
+    public AbstractJType getType(JDefinedClass targetClass, ConvertedProperty property) throws JCodeModelException, UnknownTypeException {
+        if (property.isArray())
+            return codeModel.ref(List.class).narrow(getTypes(targetClass, property));
 
-        JDefinedClass subClassType = getSubClassType(targetClass, typeName);
+        return getTypes(targetClass, property);
+    }
+
+    private AbstractJType getTypes(JDefinedClass targetClass, ConvertedProperty property) throws JCodeModelException, UnknownTypeException {
+        JDefinedClass subClassType = getSubClassType(targetClass, property.getType());
         if (subClassType != null)
             return subClassType;
 
-        JDefinedClass apiType = apiTypes.get(typeName);
+        JDefinedClass apiType = apiTypes.get(property.getType());
         if (apiType != null)
             return apiType;
 
-        JDefinedClass customType = getCustomType(findParentClass(targetClass).name().toLowerCase(), fieldName.toLowerCase(), description);
+        JDefinedClass customType = getCustomType(findParentClass(targetClass).name().toLowerCase(), property.getName().toLowerCase(), property.getDescription());
         if (customType != null)
             return customType;
 
-        AbstractJType primitiveType = getPrimitiveType(typeName);
+        AbstractJType primitiveType = getPrimitiveType(property.getType());
         if (primitiveType != null)
             return primitiveType;
 
-        throw new UnknownTypeException(typeName);
+        throw new UnknownTypeException(property.getType());
     }
 
     public void addApiType(String typeName, JDefinedClass typeClass) {
