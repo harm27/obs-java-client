@@ -22,6 +22,7 @@ public class TypeDefinition extends Definition {
         return definitions.stream().findFirst();
     }
 
+    @Override
     public String getName() {
         return getTypeDefinition().map(TypeMetadata::getName).orElse("");
     }

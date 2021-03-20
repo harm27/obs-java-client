@@ -28,6 +28,7 @@ public abstract class ContentDefinition extends Definition {
         return api;
     }
 
+    @Override
     public String getName() {
         return name;
     }

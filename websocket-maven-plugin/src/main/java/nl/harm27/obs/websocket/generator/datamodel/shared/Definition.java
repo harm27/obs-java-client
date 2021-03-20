@@ -1,14 +1,20 @@
 package nl.harm27.obs.websocket.generator.datamodel.shared;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class Definition {
     protected List<ConvertedProperty> convertProperties(List<Property> properties) {
         if (properties == null)
             return new ArrayList<>();
+
+        if (getName().equalsIgnoreCase("ExecuteBatch")) {
+            Optional<Property> first = properties.stream().filter(property -> property.getName().equalsIgnoreCase("results") || property.getName().equalsIgnoreCase("requests")).findFirst();
+            if (first.isPresent()) {
+                Property property = first.get();
+                String type = property.getName().equalsIgnoreCase("results") ? "BaseResponse" : "BaseRequest";
+                return new ArrayList<>(Collections.singletonList(new ConvertedProperty(property, type)));
+            }
+        }
 
         List<ConvertedProperty> convertedProperties = new ArrayList<>();
         for (Property property : properties) {
@@ -20,6 +26,8 @@ public abstract class Definition {
         }
         return convertedProperties;
     }
+
+    protected abstract String getName();
 
     private void updateSingleLevelProperty(List<ConvertedProperty> convertedProperties, Property property) {
         ConvertedProperty convertedProperty = getConvertedProperty(convertedProperties, property.getName());

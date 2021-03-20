@@ -49,6 +49,7 @@ public class RequestsBaseGenerator extends GenericBaseGenerator {
     private void generateRequestClass() throws JCodeModelException, UnknownTypeException {
         baseRequestClass = basePackageModel._class(JMod.PUBLIC | JMod.ABSTRACT, "BaseRequest");
         generateJavadocForClass(baseRequestClass.javadoc(), BASE_REQUEST_JAVADOC, REQUESTS_URL_PART);
+        typeManager.addApiType(baseRequestClass.name(), baseRequestClass);
 
         JFieldVar requestTypeField = generateField(baseRequestClass, new ConvertedProperty("request-type", requestTypeEnum.name(), BASE_REQUEST_TYPE_JAVADOC), FunctionType.GETTER);
         JFieldVar messageIdField = generateField(baseRequestClass, new ConvertedProperty("message-id", STRING_TYPE, BASE_REQUEST_MESSAGE_ID_JAVADOC), FunctionType.GETTER);
@@ -82,6 +83,7 @@ public class RequestsBaseGenerator extends GenericBaseGenerator {
     private void generateResponseClass() throws JCodeModelException, UnknownTypeException {
         baseResponseClass = basePackageModel._class(JMod.PUBLIC | JMod.ABSTRACT, "BaseResponse");
         generateJavadocForClass(baseResponseClass.javadoc(), StringConstants.BASE_RESPONSE_JAVADOC, REQUESTS_URL_PART);
+        typeManager.addApiType(baseResponseClass.name(), baseResponseClass);
 
         generateField(baseResponseClass, new ConvertedProperty("message-id", STRING_TYPE, BASE_RESPONSE_MESSAGE_ID_JAVADOC), FunctionType.GETTER);
 

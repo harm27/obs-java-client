@@ -36,6 +36,12 @@ public class ConvertedProperty {
         setType(type);
     }
 
+    public ConvertedProperty(Property property, String type) {
+        this(property.getName(), property.isArray(), property.isOptional());
+        setDescription(property.getDescription());
+        setType(type);
+    }
+
     public String getName() {
         return name;
     }
