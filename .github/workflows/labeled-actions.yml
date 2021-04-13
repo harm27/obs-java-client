@@ -9,25 +9,29 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'in-development'
     steps:
-    - uses: actions/checkout@v2
-    - name: Create branch
-      uses: peterjgrainger/action-create-branch@2.0.1
-      env: 
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        branch: 'issue/${{github.event.issue.number }}'
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create branch
+        uses: peterjgrainger/action-create-branch@2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: 'issue/${{github.event.issue.number }}'
 
   pr:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'ready'
     steps:
-    - uses: actions/checkout@v2
-    - name: Create Pull-Request
-      uses: repo-sync/pull-request@v2
-      with:
-        source_branch: 'issue/${{github.event.issue.number }}'
-        pr_title: '${{github.event.issue.title }}'
-        pr_body: 'Closes #${{github.event.issue.number }}'
-        pr_milestone: '${{github.event.issue.milestone.title}}'
-        pr_draft: true
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create Pull-Request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: 'issue/${{github.event.issue.number }}'
+          pr_title: '${{github.event.issue.title }}'
+          pr_body: 'Closes #${{github.event.issue.number }}'
+          pr_milestone: '${{github.event.issue.milestone.title}}'
+          pr_draft: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}

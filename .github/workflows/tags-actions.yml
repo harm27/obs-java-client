@@ -9,14 +9,18 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'
+
       - name: Get Maven version
         run: echo PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
@@ -30,18 +34,22 @@ jobs:
             Javadoc: https://harm27.github.io/obs-websocket-java/release/${{env.PROJECT_VERSION}}
           draft: false
           prerelease: false
+
       - name: Cache Maven packages
         uses: actions/cache@v2.1.5
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+
       - name: Publish to GitHub Packages Apache Maven
         run: mvn deploy
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
       - name: Upload file
         id: upload-release-jar-asset
         uses: actions/upload-release-asset@v1
@@ -56,28 +64,36 @@ jobs:
   javadoc:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'
+
       - name: Get Maven version
         run: echo PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
+
       - name: Cache Maven packages
         uses: actions/cache@v2.1.5
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
       - name: Build classes
         run: mvn -B install --file pom.xml
+
       - name: Generate Javadoc
         run: mvn -B javadoc:aggregate --file pom.xml
+
       - name: Sleep for 30 seconds
         uses: jakejarvis/wait-action@master
         with:
           time: '30s'
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

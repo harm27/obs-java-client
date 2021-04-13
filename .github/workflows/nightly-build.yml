@@ -8,20 +8,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'
+
       - name: Cache Maven packages
         uses: actions/cache@v2.1.5
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
       - name: Get Maven version
         run: echo PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
+
       - name: Convert Maven version
         id: version
         uses: ashley-taylor/regex-property-action@1.2
@@ -29,20 +34,25 @@ jobs:
           value: ${{ env.PROJECT_VERSION }}
           regex: "(SNAPSHOT)"
           replacement: "NIGHTLY-${GITHUB_RUN_NUMBER}"
+
       - name: Update version
         run: mvn -B versions:set -DnewVersion=${{ steps.version.outputs.value }} --file pom.xml
+
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+
       - name: Publish to GitHub Packages Apache Maven
         run: mvn deploy
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
       - name: Generate Javadoc
         run: mvn -B javadoc:aggregate --file pom.xml
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.JAVADOC_GITHUB_PAGES }}
           BRANCH: gh-pages
           FOLDER: target/site/apidocs
-          TARGET_FOLDER: snapshot  
+          TARGET_FOLDER: snapshot
