@@ -19,9 +19,10 @@ public class GenericRequestsGenerator extends GenericClassGenerator {
 
         JMethod constructor = targetClass.constructor(JMod.PUBLIC);
         JVar consumerRequests = constructor.param(consumerRequestClass, "requestConsumer");
+        JVar consumerBatches = constructor.param(consumerRequestClass, "batchConsumer");
         JVar supplierMessageId = constructor.param(supplierMessageIdClass, "messageIdSupplier");
 
         JBlock body = constructor.body();
-        body.add(JExpr.invokeSuper().arg(consumerRequests).arg(supplierMessageId));
+        body.add(JExpr.invokeSuper().arg(consumerRequests).arg(consumerBatches).arg(supplierMessageId));
     }
 }

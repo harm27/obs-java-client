@@ -31,19 +31,19 @@ public class RequestSenderManager {
     private int lastMessageId = 0;
 
     public RequestSenderManager(OBSWebSocketClient obsWebSocketClient, AuthenticationHandler authenticationHandler, ListenerRegistry listenerRegistry) {
-        generalRequestSender = new GeneralRequestSender(this::sendMessage, this::getMessageId);
-        mediaControlRequestSender = new MediaControlRequestSender(this::sendMessage, this::getMessageId);
-        outputsRequestSender = new OutputsRequestSender(this::sendMessage, this::getMessageId);
-        profilesRequestSender = new ProfilesRequestSender(this::sendMessage, this::getMessageId);
-        recordingRequestSender = new RecordingRequestSender(this::sendMessage, this::getMessageId);
-        replayBufferRequestSender = new ReplayBufferRequestSender(this::sendMessage, this::getMessageId);
-        sceneCollectionsRequestSender = new SceneCollectionsRequestSender(this::sendMessage, this::getMessageId);
-        sceneItemsRequestSender = new SceneItemsRequestSender(this::sendMessage, this::getMessageId);
-        scenesRequestSender = new ScenesRequestSender(this::sendMessage, this::getMessageId);
-        sourcesRequestSender = new SourcesRequestSender(this::sendMessage, this::getMessageId);
-        streamingRequestSender = new StreamingRequestSender(this::sendMessage, this::getMessageId);
-        studioModeRequestSender = new StudioModeRequestSender(this::sendMessage, this::getMessageId);
-        transitionsRequestSender = new TransitionsRequestSender(this::sendMessage, this::getMessageId);
+        generalRequestSender = new GeneralRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        mediaControlRequestSender = new MediaControlRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        outputsRequestSender = new OutputsRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        profilesRequestSender = new ProfilesRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        recordingRequestSender = new RecordingRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        replayBufferRequestSender = new ReplayBufferRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        sceneCollectionsRequestSender = new SceneCollectionsRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        sceneItemsRequestSender = new SceneItemsRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        scenesRequestSender = new ScenesRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        sourcesRequestSender = new SourcesRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        streamingRequestSender = new StreamingRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        studioModeRequestSender = new StudioModeRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
+        transitionsRequestSender = new TransitionsRequestSender(this::sendMessage, this::batchMessage, this::getMessageId);
         messageSender = new MessageSender(this, obsWebSocketClient, authenticationHandler);
         messageReceiver = new MessageReceiver(listenerRegistry);
         obsWebSocketClient.connect(messageSender, messageReceiver);
@@ -57,6 +57,10 @@ public class RequestSenderManager {
     private void sendMessage(BaseRequest request, Consumer<BaseResponse> responseConsumer) {
         messageReceiver.addMessage(request.getMessageId(), request.getResponseType(), responseConsumer);
         messageSender.sendMessage(request);
+    }
+
+    private void batchMessage(BaseRequest request, Consumer<BaseResponse> responseConsumer) {
+        messageReceiver.addMessage(request.getMessageId(), request.getResponseType(), responseConsumer);
     }
 
     public GeneralRequestSender getGeneralRequestSender() {

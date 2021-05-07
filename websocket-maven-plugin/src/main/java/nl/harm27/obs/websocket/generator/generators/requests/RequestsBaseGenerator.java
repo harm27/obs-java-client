@@ -114,30 +114,38 @@ public class RequestsBaseGenerator extends GenericBaseGenerator {
         AbstractJClass supplierMessageIdClass = typeManager.getSupplier(typeManager.getPrimitiveType(STRING_TYPE));
 
         JFieldVar requestConsumer = targetClass.field(JMod.PRIVATE, consumerRequestClass, "requestConsumer");
+        JFieldVar batchConsumer = targetClass.field(JMod.PRIVATE, consumerRequestClass, "batchConsumer");
         JFieldVar messageIdSupplier = targetClass.field(JMod.PRIVATE, supplierMessageIdClass, "messageIdSupplier");
 
-        generateConstructor(targetClass, consumerRequestClass, supplierMessageIdClass, requestConsumer, messageIdSupplier);
-        generateMethods(targetClass, consumerResponseClass, requestConsumer, messageIdSupplier);
+        generateConstructor(targetClass, consumerRequestClass, supplierMessageIdClass, requestConsumer, batchConsumer, messageIdSupplier);
+        generateMethods(targetClass, consumerResponseClass, requestConsumer, batchConsumer, messageIdSupplier);
     }
 
-    private void generateConstructor(JDefinedClass targetClass, AbstractJClass consumerRequestClass, AbstractJClass supplierMessageIdClass, JFieldVar requestConsumer, JFieldVar messageIdSupplier) {
+    private void generateConstructor(JDefinedClass targetClass, AbstractJClass consumerRequestClass, AbstractJClass supplierMessageIdClass, JFieldVar requestConsumer, JFieldVar batchConsumer, JFieldVar messageIdSupplier) {
         JMethod constructor = targetClass.constructor(JMod.PUBLIC);
         JVar consumerRequests = constructor.param(consumerRequestClass, "requestConsumer");
+        JVar consumerBatches = constructor.param(consumerRequestClass, "batchConsumer");
         JVar supplierMessageId = constructor.param(supplierMessageIdClass, "messageIdSupplier");
 
         JBlock body = constructor.body();
         body.add(JExpr._this().ref(requestConsumer).assign(consumerRequests));
+        body.add(JExpr._this().ref(batchConsumer).assign(consumerBatches));
         body.add(JExpr._this().ref(messageIdSupplier).assign(supplierMessageId));
     }
 
-    private void generateMethods(JDefinedClass targetClass, AbstractJClass consumerResponseClass, JFieldVar requestConsumer, JFieldVar messageIdSupplier) {
+    private void generateMethods(JDefinedClass targetClass, AbstractJClass consumerResponseClass, JFieldVar requestConsumer, JFieldVar batchConsumer, JFieldVar messageIdSupplier) {
         JMethod getNewMessageIdMethod = targetClass.method(JMod.PROTECTED, typeManager.getPrimitiveType(STRING_TYPE), "getNewMessageId");
         getNewMessageIdMethod.body()._return(messageIdSupplier.invoke("get"));
 
         JMethod sendMessageMethod = targetClass.method(JMod.PROTECTED, typeManager.getVoidType(), "sendMessage");
-        JVar request = sendMessageMethod.param(baseRequestClass, "request");
-        JVar responseConsumer = sendMessageMethod.param(consumerResponseClass, "responseConsumer");
-        sendMessageMethod.body().add(requestConsumer.invoke("accept").arg(request).arg(responseConsumer));
+        JVar sendRequest = sendMessageMethod.param(baseRequestClass, "request");
+        JVar sendResponseConsumer = sendMessageMethod.param(consumerResponseClass, "responseConsumer");
+        sendMessageMethod.body().add(requestConsumer.invoke("accept").arg(sendRequest).arg(sendResponseConsumer));
+
+        JMethod batchMessageMethod = targetClass.method(JMod.PROTECTED, typeManager.getVoidType(), "batchMessage");
+        JVar batchRequest = batchMessageMethod.param(baseRequestClass, "request");
+        JVar batchResponseConsumer = batchMessageMethod.param(consumerResponseClass, "responseConsumer");
+        batchMessageMethod.body().add(batchConsumer.invoke("accept").arg(batchRequest).arg(batchResponseConsumer));
     }
 
     public JDefinedClass getRequestSenderClass() {

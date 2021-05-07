@@ -9,6 +9,7 @@ public final class StringConstants {
     public static final String BASE_REQUEST_NAME_METHODE_JAVADOC = "Says what the name is of this class.";
     public static final String BASE_REQUEST_AUTHENTICATION_REQUIRED_METHOD = "Says if request needs to wait for authentication.";
     public static final String BASE_BUILDER_SEND_MESSAGE_JAVADOC = "Send the message to the OBS Studio instance.";
+    public static final String BASE_BUILDER_BATCH_MESSAGE_JAVADOC = "Batch the message to the OBS Studio instance.";
     public static final String BASE_EVENT_JAVADOC = "Events are broadcast by the server to each connected client when a recognized action occurs within OBS.";
     public static final String BASE_EVENT_TYPE_JAVADOC = "Enum constants for names of the event types.";
     public static final String BASE_EVENT_STREAM_JAVADOC = "Time elapsed between now and stream start (only present if OBS Studio is streaming) as string.";
