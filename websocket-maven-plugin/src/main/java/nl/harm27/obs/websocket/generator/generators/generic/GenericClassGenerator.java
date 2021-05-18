@@ -64,7 +64,7 @@ public abstract class GenericClassGenerator extends GenericGenerator {
 
     private void convertStringToList(JDefinedClass targetClass, JMethod getterMethod) {
         JMethod method = targetClass.method(JMod.PUBLIC, typeManager.getListPrimitiveType("string"), String.format("%sAsList", getterMethod.name()));
-        method.body()._return(typeManager.getArraysAsList(JExpr._this().invoke(getterMethod).invoke("split").arg("\\.")));
+        method.body()._return(typeManager.getArraysAsList(JExpr._this().invoke(getterMethod).invoke("split").arg(",")));
     }
 
     private void generateSetter(JDefinedClass targetClass, AbstractJType fieldType, JFieldVar fieldVar, Field field) {
