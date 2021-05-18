@@ -59,8 +59,8 @@ public class RequestSenderManager {
         messageSender.sendMessage(request);
     }
 
-    private void batchMessage(BaseRequest request, Consumer<BaseResponse> responseConsumer) {
-        messageReceiver.addMessage(request.getMessageId(), request.getResponseType(), responseConsumer);
+    private void batchMessage(BaseRequest request) {
+        messageReceiver.addMessage(request.getMessageId(), request.getResponseType(), null);
     }
 
     public GeneralRequestSender getGeneralRequestSender() {

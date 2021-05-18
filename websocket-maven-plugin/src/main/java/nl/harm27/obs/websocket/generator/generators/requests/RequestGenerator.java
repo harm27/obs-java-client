@@ -56,15 +56,22 @@ public class RequestGenerator extends GenericRequestsGenerator {
 
         JMethod method = builderClass.method(JMod.PUBLIC, returnType, methodName);
         method.javadoc().add(javadoc);
-        JVar consumerVar = method.param(typeManager.getConsumer(responseClass), "consumer");
 
         JBlock body = method.body();
         JVar messageId = body.decl(typeManager.getPrimitiveType(StringConstants.STRING_TYPE), "messageId", JExpr.invoke("getNewMessageId"));
         JVar requestVar = body.decl(requestClass, "request", requestClass._new().arg(JExpr._this()).arg(messageId));
-        var lambda = new JLambda();
-        JLambdaParam responseConsumerParam = lambda.addParam("responseConsumer");
-        lambda.body().lambdaExpr(consumerVar.invoke("accept").arg(responseConsumerParam.castTo(responseClass)));
-        body.add(JExpr.invoke(methodName).arg(requestVar).arg(lambda));
+
+        if (!batchMethod) {
+            JVar consumerVar = method.param(typeManager.getConsumer(responseClass), "consumer");
+
+            var lambda = new JLambda();
+            JLambdaParam responseConsumerParam = lambda.addParam("responseConsumer");
+            lambda.body().lambdaExpr(consumerVar.invoke("accept").arg(responseConsumerParam.castTo(responseClass)));
+
+            body.add(JExpr.invoke(methodName).arg(requestVar).arg(lambda));
+        } else {
+            body.add(JExpr.invoke(methodName).arg(requestVar));
+        }
 
         if (batchMethod) {
             body._return(requestVar);

@@ -14,12 +14,13 @@ public class GenericRequestsGenerator extends GenericClassGenerator {
 
     protected void generateConstructor(JDefinedClass targetClass) {
         AbstractJClass consumerResponseClass = typeManager.getConsumer(requestsBaseGenerator.getBaseResponseClass());
+        AbstractJClass consumerBatchClass = typeManager.getConsumer(requestsBaseGenerator.getBaseRequestClass());
         AbstractJClass consumerRequestClass = typeManager.getBiConsumer(requestsBaseGenerator.getBaseRequestClass(), consumerResponseClass);
         AbstractJClass supplierMessageIdClass = typeManager.getSupplier(typeManager.getPrimitiveType("string"));
 
         JMethod constructor = targetClass.constructor(JMod.PUBLIC);
         JVar consumerRequests = constructor.param(consumerRequestClass, "requestConsumer");
-        JVar consumerBatches = constructor.param(consumerRequestClass, "batchConsumer");
+        JVar consumerBatches = constructor.param(consumerBatchClass, "batchConsumer");
         JVar supplierMessageId = constructor.param(supplierMessageIdClass, "messageIdSupplier");
 
         JBlock body = constructor.body();

@@ -1,5 +1,6 @@
 package nl.harm27.obs.websocket.generator.generators.requests;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.helger.jcodemodel.*;
 import nl.harm27.obs.websocket.generator.datamodel.shared.ConvertedProperty;
@@ -110,21 +111,25 @@ public class RequestsBaseGenerator extends GenericBaseGenerator {
 
     private void generateRequestMethodHelpers(JDefinedClass targetClass) {
         AbstractJClass consumerResponseClass = typeManager.getConsumer(baseResponseClass);
+        AbstractJClass consumerBatchClass = typeManager.getConsumer(baseRequestClass);
         AbstractJClass consumerRequestClass = typeManager.getBiConsumer(baseRequestClass, consumerResponseClass);
         AbstractJClass supplierMessageIdClass = typeManager.getSupplier(typeManager.getPrimitiveType(STRING_TYPE));
 
         JFieldVar requestConsumer = targetClass.field(JMod.PRIVATE, consumerRequestClass, "requestConsumer");
-        JFieldVar batchConsumer = targetClass.field(JMod.PRIVATE, consumerRequestClass, "batchConsumer");
+        requestConsumer.annotate(JsonIgnore.class);
+        JFieldVar batchConsumer = targetClass.field(JMod.PRIVATE, consumerBatchClass, "batchConsumer");
+        batchConsumer.annotate(JsonIgnore.class);
         JFieldVar messageIdSupplier = targetClass.field(JMod.PRIVATE, supplierMessageIdClass, "messageIdSupplier");
+        messageIdSupplier.annotate(JsonIgnore.class);
 
-        generateConstructor(targetClass, consumerRequestClass, supplierMessageIdClass, requestConsumer, batchConsumer, messageIdSupplier);
+        generateConstructor(targetClass, consumerRequestClass, consumerBatchClass, supplierMessageIdClass, requestConsumer, batchConsumer, messageIdSupplier);
         generateMethods(targetClass, consumerResponseClass, requestConsumer, batchConsumer, messageIdSupplier);
     }
 
-    private void generateConstructor(JDefinedClass targetClass, AbstractJClass consumerRequestClass, AbstractJClass supplierMessageIdClass, JFieldVar requestConsumer, JFieldVar batchConsumer, JFieldVar messageIdSupplier) {
+    private void generateConstructor(JDefinedClass targetClass, AbstractJClass consumerRequestClass, AbstractJClass consumerBatchClass, AbstractJClass supplierMessageIdClass, JFieldVar requestConsumer, JFieldVar batchConsumer, JFieldVar messageIdSupplier) {
         JMethod constructor = targetClass.constructor(JMod.PUBLIC);
         JVar consumerRequests = constructor.param(consumerRequestClass, "requestConsumer");
-        JVar consumerBatches = constructor.param(consumerRequestClass, "batchConsumer");
+        JVar consumerBatches = constructor.param(consumerBatchClass, "batchConsumer");
         JVar supplierMessageId = constructor.param(supplierMessageIdClass, "messageIdSupplier");
 
         JBlock body = constructor.body();
@@ -144,8 +149,7 @@ public class RequestsBaseGenerator extends GenericBaseGenerator {
 
         JMethod batchMessageMethod = targetClass.method(JMod.PROTECTED, typeManager.getVoidType(), "batchMessage");
         JVar batchRequest = batchMessageMethod.param(baseRequestClass, "request");
-        JVar batchResponseConsumer = batchMessageMethod.param(consumerResponseClass, "responseConsumer");
-        batchMessageMethod.body().add(batchConsumer.invoke("accept").arg(batchRequest).arg(batchResponseConsumer));
+        batchMessageMethod.body().add(batchConsumer.invoke("accept").arg(batchRequest));
     }
 
     public JDefinedClass getRequestSenderClass() {

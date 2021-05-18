@@ -78,6 +78,7 @@ public class MessageReceiver {
 
     public void addMessage(String messageId, Class<?> responseType, Consumer<BaseResponse> responseConsumer) {
         messageResponseTypes.put(messageId, responseType);
-        messageCallbacks.put(messageId, responseConsumer);
+        if (responseConsumer != null)
+            messageCallbacks.put(messageId, responseConsumer);
     }
 }
