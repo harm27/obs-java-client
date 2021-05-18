@@ -146,10 +146,6 @@ public class RequestsBaseGenerator extends GenericBaseGenerator {
         return baseResponseClass;
     }
 
-    public JDefinedClass getRequestTypeClass() {
-        return requestTypeEnum;
-    }
-
     public JEnumConstant getEnumValue(String name) {
         return requestTypeEnum.enumConstant(StringUtil.generateEnumValue(name));
     }
