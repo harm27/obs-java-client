@@ -23,12 +23,11 @@ public class AuthenticationHandler {
     private final OBSWebSocket obsWebSocket;
     private final String password;
     private final List<Consumer<AuthenticationResult>> authenticationResultConsumers;
-    private final GeneralRequestSender generalRequestSender;
+    private GeneralRequestSender generalRequestSender;
     private AuthenticationResult authenticationResult;
 
     public AuthenticationHandler(OBSWebSocket obsWebSocket, String password) {
         this.obsWebSocket = obsWebSocket;
-        this.generalRequestSender = obsWebSocket.getRequestSenderManager().getGeneralRequestSender();
         this.password = password;
         this.authenticationResult = UN_AVAILABLE;
         authenticationResultConsumers = new ArrayList<>();
@@ -108,5 +107,9 @@ public class AuthenticationHandler {
             setAuthenticationResult(AUTHENTICATION_FAILED);
             obsWebSocket.notifyShutdown();
         }
+    }
+
+    public void setGeneralRequestSender(GeneralRequestSender generalRequestSender) {
+        this.generalRequestSender = generalRequestSender;
     }
 }

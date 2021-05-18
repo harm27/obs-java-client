@@ -19,6 +19,7 @@ public class OBSWebSocket {
         obsWebSocketClient = new OBSWebSocketClient(ip, port);
         listenerRegistry = new ListenerRegistry();
         requestSenderManager = new RequestSenderManager(obsWebSocketClient, authenticationHandler, listenerRegistry);
+        authenticationHandler.setGeneralRequestSender(requestSenderManager.getGeneralRequestSender());
     }
 
     public void registerListener(EventListener eventListener) {
