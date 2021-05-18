@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import nl.harm27.obs.websocket.RequestSenderManager;
 import nl.harm27.obs.websocket.api.base.BaseRequest;
 import nl.harm27.obs.websocket.api.base.BaseResponse;
@@ -33,7 +34,8 @@ public class MessageSender {
         objectMapper = new ObjectMapper().
                 setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE).
                 setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY).
-                setSerializationInclusion(JsonInclude.Include.NON_NULL);
+                setSerializationInclusion(JsonInclude.Include.NON_NULL).
+                disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
     }
 
     public void onWebSocketOpen() {
