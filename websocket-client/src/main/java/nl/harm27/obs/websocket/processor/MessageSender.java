@@ -34,7 +34,7 @@ public class MessageSender {
         objectMapper = new ObjectMapper().
                 setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE).
                 setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY).
-                setSerializationInclusion(JsonInclude.Include.NON_NULL).
+                setSerializationInclusion(JsonInclude.Include.NON_EMPTY).
                 disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
     }
 
