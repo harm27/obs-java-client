@@ -35,6 +35,8 @@ public class RequestsDefinition {
     private List<Request> studioModeRequests;
     @JsonProperty("transitions")
     private List<Request> transitionRequests;
+    @JsonProperty("virtual cam")
+    private List<Request> virtualCamRequests;
 
     public Map<String, List<Request>> getRequestsMap() {
         return getRequests().collect(Collectors.toMap(requests -> requests.get(0).getCategory(), Function.identity()));
@@ -47,6 +49,6 @@ public class RequestsDefinition {
     private Stream<List<Request>> getRequests() {
         return Stream.of(generalRequests, mediaControlRequests, sourceRequests, outputRequests,
                 profileRequests, recordingRequests, replayBufferRequests, sceneCollectionRequests,
-                sceneItemRequests, sceneRequests, streamingRequests, studioModeRequests, transitionRequests);
+                sceneItemRequests, sceneRequests, streamingRequests, studioModeRequests, transitionRequests, virtualCamRequests);
     }
 }

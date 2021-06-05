@@ -13,9 +13,9 @@ import static nl.harm27.obs.websocket.generator.validator.ValidationResult.*;
 
 public class JSONValidator {
     private static final List<String> eventCategories =
-            Arrays.asList("scenes", "transitions", "profiles", "streaming", "recording", "replay buffer", "other", "general", "sources", "media", "scene items", "studio mode");
+            Arrays.asList("scenes", "transitions", "profiles", "streaming", "recording", "replay buffer", "other", "general", "sources", "media", "scene items", "studio mode", "virtual cam");
     private static final List<String> requestCategories =
-            Arrays.asList("general", "media control", "sources", "outputs", "profiles", "recording", "replay buffer", "scene collections", "scene items", "scenes", "streaming", "studio mode", "transitions");
+            Arrays.asList("general", "media control", "sources", "outputs", "profiles", "recording", "replay buffer", "scene collections", "scene items", "scenes", "streaming", "studio mode", "transitions", "virtual cam");
     private final JsonNode rootNode;
     private final Log log;
 

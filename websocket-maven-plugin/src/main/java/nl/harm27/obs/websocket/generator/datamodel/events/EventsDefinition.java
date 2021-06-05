@@ -33,6 +33,8 @@ public class EventsDefinition {
     private List<Event> sceneItemEvents;
     @JsonProperty("studio mode")
     private List<Event> studioModeEvents;
+    @JsonProperty("virtual cam")
+    private List<Event> virtualCamEvents;
 
     public Map<String, List<Event>> getEventsMap() {
         return getEvents().collect(Collectors.toMap(events -> events.get(0).getCategory(), Function.identity()));
@@ -45,6 +47,6 @@ public class EventsDefinition {
     private Stream<List<Event>> getEvents() {
         return Stream.of(sceneEvents, transitionEvents, profileEvents, streamingEvents,
                 recordingEvents, replayBufferEvents, otherEvents, generalEvents,
-                sourceEvents, mediaEvents, sceneItemEvents, studioModeEvents);
+                sourceEvents, mediaEvents, sceneItemEvents, studioModeEvents, virtualCamEvents);
     }
 }
