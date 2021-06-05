@@ -13,6 +13,7 @@ nl.harm27.obs.websocket.api.events.sources
 nl.harm27.obs.websocket.api.events.streaming
 nl.harm27.obs.websocket.api.events.studiomode
 nl.harm27.obs.websocket.api.events.transitions
+nl.harm27.obs.websocket.api.events.virtualcam
 nl.harm27.obs.websocket.api.requests.general
 nl.harm27.obs.websocket.api.requests.mediacontrol
 nl.harm27.obs.websocket.api.requests.outputs
@@ -26,6 +27,7 @@ nl.harm27.obs.websocket.api.requests.sources
 nl.harm27.obs.websocket.api.requests.streaming
 nl.harm27.obs.websocket.api.requests.studiomode
 nl.harm27.obs.websocket.api.requests.transitions
+nl.harm27.obs.websocket.api.requests.virtualcam
 nl.harm27.obs.websocket.api.types
 nl.harm27.obs.websocket.authentication
 nl.harm27.obs.websocket.listener
