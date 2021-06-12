@@ -32,5 +32,6 @@ nl.harm27.obs.websocket.api.types
 nl.harm27.obs.websocket.authentication
 nl.harm27.obs.websocket.listener
 nl.harm27.obs.websocket.processor
+nl.harm27.obs.websocket.processor.deserializer
 nl.harm27.obs.websocket.sender
 nl.harm27.obs.websocket.websocket
