@@ -28,7 +28,7 @@ public class RequestCategoryGenerator extends GenericRequestsGenerator {
     public void generate() throws JCodeModelException, UnknownTypeException {
         List<GeneratedRequest> generatedRequests = new ArrayList<>();
         for (Request request : requests) {
-            RequestGenerator requestGenerator = new RequestGenerator(requestCategoryPackageModel, requestsBaseGenerator, typeManager, request);
+            var requestGenerator = new RequestGenerator(requestCategoryPackageModel, requestsBaseGenerator, typeManager, request);
             generatedRequests.add(requestGenerator.generate());
         }
 
@@ -36,7 +36,7 @@ public class RequestCategoryGenerator extends GenericRequestsGenerator {
     }
 
     private void generateSender(List<GeneratedRequest> generatedRequests) throws JCodeModelException {
-        String className = String.format("%sRequestSender", StringUtil.generateValidClassName(category));
+        var className = String.format("%sRequestSender", StringUtil.generateValidClassName(category));
         JDefinedClass requestSenderClass = senderPackageModel._class(className)._extends(requestsBaseGenerator.getRequestSenderClass());
 
         generateConstructor(requestSenderClass);
@@ -49,7 +49,10 @@ public class RequestCategoryGenerator extends GenericRequestsGenerator {
     private void generateRequestMethod(JDefinedClass requestSenderClass, GeneratedRequest generatedRequest) {
         JMethod requestMethod = requestSenderClass.method(JMod.PUBLIC, generatedRequest.getBuilderClass(), StringUtil.generateValidMethodName(generatedRequest.getName()));
         generateJavadocForClass(requestMethod.javadoc(), generatedRequest.getDescription(), generatedRequest.getName(), generatedRequest.getSince(), generatedRequest.getDeprecated());
-        requestMethod.body()._return(generatedRequest.getBuilderClass()._new().arg(new JLambdaMethodRef(JExpr._this(), "sendMessage")).arg(new JLambdaMethodRef(JExpr._this(), "getNewMessageId")));
+        requestMethod.body()._return(generatedRequest.getBuilderClass()._new()
+                .arg(new JLambdaMethodRef(JExpr._this(), "sendMessage"))
+                .arg(new JLambdaMethodRef(JExpr._this(), "batchMessage"))
+                .arg(new JLambdaMethodRef(JExpr._this(), "getNewMessageId")));
     }
 
 }

@@ -32,7 +32,7 @@ public class EventCategoryGenerator extends GenericClassGenerator {
     public void generate() throws JCodeModelException, UnknownTypeException {
         List<GeneratedEvent> generatedEvents = new ArrayList<>();
         for (Event event : events) {
-            EventGenerator eventGenerator = new EventGenerator(eventCategoryPackageModel, eventsBaseGenerator, typeManager, event);
+            var eventGenerator = new EventGenerator(eventCategoryPackageModel, eventsBaseGenerator, typeManager, event);
             generatedEvents.add(eventGenerator.generate());
         }
         generateEventListener(generatedEvents);
@@ -56,7 +56,7 @@ public class EventCategoryGenerator extends GenericClassGenerator {
         callEventMethod.annotate(Override.class);
         JVar baseEventVar = callEventMethod.param(eventsBaseGenerator.getBaseEventClass(), "baseEvent");
         JBlock body = callEventMethod.body();
-        JSwitch eventTypeSwitch = body._switch(baseEventVar.invoke("getEventType"));
+        JSwitch eventTypeSwitch = body._switch(baseEventVar.invoke("getUpdateType"));
         for (GeneratedEvent generatedEvent : generatedEvents) {
             JBlock caseStatementBody = eventTypeSwitch._case(eventsBaseGenerator.getEnumValue(generatedEvent.getName())).body();
             caseStatementBody.add(JExpr.invoke(generatedEvent.getEventListenerMethod()).arg(baseEventVar.castTo(generatedEvent.getEventClass())));
@@ -74,14 +74,14 @@ public class EventCategoryGenerator extends GenericClassGenerator {
     }
 
     private void generateGetSupportedEventsMethod(List<GeneratedEvent> generatedEvents, JDefinedClass listenerClass) {
-        AbstractJClass eventAndClassMap = typeManager.getEnumClassMap(eventsBaseGenerator.getEventTypeEnum());
+        AbstractJClass eventAndClassMap = typeManager.getList(eventsBaseGenerator.getEventTypeEnum());
         JMethod getSupportedEventsMethod = listenerClass.method(JMod.PUBLIC | JMod.FINAL, eventAndClassMap, "getSupportedEvents");
         getSupportedEventsMethod.annotate(Override.class);
         JBlock body = getSupportedEventsMethod.body();
-        JVar supportedEventsVar = body.decl(eventAndClassMap, "supportedEvents", typeManager.getEnumMap(eventsBaseGenerator.getEventTypeEnum()));
+        JVar supportedEventsVar = body.decl(eventAndClassMap, "supportedEvents", typeManager.getArrayList());
 
         for (GeneratedEvent generatedEvent : generatedEvents)
-            body.add(supportedEventsVar.invoke("put").arg(eventsBaseGenerator.getEnumValue(generatedEvent.getName())).arg(generatedEvent.getDotClass()));
+            body.add(supportedEventsVar.invoke("add").arg(eventsBaseGenerator.getEnumValue(generatedEvent.getName())));
 
         body._return(supportedEventsVar);
     }

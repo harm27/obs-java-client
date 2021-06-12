@@ -28,6 +28,7 @@ public abstract class ContentDefinition extends Definition {
         return api;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -44,7 +45,7 @@ public abstract class ContentDefinition extends Definition {
         return deprecated;
     }
 
-    public List<Property> getReturns() {
-        return filteredProperties(returns);
+    public List<ConvertedProperty> getReturns() {
+        return convertProperties(returns);
     }
 }

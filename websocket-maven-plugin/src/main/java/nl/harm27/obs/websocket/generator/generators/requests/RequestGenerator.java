@@ -3,7 +3,7 @@ package nl.harm27.obs.websocket.generator.generators.requests;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.helger.jcodemodel.*;
 import nl.harm27.obs.websocket.generator.datamodel.requests.Request;
-import nl.harm27.obs.websocket.generator.datamodel.shared.Property;
+import nl.harm27.obs.websocket.generator.datamodel.shared.ConvertedProperty;
 import nl.harm27.obs.websocket.generator.generators.generic.FunctionType;
 import nl.harm27.obs.websocket.generator.generators.generic.StringConstants;
 import nl.harm27.obs.websocket.generator.generators.generic.TypeManager;
@@ -34,28 +34,54 @@ public class RequestGenerator extends GenericRequestsGenerator {
         JDefinedClass builderClass = generateBuilderClass(request, definedClass);
         JDefinedClass responseClass = generateResponseClass(request, definedClass);
         JDefinedClass requestClass = generateRequestClass(request, requestsBaseGenerator.getEnumValue(typeName), definedClass, builderClass, responseClass);
-        generateSendMessageMethod(builderClass, responseClass, requestClass);
+        generateGenericMethod(builderClass, responseClass, requestClass, false);
+        generateGenericMethod(builderClass, responseClass, requestClass, true);
 
         return new GeneratedRequest(request, builderClass, requestClass, responseClass);
     }
 
-    private void generateSendMessageMethod(JDefinedClass builderClass, JDefinedClass responseClass, JDefinedClass requestClass) {
-        JMethod sendMessageMethod = builderClass.method(JMod.PUBLIC, typeManager.getVoidType(), "sendMessage");
-        sendMessageMethod.javadoc().add(StringConstants.BASE_BUILDER_SEND_MESSAGE_JAVADOC);
-        JVar consumerVar = sendMessageMethod.param(typeManager.getConsumer(responseClass), "consumer");
-        JBlock body = sendMessageMethod.body();
+    private void generateGenericMethod(JDefinedClass builderClass, JDefinedClass responseClass, JDefinedClass requestClass, boolean batchMethod) {
+        String methodName;
+        String javadoc;
+        AbstractJType returnType;
+        if (batchMethod) {
+            methodName = "batchMessage";
+            javadoc = StringConstants.BASE_BUILDER_BATCH_MESSAGE_JAVADOC;
+            returnType = requestClass;
+        } else {
+            methodName = "sendMessage";
+            javadoc = StringConstants.BASE_BUILDER_SEND_MESSAGE_JAVADOC;
+            returnType = typeManager.getVoidType();
+        }
+
+        JMethod method = builderClass.method(JMod.PUBLIC, returnType, methodName);
+        method.javadoc().add(javadoc);
+
+        JBlock body = method.body();
         JVar messageId = body.decl(typeManager.getPrimitiveType(StringConstants.STRING_TYPE), "messageId", JExpr.invoke("getNewMessageId"));
         JVar requestVar = body.decl(requestClass, "request", requestClass._new().arg(JExpr._this()).arg(messageId));
-        JLambda lambda = new JLambda();
-        JLambdaParam responseConsumerParam = lambda.addParam("responseConsumer");
-        lambda.body().lambdaExpr(consumerVar.invoke("accept").arg(responseConsumerParam.castTo(responseClass)));
-        body.add(JExpr.invoke("sendMessage").arg(requestVar).arg(lambda));
+
+        if (!batchMethod) {
+            JVar consumerVar = method.param(typeManager.getConsumer(responseClass), "consumer");
+
+            var lambda = new JLambda();
+            JLambdaParam responseConsumerParam = lambda.addParam("responseConsumer");
+            lambda.body().lambdaExpr(consumerVar.invoke("accept").arg(responseConsumerParam.castTo(responseClass)));
+
+            body.add(JExpr.invoke(methodName).arg(requestVar).arg(lambda));
+        } else {
+            body.add(JExpr.invoke(methodName).arg(requestVar));
+        }
+
+        if (batchMethod) {
+            body._return(requestVar);
+        }
     }
 
     private JDefinedClass generateBuilderClass(Request request, JDefinedClass definedClass) throws JCodeModelException, UnknownTypeException {
         JDefinedClass builderClass = definedClass._class(JMod.PUBLIC | JMod.STATIC, "Builder")._extends(requestsBaseGenerator.getBaseBuilderClass());
         generateConstructor(builderClass);
-        for (Property property : request.getParams()) {
+        for (ConvertedProperty property : request.getParams()) {
             generateProperty(builderClass, property, FunctionType.BOTH);
         }
         return builderClass;
@@ -63,7 +89,7 @@ public class RequestGenerator extends GenericRequestsGenerator {
 
     private JDefinedClass generateResponseClass(Request request, JDefinedClass definedClass) throws JCodeModelException, UnknownTypeException {
         JDefinedClass responseClass = definedClass._class(JMod.PUBLIC | JMod.STATIC, "Response")._extends(requestsBaseGenerator.getBaseResponseClass());
-        for (Property property : request.getReturns()) {
+        for (ConvertedProperty property : request.getReturns()) {
             generateProperty(responseClass, property, FunctionType.GETTER);
         }
         return responseClass;

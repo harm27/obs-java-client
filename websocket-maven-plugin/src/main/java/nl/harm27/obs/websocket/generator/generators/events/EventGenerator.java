@@ -1,10 +1,11 @@
 package nl.harm27.obs.websocket.generator.generators.events;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.helger.jcodemodel.JCodeModelException;
 import com.helger.jcodemodel.JDefinedClass;
 import com.helger.jcodemodel.JPackage;
 import nl.harm27.obs.websocket.generator.datamodel.events.Event;
-import nl.harm27.obs.websocket.generator.datamodel.shared.Property;
+import nl.harm27.obs.websocket.generator.datamodel.shared.ConvertedProperty;
 import nl.harm27.obs.websocket.generator.generators.generic.FunctionType;
 import nl.harm27.obs.websocket.generator.generators.generic.GenericClassGenerator;
 import nl.harm27.obs.websocket.generator.generators.generic.TypeManager;
@@ -26,9 +27,11 @@ public class EventGenerator extends GenericClassGenerator {
         String eventName = event.getName();
         JDefinedClass eventClass = eventCategoryPackageModel._class(eventName);
         eventClass._extends(eventsBaseGenerator.getBaseEventClass());
+        eventsBaseGenerator.getBaseEventClassAnnotationArray().annotate(JsonSubTypes.Type.class).param(eventClass.dotclass()).param("name", eventName);
+
         generateJavadocForClass(eventClass.javadoc(), event.getDescription(), eventName, event.getSince(), event.getDeprecated());
 
-        for (Property property : event.getReturns()) {
+        for (ConvertedProperty property : event.getReturns()) {
             generateProperty(eventClass, property, FunctionType.GETTER);
         }
 

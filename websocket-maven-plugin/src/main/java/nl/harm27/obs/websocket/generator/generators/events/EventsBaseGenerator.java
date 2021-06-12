@@ -1,8 +1,14 @@
 package nl.harm27.obs.websocket.generator.generators.events;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.helger.jcodemodel.*;
-import nl.harm27.obs.websocket.generator.generators.generic.*;
+import nl.harm27.obs.websocket.generator.datamodel.shared.ConvertedProperty;
+import nl.harm27.obs.websocket.generator.generators.generic.FunctionType;
+import nl.harm27.obs.websocket.generator.generators.generic.GenericBaseGenerator;
+import nl.harm27.obs.websocket.generator.generators.generic.TypeManager;
+import nl.harm27.obs.websocket.generator.generators.generic.UnknownTypeException;
 
 import java.time.Duration;
 import java.util.List;
@@ -18,6 +24,7 @@ public class EventsBaseGenerator extends GenericBaseGenerator {
     private JDefinedClass eventTypeEnum;
     private JDefinedClass eventListenerClass;
     private JDefinedClass baseEventClass;
+    private JAnnotationArrayMember baseEventClassAnnotationArray;
 
     public EventsBaseGenerator(JPackage basePackageModel, JPackage listenerPackageModel, TypeManager typeManager, List<String> eventNames) {
         super(typeManager);
@@ -28,6 +35,7 @@ public class EventsBaseGenerator extends GenericBaseGenerator {
 
     public void generate() throws JCodeModelException, UnknownTypeException {
         eventTypeEnum = generateEnum(basePackageModel, "EventType", eventNames, BASE_EVENT_TYPE_JAVADOC);
+        typeManager.addApiType(eventTypeEnum.name(), eventTypeEnum);
         generateBaseEvent();
         generateEventListener();
     }
@@ -38,14 +46,21 @@ public class EventsBaseGenerator extends GenericBaseGenerator {
         JMethod callEventMethod = eventListenerClass.method(JMod.NONE, typeManager.getVoidType(), "callEvent");
         callEventMethod.param(baseEventClass, "baseEvent");
 
-        eventListenerClass.method(JMod.NONE, typeManager.getEnumClassMap(eventTypeEnum), "getSupportedEvents");
+        eventListenerClass.method(JMod.NONE, typeManager.getList(eventTypeEnum), "getSupportedEvents");
     }
 
     private void generateBaseEvent() throws JCodeModelException, UnknownTypeException {
         baseEventClass = basePackageModel._class(JMod.ABSTRACT | JMod.PUBLIC, "BaseEvent");
         generateJavadocForClass(baseEventClass.javadoc(), BASE_EVENT_JAVADOC, "Events");
 
-        generateFieldForProperty(baseEventClass, FunctionType.GETTER, new Field(eventTypeEnum, "eventType", "update-type", BASE_EVENT_TYPE_JAVADOC));
+        baseEventClass.annotate(JsonTypeInfo.class)
+                .param("use", JsonTypeInfo.Id.NAME)
+                .param("include", JsonTypeInfo.As.EXISTING_PROPERTY)
+                .param("property", "update-type")
+                .param("visible", true);
+        baseEventClassAnnotationArray = baseEventClass.annotate(JsonSubTypes.class).paramArray(JAnnotationUse.SPECIAL_KEY_VALUE);
+
+        generateField(baseEventClass, new ConvertedProperty("update-type", eventTypeEnum.name(), BASE_EVENT_TYPE_JAVADOC), FunctionType.GETTER);
         generateTimecode("streamTimecode", "stream-timecode", BASE_EVENT_STREAM_JAVADOC);
         generateTimecode("recordingTimecode", "rec-timecode", BASE_EVENT_RECORDING_JAVADOC);
     }
@@ -77,6 +92,10 @@ public class EventsBaseGenerator extends GenericBaseGenerator {
 
     public JDefinedClass getBaseEventClass() {
         return baseEventClass;
+    }
+
+    public JAnnotationArrayMember getBaseEventClassAnnotationArray() {
+        return baseEventClassAnnotationArray;
     }
 
     public JEnumConstant getEnumValue(String name) {

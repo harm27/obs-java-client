@@ -1,6 +1,7 @@
 package nl.harm27.obs.websocket.generator.generators.generic;
 
 import com.helger.jcodemodel.*;
+import nl.harm27.obs.websocket.generator.datamodel.shared.ConvertedProperty;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -21,29 +22,31 @@ public class TypeManager extends GenericGenerator {
         this.apiTypes = new HashMap<>();
     }
 
-    public AbstractJType getType(JDefinedClass targetClass, String fieldName, String typeName, String description) throws JCodeModelException, UnknownTypeException {
-        if (typeName.contains("Array")) {
-            AbstractJType arraySubType = getType(targetClass, fieldName, typeName.replace("Array<", "").replace(">", ""), description);
-            return codeModel.ref(List.class).narrow(arraySubType);
-        }
+    public AbstractJType getType(JDefinedClass targetClass, ConvertedProperty property) throws JCodeModelException, UnknownTypeException {
+        if (property.isArray())
+            return codeModel.ref(List.class).narrow(getTypes(targetClass, property));
 
-        JDefinedClass subClassType = getSubClassType(targetClass, typeName);
+        return getTypes(targetClass, property);
+    }
+
+    private AbstractJType getTypes(JDefinedClass targetClass, ConvertedProperty property) throws JCodeModelException, UnknownTypeException {
+        JDefinedClass subClassType = getSubClassType(targetClass, property.getType());
         if (subClassType != null)
             return subClassType;
 
-        JDefinedClass apiType = apiTypes.get(typeName);
+        JDefinedClass apiType = apiTypes.get(property.getType());
         if (apiType != null)
             return apiType;
 
-        JDefinedClass customType = getCustomType(findParentClass(targetClass).name().toLowerCase(), fieldName.toLowerCase(), description);
+        JDefinedClass customType = getCustomType(findParentClass(targetClass).name().toLowerCase(), property.getName().toLowerCase(), property.getDescription());
         if (customType != null)
             return customType;
 
-        AbstractJType primitiveType = getPrimitiveType(typeName);
+        AbstractJType primitiveType = getPrimitiveType(property.getType());
         if (primitiveType != null)
             return primitiveType;
 
-        throw new UnknownTypeException(typeName);
+        throw new UnknownTypeException(property.getType());
     }
 
     public void addApiType(String typeName, JDefinedClass typeClass) {
@@ -81,9 +84,7 @@ public class TypeManager extends GenericGenerator {
     }
 
     private JDefinedClass getCustomType(String className, String fieldName, String description) throws JCodeModelException {
-        if (isSourceTypeEnum(className, fieldName))
-            return generateEnum(enumPackage, "SourceType", StringConstants.SOURCE_TYPE_VALUES, description);
-        else if (isMediaStateEnum(className, fieldName))
+        if (isMediaStateEnum(className, fieldName))
             return generateEnum(enumPackage, "MediaState", StringConstants.MEDIA_STATE_FIELD, description);
         else if (isMonitorTypeEnum(className, fieldName))
             return generateEnum(enumPackage, "MonitorType", StringConstants.MONiTOR_TYPE_FIELD, description);
@@ -114,17 +115,6 @@ public class TypeManager extends GenericGenerator {
             return "MediaSources".equalsIgnoreCase(className) && "mediaSources.*.mediaState".equalsIgnoreCase(fieldName);
     }
 
-    private boolean isSourceTypeEnum(String className, String fieldName) {
-        if (StringConstants.SOURCE_TYPE_CLASSES.contains(className) && StringConstants.SOURCE_TYPE_FIELD.equalsIgnoreCase(fieldName))
-            return true;
-        else if ("SceneItem".equalsIgnoreCase(className) && "type".equalsIgnoreCase(fieldName))
-            return true;
-        else if ("Sources".equalsIgnoreCase(className) && "sources.*.type".equalsIgnoreCase(fieldName))
-            return true;
-        else
-            return "Types".equalsIgnoreCase(className) && "types.*.type".equalsIgnoreCase(fieldName);
-    }
-
     private JDefinedClass getSubClassType(JDefinedClass targetClass, String typeName) {
         return getRootClass(targetClass).classes().stream().filter(sub -> typeName.equalsIgnoreCase(sub.name())).findFirst().orElse(null);
     }
@@ -145,12 +135,8 @@ public class TypeManager extends GenericGenerator {
         return codeModel.ref(Optional.class).staticInvoke("empty");
     }
 
-    public AbstractJClass getEnumClassMap(AbstractJClass enumClass) {
-        return codeModel.ref(Map.class).narrow(enumClass, codeModel.ref(Class.class).narrowAny());
-    }
-
-    public IJExpression getEnumMap(JDefinedClass enumClass) {
-        return codeModel.ref(EnumMap.class)._new().arg(enumClass.dotclass());
+    public AbstractJClass getList(JDefinedClass targetClass) {
+        return codeModel.ref(List.class).narrow(targetClass);
     }
 
     public AbstractJClass getSupplier(AbstractJType targetClass) {
@@ -191,5 +177,9 @@ public class TypeManager extends GenericGenerator {
 
     public IJExpression getArraysAsList(JInvocation array) {
         return codeModel.ref(Arrays.class).staticInvoke("asList").arg(array);
+    }
+
+    public IJExpression getArrayList() {
+        return codeModel.ref(ArrayList.class).narrowEmpty()._new();
     }
 }

@@ -9,6 +9,7 @@ public final class StringConstants {
     public static final String BASE_REQUEST_NAME_METHODE_JAVADOC = "Says what the name is of this class.";
     public static final String BASE_REQUEST_AUTHENTICATION_REQUIRED_METHOD = "Says if request needs to wait for authentication.";
     public static final String BASE_BUILDER_SEND_MESSAGE_JAVADOC = "Send the message to the OBS Studio instance.";
+    public static final String BASE_BUILDER_BATCH_MESSAGE_JAVADOC = "Batch the message to the OBS Studio instance.";
     public static final String BASE_EVENT_JAVADOC = "Events are broadcast by the server to each connected client when a recognized action occurs within OBS.";
     public static final String BASE_EVENT_TYPE_JAVADOC = "Enum constants for names of the event types.";
     public static final String BASE_EVENT_STREAM_JAVADOC = "Time elapsed between now and stream start (only present if OBS Studio is streaming) as string.";
@@ -24,10 +25,8 @@ public final class StringConstants {
     public static final String BASE_BUILDER_JAVADOC = "Builders helps creating new requests.";
     public static final String REQUESTS_URL_PART = "Requests";
     public static final String ERROR_FIELD_NAME = "error";
-    public static final String SOURCE_TYPE_FIELD = "sourceType";
     public static final String STRING_TYPE = "string";
     public static final String MESSAGE_ID_FIELD = "messageId";
-    protected static final List<String> SOURCE_TYPE_VALUES = Arrays.asList("input", "filter", "transition", "scene", "unknown");
     protected static final List<String> BOUNDING_BOX_TYPE_VALUES = Arrays.asList("OBS_BOUNDS_STRETCH", "OBS_BOUNDS_SCALE_INNER", "OBS_BOUNDS_SCALE_OUTER", "OBS_BOUNDS_SCALE_TO_WIDTH", "OBS_BOUNDS_SCALE_TO_HEIGHT", "OBS_BOUNDS_MAX_ONLY", "OBS_BOUNDS_NONE");
     protected static final List<String> PROJECTOR_TYPE_FIELD = Arrays.asList("Preview", "Source", "Scene", "StudioProgram", "Multiview");
     protected static final List<String> MEDIA_STATE_FIELD = Arrays.asList("none", "playing", "opening", "buffering", "paused", "stopped", "ended", ERROR_FIELD_NAME, "unknown");
@@ -35,7 +34,6 @@ public final class StringConstants {
     protected static final List<String> TEXT_VERTICAL_ALIGNMENT_FIELD = Arrays.asList("top", "center", "bottom");
     protected static final List<String> MOVEMENT_TYPE_FIELD = Arrays.asList("up", "down", "top", "bottom");
     protected static final List<String> MONiTOR_TYPE_FIELD = Arrays.asList("none", "monitorOnly", "monitorAndOutput");
-    protected static final List<String> SOURCE_TYPE_CLASSES = Arrays.asList("SourceCreated", "SourceDestroyed", "SourceRenamed", "GetSourceSettings", "SetSourceSettings");
 
     private StringConstants() {
     }
