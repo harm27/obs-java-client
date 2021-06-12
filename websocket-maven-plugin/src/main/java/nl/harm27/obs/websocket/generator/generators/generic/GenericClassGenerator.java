@@ -78,7 +78,7 @@ public abstract class GenericClassGenerator extends GenericGenerator {
     }
 
     private JMethod generateGetter(JDefinedClass targetClass, AbstractJType fieldType, JFieldVar fieldVar, ConvertedProperty property) {
-        String methodPrefix = "get";
+        var methodPrefix = "get";
         if (typeManager.isBoolean(fieldType))
             methodPrefix = "is";
 

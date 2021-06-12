@@ -23,10 +23,11 @@ public class TypesGenerator {
     }
 
     public void generate(List<TypeDefinition> typeDefinitions) throws JCodeModelException, UnknownTypeException {
-        SharedClassesGenerator sharedClassesGenerator = new SharedClassesGenerator(codeModel, typeManager, basePackageModel);
+        var sharedClassesGenerator = new SharedClassesGenerator(codeModel, typeManager, basePackageModel);
         sharedClassesGenerator.generate();
+
         for (TypeDefinition typeDefinition : typeDefinitions) {
-            TypeGenerator typeGenerator = new TypeGenerator(typeManager, typesPackageModel, typeDefinition);
+            var typeGenerator = new TypeGenerator(typeManager, typesPackageModel, typeDefinition);
             typeGenerator.generate();
         }
     }

@@ -34,13 +34,13 @@ public class Generator {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public void generateClasses(OBSWebSocket obsWebSocket) throws JCodeModelException, IOException, UnknownTypeException {
-        TypesGenerator typesGenerator = new TypesGenerator(typeManager, codeModel, apiPackageName);
+        var typesGenerator = new TypesGenerator(typeManager, codeModel, apiPackageName);
         typesGenerator.generate(obsWebSocket.getTypeDefinitions());
 
-        EventsGenerator eventsGenerator = new EventsGenerator(codeModel, typeManager, listenerPackageName, apiPackageName);
+        var eventsGenerator = new EventsGenerator(codeModel, typeManager, listenerPackageName, apiPackageName);
         eventsGenerator.generate(obsWebSocket.getEventsDefinition());
 
-        RequestsGenerator requestsGenerator = new RequestsGenerator(codeModel, typeManager, senderPackageName, apiPackageName);
+        var requestsGenerator = new RequestsGenerator(codeModel, typeManager, senderPackageName, apiPackageName);
         requestsGenerator.generate(obsWebSocket.getRequestsDefinition());
 
         if (!targetFolder.exists())

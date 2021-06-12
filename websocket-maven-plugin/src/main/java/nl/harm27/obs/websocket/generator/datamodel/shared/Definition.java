@@ -10,7 +10,7 @@ public abstract class Definition {
         if (getName().equalsIgnoreCase("ExecuteBatch")) {
             Optional<Property> first = properties.stream().filter(property -> property.getName().equalsIgnoreCase("results") || property.getName().equalsIgnoreCase("requests")).findFirst();
             if (first.isPresent()) {
-                Property property = first.get();
+                var property = first.get();
                 String type = property.getName().equalsIgnoreCase("results") ? "BaseResponse" : "BaseRequest";
                 return new ArrayList<>(Collections.singletonList(new ConvertedProperty(property, type)));
             }
@@ -30,7 +30,7 @@ public abstract class Definition {
     protected abstract String getName();
 
     private void updateSingleLevelProperty(List<ConvertedProperty> convertedProperties, Property property) {
-        ConvertedProperty convertedProperty = getConvertedProperty(convertedProperties, property.getName());
+        var convertedProperty = getConvertedProperty(convertedProperties, property.getName());
         configureConvertedProperty(property, convertedProperty);
     }
 
@@ -48,7 +48,7 @@ public abstract class Definition {
         if (exists.isPresent())
             return exists.get();
 
-        ConvertedProperty convertedProperty = new ConvertedProperty(propertyName);
+        var convertedProperty = new ConvertedProperty(propertyName);
         convertedProperties.add(convertedProperty);
         return convertedProperty;
     }
@@ -59,7 +59,7 @@ public abstract class Definition {
     }
 
     private void createOrUpdateMultiLevelProperty(List<ConvertedProperty> convertedProperties, List<String> nameParts, Property property) {
-        ConvertedProperty convertedProperty = getConvertedProperty(convertedProperties, nameParts.get(0));
+        var convertedProperty = getConvertedProperty(convertedProperties, nameParts.get(0));
         if (nameParts.size() == 1)
             configureConvertedProperty(property, convertedProperty);
         else

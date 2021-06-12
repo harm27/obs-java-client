@@ -19,8 +19,8 @@ public class StringUtil {
 
     private static String generateValidName(String name, char separator, boolean firstWordNotCapitalized) {
         String[] nameParts = JCStringHelper.getExplodedArray(separator, name);
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < nameParts.length; i++) {
+        var builder = new StringBuilder();
+        for (var i = 0; i < nameParts.length; i++) {
             if (i == 0 && firstWordNotCapitalized)
                 builder.append(nameParts[i]);
             else

@@ -25,11 +25,11 @@ public class EventsGenerator {
     }
 
     public void generate(EventsDefinition eventsDefinition) throws JCodeModelException, UnknownTypeException {
-        EventsBaseGenerator eventsBaseGenerator = new EventsBaseGenerator(basePackageModel, listenerPackageModel, typeManager, eventsDefinition.getEventNames());
+        var eventsBaseGenerator = new EventsBaseGenerator(basePackageModel, listenerPackageModel, typeManager, eventsDefinition.getEventNames());
         eventsBaseGenerator.generate();
 
         for (Map.Entry<String, List<Event>> eventCategory : eventsDefinition.getEventsMap().entrySet()) {
-            EventCategoryGenerator eventCategoryGenerator = new EventCategoryGenerator(listenerPackageModel, eventsPackageModel, eventsBaseGenerator, typeManager, eventCategory.getKey(), eventCategory.getValue());
+            var eventCategoryGenerator = new EventCategoryGenerator(listenerPackageModel, eventsPackageModel, eventsBaseGenerator, typeManager, eventCategory.getKey(), eventCategory.getValue());
             eventCategoryGenerator.generate();
         }
     }

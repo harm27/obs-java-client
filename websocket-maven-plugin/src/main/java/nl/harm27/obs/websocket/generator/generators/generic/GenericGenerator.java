@@ -20,7 +20,7 @@ public abstract class GenericGenerator {
         enumClass = packageModel._enum(validEnumName);
         enumClass.javadoc().add(description);
         for (String enumConstant : enumConstants) {
-            JEnumConstant jEnumConstant = enumClass.enumConstant(generateEnumValue(enumConstant));
+            var jEnumConstant = enumClass.enumConstant(generateEnumValue(enumConstant));
             jEnumConstant.annotate(JsonProperty.class).param(enumConstant);
         }
         return enumClass;

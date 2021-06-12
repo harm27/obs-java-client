@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.harm27.obs.websocket.generator.datamodel.OBSWebSocket;
 import nl.harm27.obs.websocket.generator.generators.Generator;
 import nl.harm27.obs.websocket.generator.validator.JSONValidator;
-import nl.harm27.obs.websocket.generator.validator.ValidationResult;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -47,7 +46,7 @@ public class ObsWebSocketGeneratorMojo extends AbstractMojo {
     public void execute() throws MojoFailureException {
         String content = downloadCommentsJson();
 
-        ObjectMapper objectMapper = new ObjectMapper().
+        var objectMapper = new ObjectMapper().
                 configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             info("Parsing comments.json file.");
@@ -62,7 +61,7 @@ public class ObsWebSocketGeneratorMojo extends AbstractMojo {
     }
 
     private void generateClasses(OBSWebSocket obsWebSocket) {
-        Generator generator = new Generator(targetFolder, apiPackageName, listenerPackageName, senderPackageName);
+        var generator = new Generator(targetFolder, apiPackageName, listenerPackageName, senderPackageName);
         try {
             generator.generateClasses(obsWebSocket);
         } catch (Exception e) {
@@ -71,7 +70,7 @@ public class ObsWebSocketGeneratorMojo extends AbstractMojo {
     }
 
     private boolean validateJSON(JsonNode rootNode) {
-        ValidationResult validationResult = new JSONValidator(rootNode, getLog()).validate();
+        var validationResult = new JSONValidator(rootNode, getLog()).validate();
         switch (validationResult) {
             case MISSING_TYPEDEFS:
                 getLog().error("Validation failed because the typedefs element is missing.");

@@ -56,7 +56,7 @@ public class AuthenticationHandler {
         if (!(baseResponse instanceof GetAuthRequired.Response))
             return;
 
-        GetAuthRequired.Response response = (GetAuthRequired.Response) baseResponse;
+        var response = (GetAuthRequired.Response) baseResponse;
         if (!response.isAuthRequired()) {
             setAuthenticationResult(AUTHENTICATION_NOT_REQUIRED);
             return;
@@ -83,15 +83,15 @@ public class AuthenticationHandler {
     }
 
     private void sendAuthenticationRequest(String challenge, String salt, String password) throws NoSuchAlgorithmException {
-        MessageDigest digesterSecretString = MessageDigest.getInstance("SHA-256");
+        var digesterSecretString = MessageDigest.getInstance("SHA-256");
         digesterSecretString.update((password + salt).getBytes(StandardCharsets.UTF_8));
-        String secret = Base64.getEncoder().encodeToString(digesterSecretString.digest());
+        var secret = Base64.getEncoder().encodeToString(digesterSecretString.digest());
 
-        MessageDigest digesterAuthResponse = MessageDigest.getInstance("SHA-256");
+        var digesterAuthResponse = MessageDigest.getInstance("SHA-256");
         digesterAuthResponse.update((secret + challenge).getBytes(StandardCharsets.UTF_8));
-        String authResponse = Base64.getEncoder().encodeToString(digesterAuthResponse.digest());
+        var authResponse = Base64.getEncoder().encodeToString(digesterAuthResponse.digest());
 
-        Authenticate.Builder builder = generalRequestSender.authenticate();
+        var builder = generalRequestSender.authenticate();
         builder.setAuth(authResponse);
         builder.sendMessage(this::processAuthenticateResponse);
     }
@@ -100,7 +100,7 @@ public class AuthenticationHandler {
         if (!(baseResponse instanceof Authenticate.Response))
             return;
 
-        Authenticate.Response response = (Authenticate.Response) baseResponse;
+        var response = (Authenticate.Response) baseResponse;
         if (Status.OK.equals(response.getStatus()))
             setAuthenticationResult(AUTHENTICATION_SUCCESS);
         else {

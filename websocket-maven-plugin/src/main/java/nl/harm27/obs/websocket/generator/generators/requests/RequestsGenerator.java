@@ -25,11 +25,11 @@ public class RequestsGenerator {
     }
 
     public void generate(RequestsDefinition requestsDefinition) throws JCodeModelException, UnknownTypeException {
-        RequestsBaseGenerator requestsBaseGenerator = new RequestsBaseGenerator(basePackageModel, senderPackageModel, typeManager, requestsDefinition.getRequestNames());
+        var requestsBaseGenerator = new RequestsBaseGenerator(basePackageModel, senderPackageModel, typeManager, requestsDefinition.getRequestNames());
         requestsBaseGenerator.generate();
 
         for (Map.Entry<String, List<Request>> requestCategory : requestsDefinition.getRequestsMap().entrySet()) {
-            RequestCategoryGenerator requestCategoryGenerator = new RequestCategoryGenerator(senderPackageModel, requestsPackageModel, requestsBaseGenerator, typeManager, requestCategory.getKey(), requestCategory.getValue());
+            var requestCategoryGenerator = new RequestCategoryGenerator(senderPackageModel, requestsPackageModel, requestsBaseGenerator, typeManager, requestCategory.getKey(), requestCategory.getValue());
             requestCategoryGenerator.generate();
         }
     }

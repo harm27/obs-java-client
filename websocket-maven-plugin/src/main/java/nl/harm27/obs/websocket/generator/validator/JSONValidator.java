@@ -25,7 +25,7 @@ public class JSONValidator {
     }
 
     public ValidationResult validate() {
-        ValidationResult validationResult = validateRootElements();
+        var validationResult = validateRootElements();
         if (!validationResult.isValid())
             return validationResult;
 

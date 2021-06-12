@@ -60,7 +60,7 @@ public class MessageSender {
         if (!(baseResponse instanceof GetVersion.Response))
             return;
 
-        GetVersion.Response response = (GetVersion.Response) baseResponse;
+        var response = (GetVersion.Response) baseResponse;
         supportedRequests = response.getAvailableRequestsAsList();
     }
 
