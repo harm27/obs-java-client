@@ -25,10 +25,8 @@ public final class StringConstants {
     public static final String BASE_BUILDER_JAVADOC = "Builders helps creating new requests.";
     public static final String REQUESTS_URL_PART = "Requests";
     public static final String ERROR_FIELD_NAME = "error";
-    public static final String SOURCE_TYPE_FIELD = "sourceType";
     public static final String STRING_TYPE = "string";
     public static final String MESSAGE_ID_FIELD = "messageId";
-    protected static final List<String> SOURCE_TYPE_VALUES = Arrays.asList("input", "filter", "transition", "scene", "unknown");
     protected static final List<String> BOUNDING_BOX_TYPE_VALUES = Arrays.asList("OBS_BOUNDS_STRETCH", "OBS_BOUNDS_SCALE_INNER", "OBS_BOUNDS_SCALE_OUTER", "OBS_BOUNDS_SCALE_TO_WIDTH", "OBS_BOUNDS_SCALE_TO_HEIGHT", "OBS_BOUNDS_MAX_ONLY", "OBS_BOUNDS_NONE");
     protected static final List<String> PROJECTOR_TYPE_FIELD = Arrays.asList("Preview", "Source", "Scene", "StudioProgram", "Multiview");
     protected static final List<String> MEDIA_STATE_FIELD = Arrays.asList("none", "playing", "opening", "buffering", "paused", "stopped", "ended", ERROR_FIELD_NAME, "unknown");
@@ -36,7 +34,6 @@ public final class StringConstants {
     protected static final List<String> TEXT_VERTICAL_ALIGNMENT_FIELD = Arrays.asList("top", "center", "bottom");
     protected static final List<String> MOVEMENT_TYPE_FIELD = Arrays.asList("up", "down", "top", "bottom");
     protected static final List<String> MONiTOR_TYPE_FIELD = Arrays.asList("none", "monitorOnly", "monitorAndOutput");
-    protected static final List<String> SOURCE_TYPE_CLASSES = Arrays.asList("SourceCreated", "SourceDestroyed", "SourceRenamed", "GetSourceSettings", "SetSourceSettings");
 
     private StringConstants() {
     }

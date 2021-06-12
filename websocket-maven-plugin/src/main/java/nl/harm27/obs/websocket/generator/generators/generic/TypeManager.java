@@ -84,9 +84,7 @@ public class TypeManager extends GenericGenerator {
     }
 
     private JDefinedClass getCustomType(String className, String fieldName, String description) throws JCodeModelException {
-        if (isSourceTypeEnum(className, fieldName))
-            return generateEnum(enumPackage, "SourceType", StringConstants.SOURCE_TYPE_VALUES, description);
-        else if (isMediaStateEnum(className, fieldName))
+        if (isMediaStateEnum(className, fieldName))
             return generateEnum(enumPackage, "MediaState", StringConstants.MEDIA_STATE_FIELD, description);
         else if (isMonitorTypeEnum(className, fieldName))
             return generateEnum(enumPackage, "MonitorType", StringConstants.MONiTOR_TYPE_FIELD, description);
@@ -115,17 +113,6 @@ public class TypeManager extends GenericGenerator {
             return true;
         else
             return "MediaSources".equalsIgnoreCase(className) && "mediaSources.*.mediaState".equalsIgnoreCase(fieldName);
-    }
-
-    private boolean isSourceTypeEnum(String className, String fieldName) {
-        if (StringConstants.SOURCE_TYPE_CLASSES.contains(className) && StringConstants.SOURCE_TYPE_FIELD.equalsIgnoreCase(fieldName))
-            return true;
-        else if ("SceneItem".equalsIgnoreCase(className) && "type".equalsIgnoreCase(fieldName))
-            return true;
-        else if ("Sources".equalsIgnoreCase(className) && "sources.*.type".equalsIgnoreCase(fieldName))
-            return true;
-        else
-            return "Types".equalsIgnoreCase(className) && "types.*.type".equalsIgnoreCase(fieldName);
     }
 
     private JDefinedClass getSubClassType(JDefinedClass targetClass, String typeName) {
