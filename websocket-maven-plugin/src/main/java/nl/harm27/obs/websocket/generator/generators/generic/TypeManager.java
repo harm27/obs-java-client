@@ -148,12 +148,8 @@ public class TypeManager extends GenericGenerator {
         return codeModel.ref(Optional.class).staticInvoke("empty");
     }
 
-    public AbstractJClass getEnumClassMap(AbstractJClass enumClass) {
-        return codeModel.ref(Map.class).narrow(enumClass, codeModel.ref(Class.class).narrowAny());
-    }
-
-    public IJExpression getEnumMap(JDefinedClass enumClass) {
-        return codeModel.ref(EnumMap.class)._new().arg(enumClass.dotclass());
+    public AbstractJClass getList(JDefinedClass targetClass) {
+        return codeModel.ref(List.class).narrow(targetClass);
     }
 
     public AbstractJClass getSupplier(AbstractJType targetClass) {
@@ -194,5 +190,9 @@ public class TypeManager extends GenericGenerator {
 
     public IJExpression getArraysAsList(JInvocation array) {
         return codeModel.ref(Arrays.class).staticInvoke("asList").arg(array);
+    }
+
+    public IJExpression getArrayList() {
+        return codeModel.ref(ArrayList.class).narrowEmpty()._new();
     }
 }

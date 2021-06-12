@@ -46,7 +46,7 @@ public class EventsBaseGenerator extends GenericBaseGenerator {
         JMethod callEventMethod = eventListenerClass.method(JMod.NONE, typeManager.getVoidType(), "callEvent");
         callEventMethod.param(baseEventClass, "baseEvent");
 
-        eventListenerClass.method(JMod.NONE, typeManager.getEnumClassMap(eventTypeEnum), "getSupportedEvents");
+        eventListenerClass.method(JMod.NONE, typeManager.getList(eventTypeEnum), "getSupportedEvents");
     }
 
     private void generateBaseEvent() throws JCodeModelException, UnknownTypeException {
