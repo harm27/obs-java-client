@@ -1,5 +1,6 @@
 package nl.harm27.obs.websocket.generator.generators.events;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.helger.jcodemodel.JCodeModelException;
 import com.helger.jcodemodel.JDefinedClass;
 import com.helger.jcodemodel.JPackage;
@@ -26,6 +27,8 @@ public class EventGenerator extends GenericClassGenerator {
         String eventName = event.getName();
         JDefinedClass eventClass = eventCategoryPackageModel._class(eventName);
         eventClass._extends(eventsBaseGenerator.getBaseEventClass());
+        eventsBaseGenerator.getBaseEventClassAnnotationArray().annotate(JsonSubTypes.Type.class).param(eventClass.dotclass()).param("name", eventName);
+
         generateJavadocForClass(eventClass.javadoc(), event.getDescription(), eventName, event.getSince(), event.getDeprecated());
 
         for (ConvertedProperty property : event.getReturns()) {

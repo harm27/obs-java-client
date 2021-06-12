@@ -1,6 +1,8 @@
 package nl.harm27.obs.websocket.generator.generators.events;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.helger.jcodemodel.*;
 import nl.harm27.obs.websocket.generator.datamodel.shared.ConvertedProperty;
 import nl.harm27.obs.websocket.generator.generators.generic.FunctionType;
@@ -22,6 +24,7 @@ public class EventsBaseGenerator extends GenericBaseGenerator {
     private JDefinedClass eventTypeEnum;
     private JDefinedClass eventListenerClass;
     private JDefinedClass baseEventClass;
+    private JAnnotationArrayMember baseEventClassAnnotationArray;
 
     public EventsBaseGenerator(JPackage basePackageModel, JPackage listenerPackageModel, TypeManager typeManager, List<String> eventNames) {
         super(typeManager);
@@ -49,6 +52,13 @@ public class EventsBaseGenerator extends GenericBaseGenerator {
     private void generateBaseEvent() throws JCodeModelException, UnknownTypeException {
         baseEventClass = basePackageModel._class(JMod.ABSTRACT | JMod.PUBLIC, "BaseEvent");
         generateJavadocForClass(baseEventClass.javadoc(), BASE_EVENT_JAVADOC, "Events");
+
+        baseEventClass.annotate(JsonTypeInfo.class)
+                .param("use", JsonTypeInfo.Id.NAME)
+                .param("include", JsonTypeInfo.As.EXISTING_PROPERTY)
+                .param("property", "update-type")
+                .param("visible", true);
+        baseEventClassAnnotationArray = baseEventClass.annotate(JsonSubTypes.class).paramArray(JAnnotationUse.SPECIAL_KEY_VALUE);
 
         generateField(baseEventClass, new ConvertedProperty("update-type", eventTypeEnum.name(), BASE_EVENT_TYPE_JAVADOC), FunctionType.GETTER);
         generateTimecode("streamTimecode", "stream-timecode", BASE_EVENT_STREAM_JAVADOC);
@@ -82,6 +92,10 @@ public class EventsBaseGenerator extends GenericBaseGenerator {
 
     public JDefinedClass getBaseEventClass() {
         return baseEventClass;
+    }
+
+    public JAnnotationArrayMember getBaseEventClassAnnotationArray() {
+        return baseEventClassAnnotationArray;
     }
 
     public JEnumConstant getEnumValue(String name) {
