@@ -1,3 +1,6 @@
+# Development stopped
+Because of time constraints and that my use case no longer exist, i stopped working on this project.
+
 # Java API for the OBS
 A Java API for communicating with OBS.
 Currently supporting [OBS-Websocket](https://github.com/Palakis/obs-websocket) with Java 11+ Websocket client and Jackson.
